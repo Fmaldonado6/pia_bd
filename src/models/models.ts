@@ -54,3 +54,62 @@ export class Pedido {
     descuento: number = 0
     total: number = 0
 }
+
+export class InfoSucursal {
+    nombre: string = ""
+    horario: string = ""
+    idPais: string = ""
+    idEstado: string = ""
+    idMunicipio: string = ""
+    idColonia: string = ""
+    idCalle: string = ""
+    numero : number = 0
+}
+
+export class Pais {
+    idPais : string = ""
+    descripcion: string = ""
+}
+
+export class Estado {
+    idEstado : string = ""
+    descripcion: string = ""
+    idPais: string = ""
+}
+
+export class Municipio {
+    idMunicipio : string = ""
+    descripcion: string = ""
+    idEstado: string = ""
+}
+
+export class Colonia {
+    idColonia : string = ""
+    descripcion: string = ""
+    idMunicipio: string = ""
+}
+
+export class Calle { 
+    idCalle : string = ""
+    descripcion: string = ""
+    idColonia: string = ""
+}
+
+export class Factura {
+    idFactura: string = ""
+    fechaFactura?: Date 
+    RFC: string = ""
+    idPedido: string = ""
+    concepto: string = ""
+    razonSocial: string = ""
+    idPais: string = ""
+    idEstado: string = ""
+    idMunicipio: string = ""
+    idColonia: string = ""
+    idCalle: string = ""
+    numero : number = 0
+    nombre?: string
+    apPaterno?: string
+    apMaterno?: string
+    telefono?: string
+}
