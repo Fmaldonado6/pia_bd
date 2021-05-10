@@ -37,7 +37,7 @@ export class Alimentos {
 }
 
 export class TipoAlimento {
-    tipoAlimento: string = ""
+    idTipoAlimento: string = ""
     nombreTipo: string = ""
 }
 

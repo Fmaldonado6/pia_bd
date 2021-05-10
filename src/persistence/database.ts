@@ -1,19 +1,31 @@
 
-import { SqlClient } from "msnodesqlv8";
+import { QueryDescription, SqlClient } from "msnodesqlv8";
+import { databaseConfiguration } from "./configuration/databaseConfiguration";
 
-const sql: SqlClient = require("msnodesqlv8");
 
 class Database {
-
+    sql: SqlClient = require("msnodesqlv8");
+    connectionString = "server=.;Database=barDB;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}"
     async connect() {
 
-        const connectionString = "server=.;Database=bar;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}";
-        const query = "SELECT * FROM tipoBebida";
+        await databaseConfiguration.config()
 
-        sql.query(connectionString, query, (err, rows) => {
-            console.log(rows);
-        });
     }
+
+    executeQuery(query: string): Promise<any[] | undefined> {
+        return new Promise((resolve, reject) => {
+            database.sql.query(database.connectionString, query, (err, rows) => {
+
+                if (err)
+                    reject(err)
+
+                resolve(rows)
+            })
+        })
+
+
+    }
+
 
 }
 
