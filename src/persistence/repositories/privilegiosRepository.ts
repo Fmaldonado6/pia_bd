@@ -36,3 +36,5 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
     }
 
 }
+
+export const privilegiosRepository = new PrivilegiosRepository()

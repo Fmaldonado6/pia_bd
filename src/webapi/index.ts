@@ -1,3 +1,4 @@
+import { privilegiosController } from './controllers/privilegiosController';
 import { database } from './../persistence/database';
 import express, { Application } from 'express';
 import cors from 'cors';
@@ -24,9 +25,8 @@ class Server {
     }
 
     routes() {
-        this.app.use("/", (req, res) => {
-            res.send("Buenas")
-        })
+
+        this.app.use("/privilegios", privilegiosController.router)
 
     }
 
