@@ -1,7 +1,7 @@
 export class Empleado {
     idEmpleado: string = ""
-    nombre?: string
-    telefono?: string
+    nombre: string = ""
+    telefono: string = ""
     idPais: string = ""
     idMunicipio: string = ""
     idEstado: string = ""
@@ -9,7 +9,7 @@ export class Empleado {
     idCalle: string = ""
     idTipoEmpleado: string = ""
     numero: number = 0
-    fechaNacimiento?: Date
+    fechaNacimiento: Date = new Date()
     contrasena: string = ""
 }
 
@@ -17,8 +17,8 @@ export class TipoEmpleado {
     idTipoEmpleado: string = ""
     nombreTipoEmpleado: string = ""
     sueldo: number = 0
-    horaEntrada?: Date
-    horaSalida?: Date
+    horaEntrada: Date = new Date()
+    horaSalida: Date = new Date()
 }
 
 export class Privilegios {
@@ -63,41 +63,41 @@ export class InfoSucursal {
     idMunicipio: string = ""
     idColonia: string = ""
     idCalle: string = ""
-    numero : number = 0
+    numero: number = 0
 }
 
 export class Pais {
-    idPais : string = ""
+    idPais: string = ""
     descripcion: string = ""
 }
 
 export class Estado {
-    idEstado : string = ""
+    idEstado: string = ""
     descripcion: string = ""
     idPais: string = ""
 }
 
 export class Municipio {
-    idMunicipio : string = ""
+    idMunicipio: string = ""
     descripcion: string = ""
     idEstado: string = ""
 }
 
 export class Colonia {
-    idColonia : string = ""
+    idColonia: string = ""
     descripcion: string = ""
     idMunicipio: string = ""
 }
 
-export class Calle { 
-    idCalle : string = ""
+export class Calle {
+    idCalle: string = ""
     descripcion: string = ""
     idColonia: string = ""
 }
 
 export class Factura {
     idFactura: string = ""
-    fechaFactura?: Date 
+    fechaFactura: Date = new Date()
     RFC: string = ""
     idPedido: string = ""
     concepto: string = ""
@@ -107,9 +107,9 @@ export class Factura {
     idMunicipio: string = ""
     idColonia: string = ""
     idCalle: string = ""
-    numero : number = 0
-    nombre?: string
-    apPaterno?: string
-    apMaterno?: string
-    telefono?: string
+    numero: number = 0
+    nombre: string = ""
+    apPaterno: string = ""
+    apMaterno: string = ""
+    telefono: string = ""
 }
