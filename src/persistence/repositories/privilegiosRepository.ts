@@ -5,8 +5,8 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
 
     async add(obj: Privilegios): Promise<void> {
         await database.executeQuery(`
-            insert into privilegios(nombre),
-            values(${obj.nombre})
+            insert into privilegios(nombre)
+            values('${obj.nombre}')
         `)
     }
     async get(id: string): Promise<Privilegios | null> {
@@ -31,8 +31,10 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
     update(obj: Privilegios): Promise<Privilegios> {
         throw new Error('Method not implemented.');
     }
-    delete(id: string): Promise<Privilegios> {
-        throw new Error('Method not implemented.');
+    async delete(id: string): Promise<void> {
+        await database.executeQuery(`
+        delete from Privilegios where idPrivilegio = ${id}
+    `)
     }
 
 }

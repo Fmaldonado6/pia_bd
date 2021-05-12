@@ -21,7 +21,7 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
     async findAll(): Promise<Empleado[]> {
         throw new Error('Method not implemented.');
     }
-    async delete(id: string): Promise<Empleado> {
+    async delete(id: string): Promise<void> {
         throw new Error('Method not implemented.');
     }
 

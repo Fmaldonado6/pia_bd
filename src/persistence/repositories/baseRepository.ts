@@ -8,6 +8,6 @@ export interface BaseRepository<T extends any> {
 
     update(obj: T): Promise<T>;
 
-    delete(id: string): Promise<T>;
+    delete(id: string): Promise<void>;
 
 }
