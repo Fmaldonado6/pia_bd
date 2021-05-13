@@ -1,0 +1,41 @@
+.card-content {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+}
+
+.login-btn {
+  margin-top: 10px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+mat-form-field {
+  border-radius: 20px;
+
+
+
+  mat-icon {
+    color: grey;
+  }
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 25px;
+
+}
+
+mat-card {
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
