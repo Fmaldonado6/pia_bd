@@ -7,7 +7,6 @@ import { Injectable } from '@angular/core';
 export class TokenService {
 
   intercept(req: any, next: any) {
-    console.log(this.authService.getToken())
     const token = req.clone({
       setHeaders: {
         Authorization: `Bearer ${this.authService.getToken()}`
