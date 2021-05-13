@@ -6,24 +6,26 @@ IF OBJECT_ID('TipoAlimento','U') IS NULL CREATE TABLE TipoAlimento
     nombre varchar(200) NOT NULL
 )
 
-IF OBJECT_ID('Pais','U') IS NULL BEGIN CREATE TABLE Pais
-(
-    idPais INT NOT NULL IDENTITY(1,1),
-    constraint pkPais primary key (idPais),
-    nombre varchar(200) NOT NULL
-) 
-SET IDENTITY_INSERT Pais ON
+IF OBJECT_ID('Pais','U') IS NULL BEGIN
+    CREATE TABLE Pais
+    (
+        idPais INT NOT NULL IDENTITY(1,1),
+        constraint pkPais primary key (idPais),
+        nombre varchar(200) NOT NULL
+    )
+    SET IDENTITY_INSERT Pais ON
 END
 
-IF OBJECT_ID('Estado','U') IS NULL BEGIN CREATE TABLE Estado
-(
-    idEstado INT NOT NULL IDENTITY(1,1),
-    constraint pkEstado primary key (idEstado),
-    idPais INT NOT NULL,
-    constraint fkPais foreign key (idPais) references Pais(idPais),
-    nombre varchar(200) NOT NULL
-)
-SET IDENTITY_INSERT Estado ON
+IF OBJECT_ID('Estado','U') IS NULL BEGIN
+    CREATE TABLE Estado
+    (
+        idEstado INT NOT NULL IDENTITY(1,1),
+        constraint pkEstado primary key (idEstado),
+        idPais INT NOT NULL,
+        constraint fkPais foreign key (idPais) references Pais(idPais),
+        nombre varchar(200) NOT NULL
+    )
+    SET IDENTITY_INSERT Estado ON
 END
 
 IF OBJECT_ID('Municipio','U') IS NULL CREATE TABLE Municipio
@@ -64,9 +66,9 @@ if object_id('TipoEmpleado','U') is null create table TipoEmpleado
 (
     idTipoEmpleado int not null IDENTITY(1,1),
     constraint pkTipoEmpleado primary key (idTipoEmpleado),
-    nombreTipoEmpleado varchar(200),
-    horaEntrada time not null,
-    horaSalida time not null,
+    nombreTipoEmpleado varchar(200) not null,
+    horaEntrada time,
+    horaSalida time,
     sueldo float
 )
 
@@ -83,23 +85,23 @@ if object_id('Empleado','U') is null create table Empleado
 (
     nombre varchar(200) not null,
     telefono int,
-    contrasena varchar(200),
-    fechaNacimiento DATE not null,
+    contrasena varchar(200) not null,
+    fechaNacimiento DATE ,
     idEmpleado int not null IDENTITY(1000,1),
     constraint pkEmpleado primary key (idEmpleado),
     idTipoEmpleado int not null,
     constraint fkTipoEmpleado foreign key (idTipoEmpleado) references TipoEmpleado(idTipoEmpleado),
-    idPais int not null,
+    idPais int ,
     constraint fkEmpleadoPais foreign key (idPais) references Pais(idPais),
-    idEstado int not null,
+    idEstado int ,
     constraint fkEmpleadoEstado foreign key (idEstado) references Estado(idEstado),
-    idMunicipio int not null,
+    idMunicipio int ,
     constraint fkEmpleadoMunicipio foreign key (idMunicipio) references Municipio(idMunicipio),
-    idColonia int not null,
+    idColonia int ,
     constraint fkEmpladoColonia foreign key (idColonia) references Colonia(idColonia),
-    idCalle int not null,
+    idCalle int ,
     constraint fkEmpleadoCalle foreign key (idCalle) references Calle(idCalle),
-    numero tinyInt not null
+    numero tinyInt
 )
 
 if object_id('Marca','U') is null create table Marca

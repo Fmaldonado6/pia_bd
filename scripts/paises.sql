@@ -1,3 +1,4 @@
+delete from Municipio
 delete from Estado
 delete from Pais
 
