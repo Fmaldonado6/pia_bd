@@ -29,9 +29,7 @@ class PrivilegiosController extends BaseController {
 
     async addPrivilegio(req: Request, res: Response) {
         try {
-            console.log(req.body)
             const privilegio = Object.assign(new Privilegios(), req.body)
-            console.log(privilegio)
 
             await privilegiosRepository.add(privilegio)
 
@@ -47,7 +45,8 @@ class PrivilegiosController extends BaseController {
 
     async deletePrivilegio(req: Request, res: Response) {
         try {
-            const id = req.params.id
+            const id = Number.parseInt(req.params.id)
+
             await privilegiosRepository.delete(id)
 
             res.sendStatus(200)

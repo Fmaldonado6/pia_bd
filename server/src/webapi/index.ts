@@ -1,3 +1,4 @@
+import { empleadosController } from './controllers/empleadosController';
 import { privilegiosController } from './controllers/privilegiosController';
 import { database } from './../persistence/database';
 import express, { Application } from 'express';
@@ -28,6 +29,7 @@ class Server {
     routes() {
 
         this.app.use("/auth", authController.router)
+        this.app.use("/empleados", empleadosController.router)
         this.app.use("/privilegios", privilegiosController.router)
 
     }

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Empleado } from '../../models/models';
 import { empleadosRepository } from './../../persistence/repositories/empleadosRepository';
-import { BaseController } from './baseController';
+import { BaseController, CustomRequest } from './baseController';
 class EmpleadosController extends BaseController {
 
     constructor() {
@@ -12,7 +12,29 @@ class EmpleadosController extends BaseController {
     config() {
 
         this.router.post("/", (req, res) => { this.createEmpleado(req, res) })
+        this.router.get("/info", this.verifyToken, (req, res) => { this.getMyInfo(req as CustomRequest, res) })
 
+
+    }
+
+    async getMyInfo(req: CustomRequest, res: Response) {
+        try {
+
+            const idEmpleado = req.idEmpleado
+
+            const empleado = await empleadosRepository.get(idEmpleado)
+
+            if (!empleado)
+                return res.sendStatus(404)
+
+            if (empleado) empleado.contrasena = ""
+
+            res.status(200).json(empleado)
+
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
     }
 
     async createEmpleado(req: Request, res: Response) {
@@ -32,3 +54,5 @@ class EmpleadosController extends BaseController {
 
 
 }
+
+export const empleadosController = new EmpleadosController()

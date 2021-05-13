@@ -1,3 +1,4 @@
+import { Status } from './models/models';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'web';
+  Status = Status
+  currentStatus = Status.loaded
+  isLoggedIn = false
+
+
+  onLogin() {
+    this.isLoggedIn = true
+    this.currentStatus = Status.loaded
+  }
+
+  onError() {
+    console.log("error")
+    this.currentStatus = Status.loaded
+  }
+
+  changeStatus(status: Status) {
+    this.currentStatus = status
+  }
+
 }

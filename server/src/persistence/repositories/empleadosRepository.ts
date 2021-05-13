@@ -30,7 +30,8 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
         `)
     }
 
-    async get(id: string): Promise<Empleado | null> {
+    async get(id: number): Promise<Empleado | null> {
+
         const res = await database.executeQuery(`
             select * from Empleado where idEmpleado = ${id}
         `)
@@ -49,7 +50,7 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
 
         return res
     }
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await database.executeQuery(`
             delete from Empleado where idEmpleado = ${id}
         `)
@@ -84,7 +85,7 @@ class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
 
 
 
-    async get(id: string): Promise<TipoEmpleado | null> {
+    async get(id: number): Promise<TipoEmpleado | null> {
         const res = await database.executeQuery(`
             select * from TipoEmpleado where idTipoEmpleado = ${id}
         `)
@@ -95,7 +96,7 @@ class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
         return res[0] as TipoEmpleado
     }
 
-    async getTipoEmpleadosByPrivilegiosId(privilegioId: string): Promise<TipoEmpleado[]> {
+    async getTipoEmpleadosByPrivilegiosId(privilegioId: number): Promise<TipoEmpleado[]> {
 
         const res = await database.executeQuery(`
             select * from EmpPrivilegios join TipoEmpleado on EmpPrivilegios.idPrivilegio = ${privilegioId} 
@@ -116,7 +117,7 @@ class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
         return res as TipoEmpleado[]
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await database.executeQuery(`
             delete from TipoEmpleado where idTipoEmpleado = ${id}
         `)
@@ -144,7 +145,7 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
             values('${obj.nombre}')
         `)
     }
-    async get(id: string): Promise<Privilegios | null> {
+    async get(id: number): Promise<Privilegios | null> {
         const res = await database.executeQuery(`
             select * from Privilegios where
             idPrivilegio = ${id}
@@ -172,7 +173,7 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
 
         return obj
     }
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await database.executeQuery(`
             delete from Privilegios where idPrivilegio = ${id}
         `)

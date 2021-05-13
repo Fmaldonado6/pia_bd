@@ -8,7 +8,7 @@ class PaisRepository implements BaseRepository<Pais>{
             insert into Pais(nombre) values('${obj.nombre}')
         `)
     }
-    async get(id: string): Promise<Pais | null> {
+    async get(id: number): Promise<Pais | null> {
         const res = await database.executeQuery(`
             select * from Pais where idPais = ${id}
         `)
@@ -34,7 +34,7 @@ class PaisRepository implements BaseRepository<Pais>{
 
         return obj
     }
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await database.executeQuery(`
             delete from Pais where idPais = ${id}
         `)
@@ -48,7 +48,7 @@ class EstadoRepository implements BaseRepository<Estado>{
             insert into Estado(nombre,idPais) values('${obj.nombre}','${obj.idPais}')
         `)
     }
-    async get(id: string): Promise<Estado | null> {
+    async get(id: number): Promise<Estado | null> {
         const res = await database.executeQuery(`
             select * from Estado where idEstado = ${id}
         `)
@@ -59,7 +59,7 @@ class EstadoRepository implements BaseRepository<Estado>{
         return res[0] as Estado
     }
 
-    async getEstadosByPaisId(id: string): Promise<Estado | null> {
+    async getEstadosByPaisId(id: number): Promise<Estado | null> {
         const res = await database.executeQuery(`
             select * from Estado where idPais = ${id}
         `)
@@ -86,7 +86,7 @@ class EstadoRepository implements BaseRepository<Estado>{
 
         return obj
     }
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await database.executeQuery(`
             delete from Estado where idEstado = ${id}
         `)
@@ -100,7 +100,7 @@ class MunicipioRepository implements BaseRepository<Municipio>{
             insert into Municipio(nombre,idEstado) values('${obj.nombre}','${obj.idEstado}')
         `)
     }
-    async get(id: string): Promise<Municipio | null> {
+    async get(id: number): Promise<Municipio | null> {
         const res = await database.executeQuery(`
             select * from Municipio where idMunicipio = ${id}
         `)
@@ -111,7 +111,7 @@ class MunicipioRepository implements BaseRepository<Municipio>{
         return res[0] as Municipio
     }
 
-    async getMunicipiosByEstadoId(id: string): Promise<Municipio | null> {
+    async getMunicipiosByEstadoId(id: number): Promise<Municipio | null> {
         const res = await database.executeQuery(`
             select * from Municipio where idEstado = ${id}
         `)
@@ -138,7 +138,7 @@ class MunicipioRepository implements BaseRepository<Municipio>{
 
         return obj
     }
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await database.executeQuery(`
             delete from Municipio where idMunicipio = ${id}
         `)
@@ -152,7 +152,7 @@ class ColoniaRepository implements BaseRepository<Colonia>{
             insert into Colonia(nombre,idMunicipio) values('${obj.nombre}','${obj.idMunicipio}')
         `)
     }
-    async get(id: string): Promise<Colonia | null> {
+    async get(id: number): Promise<Colonia | null> {
         const res = await database.executeQuery(`
             select * from Colonia where idColonia = ${id}
         `)
@@ -163,7 +163,7 @@ class ColoniaRepository implements BaseRepository<Colonia>{
         return res[0] as Colonia
     }
 
-    async getColoniasByMunicipioId(id: string): Promise<Colonia | null> {
+    async getColoniasByMunicipioId(id: number): Promise<Colonia | null> {
         const res = await database.executeQuery(`
             select * from Colonia where idMunicipio = ${id}
         `)
@@ -190,7 +190,7 @@ class ColoniaRepository implements BaseRepository<Colonia>{
 
         return obj
     }
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await database.executeQuery(`
             delete from Colonia where idColonia = ${id}
         `)
@@ -204,7 +204,7 @@ class CallesRepository implements BaseRepository<Calle>{
             insert into Calle(nombre,idColonia) values('${obj.nombre}','${obj.idColonia}')
         `)
     }
-    async get(id: string): Promise<Calle | null> {
+    async get(id: number): Promise<Calle | null> {
         const res = await database.executeQuery(`
             select * from Calle where idCalle = ${id}
         `)
@@ -215,7 +215,7 @@ class CallesRepository implements BaseRepository<Calle>{
         return res[0] as Calle
     }
 
-    async getCallesByColoniaId(id: string): Promise<Calle | null> {
+    async getCallesByColoniaId(id: number): Promise<Calle | null> {
         const res = await database.executeQuery(`
             select * from Calle where idColonia = ${id}
         `)
@@ -242,7 +242,7 @@ class CallesRepository implements BaseRepository<Calle>{
 
         return obj
     }
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await database.executeQuery(`
             delete from Calle where idCalle = ${id}
         `)

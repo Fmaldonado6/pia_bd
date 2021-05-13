@@ -1,13 +1,13 @@
 export class Empleado {
-    idEmpleado: string = ""
+    idEmpleado: number = 0
     nombre: string = ""
     telefono: string = ""
-    idPais: string = ""
-    idMunicipio: string = ""
-    idEstado: string = ""
-    idColonia: string = ""
-    idCalle: string = ""
-    idTipoEmpleado: string = ""
+    idPais: number = 0
+    idMunicipio: number = 0
+    idEstado: number = 0
+    idColonia: number = 0
+    idCalle: number = 0
+    idTipoEmpleado: number = 0
     numero: number = 0
     fechaNacimiento: Date = new Date()
     contrasena: string = ""
@@ -16,7 +16,7 @@ export class Empleado {
 }
 
 export class TipoEmpleado {
-    idTipoEmpleado: string = ""
+    idTipoEmpleado: number = 0
     nombreTipoEmpleado: string = ""
     sueldo: number = 0
     horaEntrada: Date = new Date()
@@ -24,13 +24,13 @@ export class TipoEmpleado {
 }
 
 export class Privilegios {
-    idPrivilegio: string = ""
+    idPrivilegio: number = 0
     nombre: string = ""
 }
 
 export class Alimentos {
-    idAlimento: string = ""
-    idTipoAlimento: string = ""
+    idAlimento: number = 0
+    idTipoAlimento: number = 0
     idMarca: string = ""
     nombre: string = ""
     precio: number = 0
@@ -39,18 +39,18 @@ export class Alimentos {
 }
 
 export class TipoAlimento {
-    idTipoAlimento: string = ""
+    idTipoAlimento: number = 0
     nombreTipo: string = ""
 }
 
 export class Marca {
-    idMarca: string = ""
+    idMarca: number = 0
     nombreMarca: string = ""
 }
 
 export class Pedido {
-    idPedido: string = ""
-    idEmpleado: string = ""
+    idPedido: number = 0
+    idEmpleado: number = 0
     fechaPedido?: Date
     subtotal: number = 0
     descuento: number = 0
@@ -60,58 +60,69 @@ export class Pedido {
 export class InfoSucursal {
     nombre: string = ""
     horario: string = ""
-    idPais: string = ""
-    idEstado: string = ""
-    idMunicipio: string = ""
-    idColonia: string = ""
-    idCalle: string = ""
+    idPais: number = 0
+    idEstado: number = 0
+    idMunicipio: number = 0
+    idColonia: number = 0
+    idCalle: number = 0
     numero: number = 0
 }
 
 export class Pais {
-    idPais: string = ""
+    idPais: number = 0
     nombre: string = ""
 }
 
 export class Estado {
-    idEstado: string = ""
+    idEstado: number = 0
     nombre: string = ""
-    idPais: string = ""
+    idPais: number = 0
 }
 
 export class Municipio {
-    idMunicipio: string = ""
+    idMunicipio: number = 0
     nombre: string = ""
-    idEstado: string = ""
+    idEstado: number = 0
 }
 
 export class Colonia {
-    idColonia: string = ""
+    idColonia: number = 0
     nombre: string = ""
-    idMunicipio: string = ""
+    idMunicipio: number = 0
 }
 
 export class Calle {
-    idCalle: string = ""
+    idCalle: number = 0
     nombre: string = ""
-    idColonia: string = ""
+    idColonia: number = 0
 }
 
 export class Factura {
-    idFactura: string = ""
+    idFactura: number = 0
     fechaFactura: Date = new Date()
     RFC: string = ""
-    idPedido: string = ""
+    idPedido: number = 0
     concepto: string = ""
     razonSocial: string = ""
-    idPais: string = ""
-    idEstado: string = ""
-    idMunicipio: string = ""
-    idColonia: string = ""
-    idCalle: string = ""
+    idPais: number = 0
+    idEstado: number = 0
+    idMunicipio: number = 0
+    idColonia: number = 0
+    idCalle: number = 0
     numero: number = 0
     nombre: string = ""
     apPaterno: string = ""
     apMaterno: string = ""
     telefono: string = ""
+}
+
+export interface Token {
+    idEmpleado: number
+}
+
+export enum Status {
+    loading,
+    loaded,
+    error,
+    empty
 }

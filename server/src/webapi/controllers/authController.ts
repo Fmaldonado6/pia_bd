@@ -2,6 +2,7 @@ import { empleadosRepository } from './../../persistence/repositories/empleadosR
 import { Empleado } from './../../models/models';
 import { Request, Response } from 'express';
 import { BaseController } from './baseController';
+import jwt from 'jsonwebtoken'
 class AuthController extends BaseController {
 
     constructor() {
@@ -18,7 +19,6 @@ class AuthController extends BaseController {
         try {
 
             const empleado = req.body as Empleado
-
             const savedEmpleado = await empleadosRepository.get(empleado.idEmpleado)
 
             if (!savedEmpleado)
@@ -27,7 +27,14 @@ class AuthController extends BaseController {
             if (empleado.contrasena != savedEmpleado?.contrasena)
                 return res.sendStatus(403)
 
-            return res.status(200).json(empleado)
+
+            let token = jwt.sign(
+                {
+                    idEmpleado: empleado.idEmpleado,
+                },
+                'chunchunmaru')
+
+            return res.status(200).json(token)
 
         } catch (error) {
             console.error(error)
