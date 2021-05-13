@@ -3,6 +3,7 @@ import { database } from './../persistence/database';
 import express, { Application } from 'express';
 import cors from 'cors';
 import morgan from "morgan";
+import { authController } from './controllers/authController';
 
 const PORT = 'port'
 
@@ -26,6 +27,7 @@ class Server {
 
     routes() {
 
+        this.app.use("/auth", authController.router)
         this.app.use("/privilegios", privilegiosController.router)
 
     }

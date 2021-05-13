@@ -4,14 +4,17 @@ import { database } from './../database';
 class DatabaseConfiguration {
 
     async config() {
-        await this.createDatabase()
         await this.createTables()
         await this.fillTables()
     }
 
     async createDatabase() {
-        const query = "IF DB_ID('barDB') IS NULL CREATE DATABASE barDB"
-        await database.executeQuery(query)
+        try {
+            const query = "IF DB_ID('barDB') IS NULL CREATE DATABASE barDB"
+            await database.executeQuery(query)
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     async createTables() {
@@ -24,14 +27,25 @@ class DatabaseConfiguration {
 
     async fillTables() {
 
-        const query = await Reader.readFile(SQL_FOLDER, "paises.sql")
+        try {
+            const query = await Reader.readFile(SQL_FOLDER, "paises.sql")
 
-        await database.executeQuery(query)
+            await database.executeQuery(query)
 
-        const municipios = await Reader.readFile(SQL_FOLDER, "municipios.sql")
+            const municipios = await Reader.readFile(SQL_FOLDER, "municipios.sql")
 
-        await database.executeQuery(municipios)
+            await database.executeQuery(municipios)
 
+            const privilegios = await Reader.readFile(SQL_FOLDER, "privilegios.sql")
+
+            await database.executeQuery(privilegios)
+
+            const tipoEmpleado = await Reader.readFile(SQL_FOLDER, "tipoEmpleado.sql")
+
+            await database.executeQuery(tipoEmpleado)
+        } catch (error) {
+            console.error(error)
+        }
     }
 
 

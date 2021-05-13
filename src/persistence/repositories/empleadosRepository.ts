@@ -15,6 +15,21 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
             ${obj.idTipoEmpleado},${obj.numero}
         )`)
     }
+
+    async addAdmin(obj: TipoEmpleado): Promise<void> {
+        await database.executeQuery(`
+        SET IDENTITY_INSERT Empleado ON
+
+        insert into Empleado(
+            idEmpleado,nombre,contrasena,idTipoEmpleado
+        ) values (
+            1000,1,19,971
+        )
+        SET IDENTITY_INSERT Empleado ON
+        
+        `)
+    }
+
     async get(id: string): Promise<Empleado | null> {
         const res = await database.executeQuery(`
             select * from Empleado where idEmpleado = ${id}
@@ -65,6 +80,10 @@ class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
             ${obj.sueldo},'${obj.nombreTipoEmpleado}',${obj.horaEntrada},${obj.horaSalida}
         )`)
     }
+
+
+
+
     async get(id: string): Promise<TipoEmpleado | null> {
         const res = await database.executeQuery(`
             select * from TipoEmpleado where idTipoEmpleado = ${id}
