@@ -33,8 +33,8 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
     }
     async delete(id: string): Promise<void> {
         await database.executeQuery(`
-        delete from Privilegios where idPrivilegio = ${id}
-    `)
+            delete from Privilegios where idPrivilegio = ${id}
+        `)
     }
 
 }

@@ -11,6 +11,8 @@ export class Empleado {
     numero: number = 0
     fechaNacimiento: Date = new Date()
     contrasena: string = ""
+    tipoEmpleado: TipoEmpleado = new TipoEmpleado()
+    privilegios: Privilegios[] = []
 }
 
 export class TipoEmpleado {
@@ -68,30 +70,30 @@ export class InfoSucursal {
 
 export class Pais {
     idPais: string = ""
-    descripcion: string = ""
+    nombre: string = ""
 }
 
 export class Estado {
     idEstado: string = ""
-    descripcion: string = ""
+    nombre: string = ""
     idPais: string = ""
 }
 
 export class Municipio {
     idMunicipio: string = ""
-    descripcion: string = ""
+    nombre: string = ""
     idEstado: string = ""
 }
 
 export class Colonia {
     idColonia: string = ""
-    descripcion: string = ""
+    nombre: string = ""
     idMunicipio: string = ""
 }
 
 export class Calle {
     idCalle: string = ""
-    descripcion: string = ""
+    nombre: string = ""
     idColonia: string = ""
 }
 
