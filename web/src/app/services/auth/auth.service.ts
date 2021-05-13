@@ -27,7 +27,7 @@ export class AuthService extends DataService {
   }
 
   loggedIn() {
-    return !!localStorage.getItem(this.TOKEN_KEY);
+    return this.loggedUser.value != null
   }
 
   getToken() {
