@@ -1,5 +1,5 @@
 import { database } from './../database';
-import { Empleado, TipoEmpleado } from './../../models/models';
+import { Empleado, Privilegios, TipoEmpleado } from './../../models/models';
 import { BaseRepository } from './baseRepository';
 class EmpleadosRepository implements BaseRepository<Empleado> {
 
@@ -117,8 +117,51 @@ class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
     }
 }
 
+class PrivilegiosRepository implements BaseRepository<Privilegios>{
+
+    async add(obj: Privilegios): Promise<void> {
+        await database.executeQuery(`
+            insert into privilegios(nombre)
+            values('${obj.nombre}')
+        `)
+    }
+    async get(id: string): Promise<Privilegios | null> {
+        const res = await database.executeQuery(`
+            select * from Privilegios where
+            idPrivilegio = ${id}
+        `)
+
+        if (!res)
+            return null
+
+        return res[0] as Privilegios
+    }
+    async findAll(): Promise<Privilegios[]> {
+        const res = await database.executeQuery(`select * from Privilegios`)
+
+        if (!res)
+            return []
+
+        return res
+    }
+    async update(obj: Privilegios): Promise<Privilegios> {
+        await database.executeQuery(`
+        update Privilegios
+        set nombre = ${obj.nombre},
+        where idPrivilegio = ${obj.idPrivilegio}
+    `)
+
+        return obj
+    }
+    async delete(id: string): Promise<void> {
+        await database.executeQuery(`
+            delete from Privilegios where idPrivilegio = ${id}
+        `)
+    }
+
+}
 
 
-
+export const privilegiosRepository = new PrivilegiosRepository()
 export const empleadosRepository = new EmpleadosRepository()
 export const tipoEmpleadoRepository = new TipoEmpleadoRepository()

@@ -1,7 +1,7 @@
-import { privilegiosRepository } from './../../persistence/repositories/privilegiosRepository';
 import { Request, Response } from 'express';
 import { BaseController } from './baseController';
 import { Privilegios } from '../../models/models';
+import { privilegiosRepository } from '../../persistence/repositories/empleadosRepository';
 class PrivilegiosController extends BaseController {
 
     constructor() {
