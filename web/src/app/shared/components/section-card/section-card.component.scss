@@ -1,0 +1,36 @@
+mat-card {
+  border-radius: 10px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-content {
+  display: flex;
+  height: 65%;
+}
+
+.content {
+  width: 80%;
+  padding-top: 10px;
+  padding-left: 20px;
+  p {
+    color: gray;
+  }
+}
+
+mat-card-actions {
+  border-top: 1px solid rgb(233, 233, 233);
+  padding: 5px 20px;
+  padding-top: 10px;
+}
+
+.icon-container {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mat-icon {
+    transform: scale(2);
+  }
+}

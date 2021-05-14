@@ -1,0 +1,20 @@
+<div>
+  <div class="container">
+    <div class="title-container">
+      <span>Inicio</span>
+      <p>
+        Bienvenido al Software de gestión del Bar delow, a continuación le
+        mostramos los diferentes menús a los que su usario puede acceder.
+      </p>
+    </div>
+    <div class="card-container">
+      <section-card
+        *ngFor="let section of sections"
+        [title]="section.title"
+        [description]="section.description"
+        [icon]="section.icon"
+        [action]="section.action"
+      ></section-card>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,38 @@
 .sidenav {
   width: 300px;
+  padding-right: 10px;
 }
 
 .sidenav-container {
   height: 100vh;
+}
+
+h1{
+    margin: 20px;
+}
+
+mat-list {
+  margin-top: 10px;
+}
+
+mat-list-item {
+  cursor: pointer;
+  margin-top: 5px;
+  height: 45px !important;
+  color: rgb(94, 94, 94) !important;
+  transition: background-color 0.3s ease;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  div {
+    font-weight: 500 !important;
+  }
+  &:hover {
+    background-color: #a3abd346;
+    color: #303f9f !important;
+  }
+}
+
+.selected-item {
+  background-color: #7987cb46;
+  color: #303f9f !important;
 }

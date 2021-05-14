@@ -14,6 +14,34 @@ export class AppComponent implements OnInit {
   innerWidth = 0;
   opened: boolean = true;
 
+  menuSections = [
+    {
+      icon: "home",
+      title: "Inicio",
+      route: "/home"
+    },
+    {
+      icon: "monetization_on",
+      title: "Pedidos",
+      route: "/pedidos"
+    },
+    {
+      icon: "supervised_user_circle",
+      title: "Empleados",
+      route: "/empleados"
+    },
+    {
+      icon: "fastfood",
+      title: "Alimentos y Bebidas",
+      route: "/comida"
+    },
+    {
+      icon: "sticky_note_2",
+      title: "Facturación",
+      route: "/facturacion"
+    }
+  ]
+
   constructor(
     private authService: AuthService
   ) { }

@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SectionCardComponent } from './components/section-card/section-card.component';
 
 
 
 @NgModule({
   declarations: [
+
+    SectionCardComponent
   ],
   imports: [
     CommonModule,
@@ -14,7 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    SectionCardComponent
+
   ]
 })
 export class SharedModule { }

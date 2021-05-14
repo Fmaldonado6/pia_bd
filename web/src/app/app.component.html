@@ -5,9 +5,22 @@
     <mat-sidenav
       #sidenav
       [mode]="innerWidth > 1234 ? 'side' : 'over'"
-      class="sidenav mat-elevation-z4"
+      class="sidenav"
       [(opened)]="opened"
     >
+    <h1>Bar delow</h1>
+      <mat-list>
+        <mat-list-item
+          *ngFor="let menu of menuSections"
+          [routerLink]="menu.route"
+          routerLinkActive="selected-item"
+        >
+          <mat-icon class="material-icons-outlined" mat-list-icon>{{
+            menu.icon
+          }}</mat-icon>
+          <div mat-line>{{ menu.title }}</div>
+        </mat-list-item>
+      </mat-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
