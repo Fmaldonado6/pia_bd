@@ -249,3 +249,7 @@ class CallesRepository implements BaseRepository<Calle>{
     }
 
 }
+
+export const paisRepository = new PaisRepository()
+export const estadoRepository = new EstadoRepository()
+export const municipioRepository = new MunicipioRepository()

@@ -1,3 +1,4 @@
+import { direccionController } from './controllers/direccionController';
 import { empleadosController } from './controllers/empleadosController';
 import { privilegiosController } from './controllers/privilegiosController';
 import { database } from './../persistence/database';
@@ -31,6 +32,7 @@ class Server {
         this.app.use("/auth", authController.router)
         this.app.use("/empleados", empleadosController.router)
         this.app.use("/privilegios", privilegiosController.router)
+        this.app.use("/direcciones", direccionController.router)
 
     }
 
