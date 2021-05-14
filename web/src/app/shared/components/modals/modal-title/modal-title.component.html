@@ -1,0 +1,18 @@
+<div class="header-container">
+  <div class="title-container" >
+    <mat-icon
+      *ngIf="type == HeaderType.goBack"
+      class="clickable back"
+      (click)="emitGoBack()"
+      >chevron_left</mat-icon
+    >
+    <span class="mat-body-2 title">{{ title }}</span>
+    <mat-icon
+      *ngIf="type == HeaderType.close"
+      class="clickable close"
+      (click)="emitClose()"
+      >close</mat-icon
+    >
+  </div>
+  <p class="mat-body text">{{ subtitle }}</p>
+</div>

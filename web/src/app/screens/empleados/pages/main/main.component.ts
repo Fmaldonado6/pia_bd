@@ -37,6 +37,7 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.openRegisterModal()
   }
 
   openRegisterModal() {

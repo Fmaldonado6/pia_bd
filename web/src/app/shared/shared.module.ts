@@ -4,6 +4,7 @@ import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SectionCardComponent } from './components/section-card/section-card.component';
 import { CrearEmpleadoComponent } from './components/modals/empleados/crear-empleado/crear-empleado.component';
+import { ModalTitleComponent } from './components/modals/modal-title/modal-title.component';
 
 
 
@@ -11,7 +12,8 @@ import { CrearEmpleadoComponent } from './components/modals/empleados/crear-empl
   declarations: [
 
     SectionCardComponent,
-     CrearEmpleadoComponent
+     CrearEmpleadoComponent,
+     ModalTitleComponent
   ],
   imports: [
     CommonModule,

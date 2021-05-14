@@ -1,1 +1,18 @@
-<p>crear-empleado works!</p>
+<div class="dialog">
+  <modal-title
+    title="Registrar Empleado"
+    subtitle="Ingrese la información personal del empleado"
+    (closeClicked)="close()"
+  ></modal-title>
+  <form>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Input</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <button mat-raised-button color="primary">REGISTRAR</button>
+  </form>
+</div>
