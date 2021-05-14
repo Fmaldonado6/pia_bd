@@ -1,0 +1,24 @@
+<modal-title
+  title="Registrar Empleado"
+  subtitle="Ingrese la información personal del empleado"
+  (closeClicked)="onIconClick()"
+></modal-title>
+<form
+  (ngSubmit)="onSubmit(formInformacion.value)"
+  [formGroup]="formInformacion"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Apellido paterno</mat-label>
+    <input matInput formControlName="apellidoPaterno" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Apellido materno</mat-label>
+    <input matInput formControlName="apellidoMaterno" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary">SIGUIENTE</button>
+</form>

@@ -1,60 +1,22 @@
 <div class="dialog" [ngSwitch]="currentStatus">
   <ng-container *ngSwitchCase="Status.loaded">
-    <modal-title
-      title="Registrar Empleado"
-      subtitle="Ingrese la información personal del empleado"
-      (closeClicked)="close()"
-    ></modal-title>
-    <form [formGroup]="form">
-      <mat-form-field appearance="outline">
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="nombre" />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Apellido paterno</mat-label>
-        <input matInput formControlName="apellidoPaterno" />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Apellido materno</mat-label>
-        <input matInput formControlName="apellidoMaterno" />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>País</mat-label>
-        <mat-select (ngModelChange)="getEstados($event)" formControlName="pais">
-          <mat-option *ngFor="let pais of paises" [value]="pais.idPais">{{
-            pais.nombre
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Estado</mat-label>
-        <mat-select
-          [disabled]="estados.length == 0"
-          (ngModelChange)="getMunicipios($event)"
-          formControlName="estado"
-        >
-          <mat-option
-            *ngFor="let estado of estados"
-            [value]="estado.idEstado"
-            >{{ estado.nombre }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Municipio</mat-label>
-        <mat-select
-          [disabled]="municipios.length == 0"
-          formControlName="municipio"
-        >
-          <mat-option
-            *ngFor="let municipio of municipios"
-            [value]="municipio.idMunicipio"
-            >{{ municipio.nombre }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-      <button mat-raised-button color="primary">SIGUIENTE</button>
-    </form>
+    <ng-container [ngSwitch]="currentPage">
+      <personal-info
+        (submitForm)="addPersonalInfo($event)"
+        (iconClicked)="close()"
+        *ngSwitchCase="Pages.personalInfo"
+      ></personal-info>
+      <address
+        (iconClicked)="changePage(Pages.personalInfo)"
+        (submitForm)="addAddress($event)"
+        *ngSwitchCase="Pages.address"
+      ></address>
+      <employee-info
+        (iconClicked)="changePage(Pages.address)"
+        *ngSwitchCase="Pages.employeeInfo"
+      >
+      </employee-info>
+    </ng-container>
   </ng-container>
 
   <div class="status" *ngSwitchCase="Status.loading">

@@ -1,0 +1,23 @@
+<modal-title
+  title="Registrar Empleado"
+  [type]="HeaderType.goBack"
+  subtitle="Ingrese la información personal del empleado"
+  (backClicked)="onIconClick()"
+></modal-title>
+<form [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Tipo de empleado</mat-label>
+    <mat-select formControlName="tipoEmpleado">
+      <mat-option>Admin</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Contraseña</mat-label>
+    <input matInput formControlName="contrasena" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Confirmar contraseña</mat-label>
+    <input matInput formControlName="confirmarContrasena" />
+  </mat-form-field>
+  <button mat-raised-button color="primary">REGISTRAR</button>
+</form>

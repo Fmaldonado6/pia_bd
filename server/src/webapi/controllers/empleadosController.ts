@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Empleado } from '../../models/models';
-import { empleadosRepository } from './../../persistence/repositories/empleadosRepository';
+import { empleadosRepository, tipoEmpleadoRepository } from './../../persistence/repositories/empleadosRepository';
 import { BaseController, CustomRequest } from './baseController';
 class EmpleadosController extends BaseController {
 
@@ -13,6 +13,7 @@ class EmpleadosController extends BaseController {
 
         this.router.post("/", (req, res) => { this.createEmpleado(req, res) })
         this.router.get("/info", this.verifyToken, (req, res) => { this.getMyInfo(req as CustomRequest, res) })
+        this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTipoEmpleados(req as CustomRequest, res) })
 
 
     }
@@ -52,6 +53,18 @@ class EmpleadosController extends BaseController {
         }
     }
 
+    async getTipoEmpleados(req: Request, res: Response) {
+        try {
+
+            const tipos = await tipoEmpleadoRepository.findAll()
+
+            res.status(200).json(tipos)
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
+
+    }
 
 }
 

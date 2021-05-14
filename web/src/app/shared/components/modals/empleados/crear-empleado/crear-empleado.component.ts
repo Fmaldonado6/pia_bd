@@ -1,101 +1,65 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Estado, Municipio, Pais, Status } from 'src/app/models/models';
+import { Empleado, Estado, Municipio, Pais, Status } from 'src/app/models/models';
 import { DireccionesService } from 'src/app/services/direcciones/direcciones.service';
+
+interface PersonalInfoForm {
+  nombre: string
+  apellidoPaterno: string
+  apellidoMaterno: string
+}
+
+interface AddressForm {
+  idPais: number
+  idEstado: number
+  idMunicipio: number
+  colonia: string
+  calle: string
+  numero: number
+}
 
 @Component({
   selector: 'app-crear-empleado',
   templateUrl: './crear-empleado.component.html',
   styleUrls: ['./crear-empleado.component.scss']
 })
-export class CrearEmpleadoComponent implements OnInit {
+export class CrearEmpleadoComponent {
 
   Pages = Pages
   Status = Status
-  currentStatus = Status.loading
 
+  currentPage = Pages.personalInfo
+  currentStatus = Status.loaded
 
-  paises: Pais[] = []
-  estados: Estado[] = []
-  municipios: Municipio[] = []
+  empleado = new Empleado()
 
-  form: FormGroup
 
   constructor(
     private dialogRef: MatDialogRef<CrearEmpleadoComponent>,
-    private direccionesService: DireccionesService
-  ) {
+  ) { }
 
-    this.form = new FormGroup({
-      nombre: new FormControl('', {
-        validators: [
-          Validators.required
-        ]
-      }),
-      apellidoPaterno: new FormControl('', {
-        validators: [
-          Validators.required
-        ]
-      }),
-      apellidoMaterno: new FormControl('', {
-        validators: [
-          Validators.required
-        ]
-      }),
-      pais: new FormControl('', {
-        validators: [
-          Validators.required
-        ]
-      }),
-      estado: new FormControl('', {
-        validators: [
-          Validators.required
-        ]
-      }),
-      municipio: new FormControl('', {
-        validators: [
-          Validators.required
-        ]
-      }),
-
-    })
-
+  addPersonalInfo(values: PersonalInfoForm) {
+    this.empleado.nombre = `${values.nombre} ${values.apellidoPaterno} ${values.apellidoMaterno}`
+    this.changePage(Pages.address)
   }
 
-  ngOnInit(): void {
-    this.getPaises()
+  addAddress(values: AddressForm) {
+    console.log(values)
+    this.changePage(Pages.employeeInfo)
   }
-
-  getPaises() {
-    this.direccionesService.getPaises().subscribe(e => {
-      this.paises = e
-      this.currentStatus = Status.loaded
-    })
-  }
-
-  getEstados(id: number) {
-    this.direccionesService.getEstados(id).subscribe(e => {
-      console.log(e)
-      this.estados = e
-    })
-  }
-
-  getMunicipios(id: number) {
-    this.direccionesService.getMunicipios(id).subscribe(e => {
-      console.log(e)
-      this.municipios = e
-    })
-  }
-
 
   close() {
     this.dialogRef.close()
   }
 
+  changePage(page: Pages) {
+    this.currentPage = page
+  }
 }
 
 enum Pages {
   personalInfo,
-  direction,
+  address,
+  employeeInfo
 }

@@ -1,0 +1,51 @@
+<modal-title
+  title="Registrar Empleado"
+  [type]="HeaderType.goBack"
+  subtitle="Ingrese la información personal del empleado"
+  (backClicked)="onIconClick()"
+></modal-title>
+<form [formGroup]="formDireccion" (ngSubmit)="onSubmit(formDireccion.value)">
+  <mat-form-field appearance="outline">
+    <mat-label>País</mat-label>
+    <mat-select (ngModelChange)="getEstados($event)" formControlName="pais">
+      <mat-option *ngFor="let pais of paises" [value]="pais.idPais">{{
+        pais.nombre
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Estado</mat-label>
+    <mat-select
+      [disabled]="estados.length == 0"
+      (ngModelChange)="getMunicipios($event)"
+      formControlName="estado"
+    >
+      <mat-option *ngFor="let estado of estados" [value]="estado.idEstado">{{
+        estado.nombre
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Municipio</mat-label>
+    <mat-select [disabled]="municipios.length == 0" formControlName="municipio">
+      <mat-option
+        *ngFor="let municipio of municipios"
+        [value]="municipio.idMunicipio"
+        >{{ municipio.nombre }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Colonia</mat-label>
+    <input matInput formControlName="colonia" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Calle</mat-label>
+    <input matInput formControlName="calle" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Numero</mat-label>
+    <input matInput formControlName="numero" />
+  </mat-form-field>
+  <button mat-raised-button color="primary">SIGUIENTE</button>
+</form>
