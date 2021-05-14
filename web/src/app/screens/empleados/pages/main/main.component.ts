@@ -1,4 +1,6 @@
+import { CrearEmpleadoComponent } from './../../../../shared/components/modals/empleados/crear-empleado/crear-empleado.component';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { SectionCard } from 'src/app/models/models';
 
 @Component({
@@ -7,18 +9,19 @@ import { SectionCard } from 'src/app/models/models';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  sections: SectionCard[] = [
+  sections: any[] = [
     {
       title: "Mi información",
       icon: "account_circle",
       description: "Consulta la información del empleado actual.",
-      action: "Consultar"
+      action: "Consultar",
     },
     {
       title: "Registrar",
       icon: "person_add",
       description: "Registrar un nuevo empleado",
-      action: "Crear"
+      action: "Crear",
+      onClick: () => { this.openRegisterModal() }
     },
     {
       title: "Editar o eliminar",
@@ -29,9 +32,15 @@ export class MainComponent implements OnInit {
 
   ]
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  openRegisterModal() {
+    const dialogRef = this.dialog.open(CrearEmpleadoComponent)
   }
 
 }
