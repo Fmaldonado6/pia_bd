@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { HeaderType } from '../../../../modal-title/modal-title.component';
+import { TipoEmpleado } from 'src/app/models/models';
 
 @Component({
   selector: 'employee-info',
@@ -13,6 +14,8 @@ export class EmployeeInfoComponent implements OnInit {
   HeaderType = HeaderType
 
   @Output() iconClicked = new EventEmitter()
+
+  tiposEmpleado: TipoEmpleado[] = []
 
   form = new FormGroup({
     tipoEmpleado: new FormControl('', {
@@ -42,7 +45,7 @@ export class EmployeeInfoComponent implements OnInit {
 
   getTiposEmpleados() {
     this.empleadosService.getTiposEmpleados().subscribe(e => {
-      console.log(e)
+      this.tiposEmpleado = e
     })
   }
 
