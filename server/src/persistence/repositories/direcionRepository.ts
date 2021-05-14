@@ -59,15 +59,15 @@ class EstadoRepository implements BaseRepository<Estado>{
         return res[0] as Estado
     }
 
-    async getEstadosByPaisId(id: number): Promise<Estado | null> {
+    async getEstadosByPaisId(id: number): Promise<Estado[]> {
         const res = await database.executeQuery(`
             select * from Estado where idPais = ${id}
         `)
 
         if (!res)
-            return null
+            return []
 
-        return res[0] as Estado
+        return res
     }
 
     async findAll(): Promise<Estado[]> {
@@ -111,15 +111,16 @@ class MunicipioRepository implements BaseRepository<Municipio>{
         return res[0] as Municipio
     }
 
-    async getMunicipiosByEstadoId(id: number): Promise<Municipio | null> {
+    async getMunicipiosByEstadoId(id: number): Promise<Municipio[]> {
         const res = await database.executeQuery(`
             select * from Municipio where idEstado = ${id}
         `)
 
-        if (!res)
-            return null
 
-        return res[0] as Municipio
+        if (!res)
+            return []
+
+        return res
     }
 
     async findAll(): Promise<Municipio[]> {
@@ -163,15 +164,15 @@ class ColoniaRepository implements BaseRepository<Colonia>{
         return res[0] as Colonia
     }
 
-    async getColoniasByMunicipioId(id: number): Promise<Colonia | null> {
+    async getColoniasByMunicipioId(id: number): Promise<Colonia[]> {
         const res = await database.executeQuery(`
             select * from Colonia where idMunicipio = ${id}
         `)
 
         if (!res)
-            return null
+            return []
 
-        return res[0] as Colonia
+        return res
     }
 
     async findAll(): Promise<Colonia[]> {
@@ -215,15 +216,15 @@ class CallesRepository implements BaseRepository<Calle>{
         return res[0] as Calle
     }
 
-    async getCallesByColoniaId(id: number): Promise<Calle | null> {
+    async getCallesByColoniaId(id: number): Promise<Calle[]> {
         const res = await database.executeQuery(`
             select * from Calle where idColonia = ${id}
         `)
 
         if (!res)
-            return null
+            return []
 
-        return res[0] as Calle
+        return res
     }
 
     async findAll(): Promise<Calle[]> {
