@@ -39,8 +39,6 @@ export class MainComponent implements OnInit {
 
     const token = this.authService.getToken()
 
-    console.log(token)
-
     if (token)
       this.getEmpleadoInfo(token)
 

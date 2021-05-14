@@ -7,8 +7,16 @@
   height: 100vh;
 }
 
-h1{
-    margin: 20px;
+h1 {
+  margin: 20px;
+}
+
+.status {
+  display: flex;
+  width: 100vw;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
 }
 
 mat-list {

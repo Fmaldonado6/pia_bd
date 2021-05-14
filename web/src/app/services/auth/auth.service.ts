@@ -1,9 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Token } from './../../models/models';
 import { Injectable } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { catchError } from 'rxjs/operators'
 import { Empleado } from 'src/app/models/models';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +14,13 @@ export class AuthService extends DataService {
   loggedUser = new BehaviorSubject<Empleado | null>(null)
 
   TOKEN_KEY = "token_bar"
+
+  constructor(
+    http: HttpClient,
+    private router: Router
+  ) {
+    super(http)
+  }
 
 
   setUser(user: Empleado) {
@@ -28,6 +37,12 @@ export class AuthService extends DataService {
 
   loggedIn() {
     return this.loggedUser.value != null
+  }
+
+  logout() {
+    this.loggedUser.next(null)
+    localStorage.removeItem(this.TOKEN_KEY)
+    this.router.navigate(["/"])
   }
 
   getToken() {

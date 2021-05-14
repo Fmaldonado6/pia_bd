@@ -1,3 +1,4 @@
+import { EmpleadosService } from './../services/empleados/empleados.service';
 import { Injectable } from '@angular/core';
 import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,6 +11,7 @@ export class AuthGuard implements CanLoad {
 
   constructor(
     private authService: AuthService,
+    private empleadosService: EmpleadosService,
     private router: Router
   ) {
   }
@@ -17,11 +19,11 @@ export class AuthGuard implements CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const loggedIn = this.authService.loggedIn()
+    const token = this.authService.getToken()
 
-    if (!loggedIn)
+    if (!token)
       this.router.navigate(["/"])
 
-    return loggedIn
+    return !!token
   }
 }

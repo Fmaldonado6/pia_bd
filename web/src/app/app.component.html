@@ -1,4 +1,12 @@
-<router-outlet *ngIf="!isLoggedIn; else loggedIn"></router-outlet>
+<ng-container [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <router-outlet *ngIf="!isLoggedIn; else loggedIn"></router-outlet>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </div>
+</ng-container>
 
 <ng-template #loggedIn>
   <mat-sidenav-container class="sidenav-container">
@@ -8,10 +16,11 @@
       class="sidenav"
       [(opened)]="opened"
     >
-    <h1>Bar delow</h1>
+      <h1>Bar delow</h1>
       <mat-list>
         <mat-list-item
           *ngFor="let menu of menuSections"
+          mat-ripple
           [routerLink]="menu.route"
           routerLinkActive="selected-item"
         >

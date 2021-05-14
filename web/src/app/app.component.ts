@@ -1,3 +1,4 @@
+import { EmpleadosService } from './services/empleados/empleados.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Status } from './models/models';
 import { Component, HostListener, OnInit } from '@angular/core';
@@ -43,15 +44,30 @@ export class AppComponent implements OnInit {
   ]
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private empleadosService: EmpleadosService
   ) { }
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth
 
     this.authService.loggedUser.asObservable().subscribe(e => {
-      this.isLoggedIn = e != null
-      console.log(this.isLoggedIn, e)
+      this.isLoggedIn = !!e
+    })
+
+    const token = this.authService.getToken()
+    if (!token)
+      return
+
+    this.isLoggedIn = true
+    this.currentStatus = Status.loading
+
+    this.empleadosService.getMyInfo().subscribe(e => {
+      this.authService.setUser(e)
+      this.currentStatus = Status.loaded
+    }, () => {
+      this.authService.logout()
+      this.currentStatus = Status.loaded
     })
   }
 

@@ -13,6 +13,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: "pedidos",
+    loadChildren: () => import('./screens/pedidos/pedidos.module').then(m => m.PedidosModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: "",
     redirectTo: "auth",
     pathMatch: 'full'
