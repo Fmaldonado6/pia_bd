@@ -18,6 +18,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: "empleados",
+    loadChildren: () => import('./screens/empleados/empleados.module').then(m => m.EmpleadosModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: "",
     redirectTo: "auth",
     pathMatch: 'full'

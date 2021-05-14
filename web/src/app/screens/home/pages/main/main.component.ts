@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SectionCard } from 'src/app/models/models';
 
-interface SectionCard {
-  title: string
-  icon: string
-  description: string
-  action: string
-}
 
 @Component({
   selector: 'app-main',

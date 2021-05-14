@@ -120,6 +120,14 @@ export interface Token {
     idEmpleado: number
 }
 
+export interface SectionCard {
+    title: string
+    icon: string
+    description: string
+    action: string
+}
+
+
 export enum Status {
     loading,
     loaded,

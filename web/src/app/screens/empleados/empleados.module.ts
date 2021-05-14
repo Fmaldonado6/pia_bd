@@ -1,9 +1,9 @@
-import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PedidosRoutingModule } from './pedidos-routing.module';
+import { EmpleadosRoutingModule } from './empleados-routing.module';
 import { MainComponent } from './pages/main/main.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +13,7 @@ import { MainComponent } from './pages/main/main.component';
   imports: [
     CommonModule,
     SharedModule,
-    PedidosRoutingModule
+    EmpleadosRoutingModule
   ]
 })
-export class PedidosModule { }
+export class EmpleadosModule { }
