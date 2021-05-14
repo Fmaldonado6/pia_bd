@@ -8,7 +8,12 @@ BEGIN
 TipoEmpleado
         (idTipoEmpleado,nombreTipoEmpleado)
     values
-        (1, 'Administrador');
+        (1, 'Administrador'),
+        (2, 'Mesero'),
+        (3, 'Bartender'),
+        (4, 'Cocinero'),
+        (5, 'Conserje'),
+        (6, 'Gerente');
 
     insert into
 EmpPrivilegios
@@ -20,7 +25,21 @@ EmpPrivilegios
         (1, 4),
         (1, 5),
         (1, 6),
-        (1, 7);
+        (1, 7),
+        (2, 7),
+        (2, 5),
+        (2, 4),
+        (3, 7),
+        (3, 5),
+        (3, 4),
+        (4, 6),
+        (6, 1),
+        (6, 2),
+        (6, 3),
+        (6, 4),
+        (6, 5),
+        (6, 6),
+        (6, 7);
     SET IDENTITY_INSERT TipoEmpleado OFF
 END
 
