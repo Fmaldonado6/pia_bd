@@ -11,7 +11,6 @@ class Database {
         await databaseConfiguration.config()
 
     }
-
     executeQuery(query: string): Promise<any[] | undefined> {
         return new Promise((resolve, reject) => {
             database.sql.query(database.connectionString, query, (err, rows) => {

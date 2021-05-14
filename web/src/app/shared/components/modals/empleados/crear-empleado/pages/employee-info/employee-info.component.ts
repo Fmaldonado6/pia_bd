@@ -1,3 +1,4 @@
+import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
@@ -31,9 +32,18 @@ export class EmployeeInfoComponent implements OnInit {
     })
   })
 
-  constructor() { }
+  constructor(
+    private empleadosService: EmpleadosService
+  ) { }
 
   ngOnInit(): void {
+    this.getTiposEmpleados()
+  }
+
+  getTiposEmpleados() {
+    this.empleadosService.getTiposEmpleados().subscribe(e => {
+      console.log(e)
+    })
   }
 
   onIconClick() {
