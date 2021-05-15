@@ -5,12 +5,14 @@ import { EmpleadosRoutingModule } from './empleados-routing.module';
 import { MainComponent } from './pages/main/main.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EmployeeInfoComponent } from './pages/employee-info/employee-info.component';
+import { EmployeeListComponent } from './pages/employee-list/employee-list.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
-    EmployeeInfoComponent
+    EmployeeInfoComponent,
+    EmployeeListComponent
   ],
   imports: [
     CommonModule,

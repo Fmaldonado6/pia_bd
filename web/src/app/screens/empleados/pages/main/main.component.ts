@@ -32,6 +32,13 @@ export class MainComponent implements OnInit {
       description: "Edita la información o elimina de nuestros registros a un empleado.",
       action: "Editar"
     },
+    {
+      title: "Tipos de empleado",
+      icon: "work",
+      description: "Administra los diferentes tipos de empleado que existen en nuestro bar.",
+      action: "Administrar",
+      onClick: () => { this.openEmployeeList() }
+    },
 
   ]
 
@@ -48,9 +55,12 @@ export class MainComponent implements OnInit {
 
     const id = this.authService.loggedUser.value?.idEmpleado
 
-    console.log(id)
-
     this.router.navigate(["/empleados/" + id])
+
+  }
+
+  openEmployeeList() {
+    this.router.navigate(["/empleados/list"])
 
   }
 

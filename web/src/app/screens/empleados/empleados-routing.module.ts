@@ -1,3 +1,4 @@
+import { EmployeeListComponent } from './pages/employee-list/employee-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeInfoComponent } from './pages/employee-info/employee-info.component';
@@ -9,9 +10,13 @@ const routes: Routes = [
     component: MainComponent
   },
   {
+    path: "list",
+    component: EmployeeListComponent
+  },
+  {
     path: ":id",
     component: EmployeeInfoComponent
-  }
+  },
 ];
 
 @NgModule({
