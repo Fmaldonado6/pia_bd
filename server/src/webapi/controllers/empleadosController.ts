@@ -14,6 +14,7 @@ class EmpleadosController extends BaseController {
     config() {
 
         this.router.post("/", this.verifyToken, (req, res) => { this.createEmpleado(req as CustomRequest, res) })
+        this.router.get("/", this.verifyToken, (req, res) => { this.getEmpleados(req, res) })
         this.router.get("/info", this.verifyToken, (req, res) => { this.getMyInfo(req as CustomRequest, res) })
         this.router.get("/:id", this.verifyToken, (req, res) => { this.getEmpleado(req as CustomRequest, res) })
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTipoEmpleados(req as CustomRequest, res) })
@@ -39,6 +40,19 @@ class EmpleadosController extends BaseController {
             console.error(error)
             res.sendStatus(500)
         }
+    }
+
+    async getEmpleados(req: Request, res: Response) {
+        try {
+
+            const empleados = await empleadosRepository.findAll()
+
+            res.status(200).json(empleados)
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
+
     }
 
     async getEmpleado(req: CustomRequest, res: Response) {
@@ -68,7 +82,7 @@ class EmpleadosController extends BaseController {
             if (calle) empleado.nombreCalle = calle.nombre
             if (privilegios) empleado.privilegios = privilegios
             if (tipoEmpleado) empleado.tipoEmpleado = tipoEmpleado
-            
+
             empleado.contrasena = ""
 
             res.status(200).json(empleado)
