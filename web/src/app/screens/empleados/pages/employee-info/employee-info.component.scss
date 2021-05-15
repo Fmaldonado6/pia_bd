@@ -21,6 +21,50 @@
   }
 }
 
+.info-container {
+  border: 1px solid rgba(197, 196, 196, 0.541);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  .section-title {
+    font-size: 20px;
+    color: black;
+    margin-bottom: 10px;
+  }
+
+  .item {
+    max-height: fit-content !important;
+    height: fit-content;
+    display: flex;
+    padding: 10px;
+    align-items: center !important;
+    min-height: 35px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(212, 212, 212, 0.411);
+    &:last-child {
+      border-bottom: none !important;
+    }
+  }
+}
+
+.info-title {
+  width: 25%;
+  text-transform: uppercase;
+  color: rgb(124, 124, 124);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.privilegios-container {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  span {
+    margin-top: 5px;
+  }
+}
+
 .status {
   width: 100%;
   display: flex;

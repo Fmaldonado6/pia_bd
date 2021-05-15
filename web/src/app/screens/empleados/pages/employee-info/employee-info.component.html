@@ -1,11 +1,62 @@
 <div class="container" [ngSwitch]="currentStatus">
   <ng-container *ngSwitchCase="Status.loaded">
     <div class="title-container">
-      <span>Empleados</span>
-      <p>
-        Aquí podras gestionar todo lo relacionado con nuestros empleados o
-        consultar tu información personal.
-      </p>
+      <span>Bienvenido, {{ empleado.nombre }}</span>
+      <p>Consulta tu información personal</p>
+    </div>
+    <div class="info-container">
+      <span class="section-title">Información personal</span>
+
+      <div *ngIf="empleado.nombre" class="item">
+        <span class="info-title">Nombre: </span>{{ empleado.nombre }}
+      </div>
+      <div *ngIf="empleado.telefono" class="item">
+        <span class="info-title">Teléfono: </span>{{ empleado.telefono }}
+      </div>
+      <div *ngIf="empleado.nombrePais" class="item">
+        <span class="info-title">Pais:</span>{{ empleado.nombrePais }}
+      </div>
+      <div *ngIf="empleado.nombreEstado" class="item">
+        <span class="info-title">Estado:</span>{{ empleado.nombreEstado }}
+      </div>
+      <div *ngIf="empleado.nombreMunicipio" class="item">
+        <span class="info-title">Municipio:</span>{{ empleado.nombreMunicipio }}
+      </div>
+      <div *ngIf="empleado.nombreColonia" class="item">
+        <span class="info-title">Colonia: </span>{{ empleado.nombreColonia }}
+      </div>
+      <div *ngIf="empleado.nombreCalle || empleado.numero" class="item">
+        <span class="info-title">Calle y numero:</span
+        >{{ empleado.nombreCalle }}
+        {{ empleado.numero }}
+      </div>
+    </div>
+    <div class="info-container">
+      <span class="section-title">Información de empleado</span>
+      <div *ngIf="empleado.tipoEmpleado.nombreTipoEmpleado" class="item">
+        <span class="info-title">Tipo de empleado:</span>
+        {{ empleado.tipoEmpleado.nombreTipoEmpleado }}
+      </div>
+      <div *ngIf="empleado.tipoEmpleado.sueldo" class="item">
+        <span class="info-title">Sueldo: </span
+        >{{ empleado.tipoEmpleado.sueldo }}
+      </div>
+      <div *ngIf="empleado.tipoEmpleado.horaSalida" class="item">
+        <span class="info-title">Hora de salida:</span>
+        {{ empleado.tipoEmpleado.horaSalida }}
+      </div>
+      <div *ngIf="empleado.tipoEmpleado.horaEntrada" class="item">
+        <span class="info-title">Hora de entrada:</span>
+        {{ empleado.tipoEmpleado.horaEntrada }}
+      </div>
+      <div *ngIf="empleado.privilegios.length != 0" class="item">
+        <span class="info-title">Privilegios:</span>
+        <div class="privilegios-container">
+          <span *ngFor="let privilegio of empleado.privilegios">
+            {{ privilegio.nombre }},
+          </span>
+        </div>
+      </div>
     </div>
   </ng-container>
   <div class="status" *ngSwitchCase="Status.loading">

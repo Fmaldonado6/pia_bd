@@ -169,8 +169,10 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
 
     async getPrivilefiosByTipoEmpleadoId(id: number): Promise<Privilegios[]> {
         const res = await database.executeQuery(`
-            select idPrivilegio from EmpPrivilegios where idTipoEmpleado = ${id}
-        `)
+            select EmpPrivilegios.idPrivilegio,Privilegios.nombre from EmpPrivilegios join Privilegios on idTipoEmpleado = ${id} 
+            and EmpPrivilegios.idPrivilegio = Privilegios.idPrivilegio
+        
+            `)
 
 
         if (!res)

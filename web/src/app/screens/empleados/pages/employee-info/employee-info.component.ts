@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Status } from 'src/app/models/models';
+import { Status, Empleado } from 'src/app/models/models';
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 
 @Component({
@@ -10,9 +10,12 @@ import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 })
 export class EmployeeInfoComponent implements OnInit {
 
+
+
   Status = Status
   currentStatus = Status.loading
 
+  empleado = new Empleado()
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +32,8 @@ export class EmployeeInfoComponent implements OnInit {
     console.log(id)
     this.empleadosService.getEmpleadosInfo(id).subscribe(e => {
       console.log(e)
+      this.empleado = e
+      this.currentStatus = Status.loaded
     })
 
   }
