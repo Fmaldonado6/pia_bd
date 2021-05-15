@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Status } from 'src/app/models/models';
+import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 
 @Component({
   selector: 'app-employee-info',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeInfoComponent implements OnInit {
 
-  constructor() { }
+  Status = Status
+  currentStatus = Status.loading
+
+
+  constructor(
+    private route: ActivatedRoute,
+    private empleadosService: EmpleadosService
+  ) { }
 
   ngOnInit(): void {
+    this.getEmpleadoInfo()
+  }
+
+  getEmpleadoInfo() {
+
+    const id = this.route.snapshot.params.id
+    console.log(id)
+    this.empleadosService.getEmpleadosInfo(id).subscribe(e => {
+      console.log(e)
+    })
+
   }
 
 }

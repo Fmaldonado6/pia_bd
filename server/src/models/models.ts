@@ -9,6 +9,9 @@ export class Empleado {
     idCalle: number = 0
     idTipoEmpleado: number = 0
     numero: number = 0
+    nombrePais: string = ""
+    nombreEstado: string = ""
+    nombreMunicipio: string = ""
     nombreColonia: string = ""
     nombreCalle: string = ""
     fechaNacimiento: Date = new Date()
