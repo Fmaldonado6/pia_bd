@@ -9,6 +9,7 @@ import { PersonalInfoComponent } from './components/modals/empleados/crear-emple
 import { AddressComponent } from './components/modals/empleados/crear-empleado/pages/address/address.component';
 import { EmployeeInfoComponent } from './components/modals/empleados/crear-empleado/pages/employee-info/employee-info.component';
 import { ConfirmMenuComponent } from './components/confirm-menu/confirm-menu.component';
+import { EliminarEmpleadoComponent } from './components/modals/empleados/eliminar-empleado/eliminar-empleado.component';
 
 
 
@@ -21,7 +22,8 @@ import { ConfirmMenuComponent } from './components/confirm-menu/confirm-menu.com
      PersonalInfoComponent,
      AddressComponent,
      EmployeeInfoComponent,
-     ConfirmMenuComponent
+     ConfirmMenuComponent,
+     EliminarEmpleadoComponent
   ],
   imports: [
     CommonModule,

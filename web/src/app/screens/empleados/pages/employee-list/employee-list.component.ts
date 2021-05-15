@@ -1,3 +1,5 @@
+import { EliminarEmpleadoComponent } from './../../../../shared/components/modals/empleados/eliminar-empleado/eliminar-empleado.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { Empleado, Status } from 'src/app/models/models';
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
@@ -15,7 +17,8 @@ export class EmployeeListComponent implements OnInit {
   empleados: Empleado[] = []
 
   constructor(
-    private empleadosService: EmpleadosService
+    private empleadosService: EmpleadosService,
+    private dialog: MatDialog
 
   ) { }
 
@@ -25,9 +28,17 @@ export class EmployeeListComponent implements OnInit {
 
   getEmpleados() {
     this.empleadosService.getEmpleados().subscribe(e => {
-      console.log(e)
       this.empleados = e
       this.currentStatus = Status.loaded
+    })
+  }
+
+  openDeleteModal(empleado: Empleado) {
+
+    this.dialog.open(EliminarEmpleadoComponent, {
+      data: {
+        empleado: empleado
+      }
     })
   }
 
