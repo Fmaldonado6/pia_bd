@@ -1,4 +1,4 @@
-import { coloniasRepository, callesRepository, paisRepository } from './../../persistence/repositories/direcionRepository';
+import { coloniasRepository, callesRepository, paisRepository, estadoRepository, municipioRepository } from './../../persistence/repositories/direcionRepository';
 import { PrivilegiosId, Colonia, Calle } from './../../models/models';
 import { Request, Response } from 'express';
 import { Empleado } from '../../models/models';
@@ -66,10 +66,10 @@ class EmpleadosController extends BaseController {
                 return res.sendStatus(404)
 
             const pais = await paisRepository.get(empleado.idPais)
-            const estado = await paisRepository.get(empleado.idPais)
-            const municipio = await paisRepository.get(empleado.idPais)
-            const colonia = await paisRepository.get(empleado.idPais)
-            const calle = await paisRepository.get(empleado.idPais)
+            const estado = await estadoRepository.get(empleado.idEstado)
+            const municipio = await municipioRepository.get(empleado.idMunicipio)
+            const colonia = await coloniasRepository.get(empleado.idColonia)
+            const calle = await callesRepository.get(empleado.idCalle)
 
             const privilegios = await privilegiosRepository.getPrivilefiosByTipoEmpleadoId(empleado.idTipoEmpleado)
             const tipoEmpleado = await tipoEmpleadoRepository.get(empleado.idTipoEmpleado)
