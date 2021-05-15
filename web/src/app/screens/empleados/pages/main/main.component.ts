@@ -1,7 +1,9 @@
+import { AuthService } from './../../../../services/auth/auth.service';
 import { CrearEmpleadoComponent } from './../../../../shared/components/modals/empleados/crear-empleado/crear-empleado.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SectionCard } from 'src/app/models/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -15,6 +17,7 @@ export class MainComponent implements OnInit {
       icon: "account_circle",
       description: "Consulta la información del empleado actual.",
       action: "Consultar",
+      onClick: () => { this.openMyInfo() }
     },
     {
       title: "Registrar",
@@ -33,12 +36,24 @@ export class MainComponent implements OnInit {
   ]
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.openRegisterModal()
   }
+
+  openMyInfo() {
+
+    const id = this.authService.loggedUser.value?.idEmpleado
+
+    console.log(id)
+
+    this.router.navigate(["/empleados/" + id])
+
+  }
+
 
   openRegisterModal() {
     const dialogRef = this.dialog.open(CrearEmpleadoComponent)
