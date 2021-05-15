@@ -13,7 +13,6 @@ IF OBJECT_ID('Pais','U') IS NULL BEGIN
         constraint pkPais primary key (idPais),
         nombre varchar(200) NOT NULL
     )
-    SET IDENTITY_INSERT Pais ON
 END
 
 IF OBJECT_ID('Estado','U') IS NULL BEGIN
@@ -25,7 +24,6 @@ IF OBJECT_ID('Estado','U') IS NULL BEGIN
         constraint fkPais foreign key (idPais) references Pais(idPais),
         nombre varchar(200) NOT NULL
     )
-    SET IDENTITY_INSERT Estado ON
 END
 
 IF OBJECT_ID('Municipio','U') IS NULL CREATE TABLE Municipio
