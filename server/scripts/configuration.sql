@@ -40,19 +40,20 @@ IF OBJECT_ID('Municipio','U') IS NULL CREATE TABLE Municipio
 IF OBJECT_ID('Colonia','U') IS NULL CREATE TABLE Colonia
 (
     idColonia INT NOT NULL IDENTITY(1,1),
-    constraint pkColonia primary key (idColonia),
     idMunicipio INT NOT NULL,
     constraint fkMunicipio foreign key (idMunicipio) references Municipio(idMunicipio),
-    nombre varchar(200) NOT NULL
+    nombre varchar(200) NOT NULL,
+    constraint pkColonia primary key (idColonia)
 )
 
 IF OBJECT_ID('Calle','U') IS NULL  CREATE TABLE Calle
 (
     idCalle INT NOT NULL IDENTITY(1,1),
-    constraint pkCalle primary key (idCalle),
     idColonia INT NOT NULL,
-    constraint fkCalle foreign key (idCalle) references Colonia(idColonia),
-    nombre varchar(200) NOT NULL
+    constraint fkCalle foreign key (idColonia) references Colonia(idColonia),
+    nombre varchar(200) NOT NULL,
+    constraint pkCalle primary key (idCalle)
+
 )
 
 if object_id('Privilegios','U') is null create table Privilegios
@@ -84,9 +85,9 @@ if object_id('EmpPrivilegios','U') is null create table EmpPrivilegios
 if object_id('Empleado','U') is null create table Empleado
 (
     nombre varchar(200) not null,
-    telefono int,
+    telefono Bigint,
     contrasena varchar(200) not null,
-    fechaNacimiento DATE ,
+    fechaNacimiento Bigint ,
     idEmpleado int not null IDENTITY(1000,1),
     constraint pkEmpleado primary key (idEmpleado),
     idTipoEmpleado int not null,

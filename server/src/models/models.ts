@@ -9,6 +9,8 @@ export class Empleado {
     idCalle: number = 0
     idTipoEmpleado: number = 0
     numero: number = 0
+    nombreColonia: string = ""
+    nombreCalle: string = ""
     fechaNacimiento: Date = new Date()
     contrasena: string = ""
     tipoEmpleado: TipoEmpleado = new TipoEmpleado()
@@ -114,4 +116,14 @@ export class Factura {
     apPaterno: string = ""
     apMaterno: string = ""
     telefono: string = ""
+}
+
+export enum PrivilegiosId {
+    crearUsuarios = 1,
+    borrarUsuarios,
+    editarUsuarios,
+    crearPedidos,
+    verPedidos,
+    almacenarAlimentos,
+    crearFacturas
 }

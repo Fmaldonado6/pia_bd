@@ -3,19 +3,23 @@ import { Empleado, Privilegios, TipoEmpleado } from './../../models/models';
 import { BaseRepository } from './baseRepository';
 class EmpleadosRepository implements BaseRepository<Empleado> {
 
-    async add(obj: Empleado): Promise<void> {
-        await database.executeQuery(`
+    async add(obj: Empleado): Promise<Empleado> {
+        const date = new Date(obj.fechaNacimiento)
+        const res = await database.executeQuery(`
         insert into Empleado(
-            idPais,idEstado,idMunicipio,idColonia,idCalle
+            idPais,idEstado,idMunicipio,idColonia,idCalle,
             nombre,telefono,contrasena,fechaNacimiento,
             idTipoEmpleado,numero
-        ) values (
+        ) 
+        output Inserted.idEmpleado
+        values (
             ${obj.idPais},${obj.idEstado},${obj.idMunicipio},${obj.idColonia},${obj.idCalle},
-            '${obj.nombre}',${obj.telefono},'${obj.contrasena}',${obj.fechaNacimiento},
+            '${obj.nombre}',${obj.telefono},'${obj.contrasena}',${date.getTime()},
             ${obj.idTipoEmpleado},${obj.numero}
         )`)
-    }
 
+        return res!![0]
+    }
     async addAdmin(obj: TipoEmpleado): Promise<void> {
         await database.executeQuery(`
         SET IDENTITY_INSERT Empleado ON
@@ -73,13 +77,17 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
 
 class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
 
-    async add(obj: TipoEmpleado): Promise<void> {
-        await database.executeQuery(`
+    async add(obj: TipoEmpleado): Promise<TipoEmpleado> {
+        const res = await database.executeQuery(`
         insert into TipoEmpleado(
             sueldo,nombreTipoEmpleado,horaEntrada,horaSalida
-        ) values (
+        ) 
+        output Inserted.idTipoEmpleado
+        values (
             ${obj.sueldo},'${obj.nombreTipoEmpleado}',${obj.horaEntrada},${obj.horaSalida}
         )`)
+
+        return res!![0]
     }
 
 
@@ -139,11 +147,13 @@ class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
 
 class PrivilegiosRepository implements BaseRepository<Privilegios>{
 
-    async add(obj: Privilegios): Promise<void> {
-        await database.executeQuery(`
+    async add(obj: Privilegios): Promise<Privilegios> {
+        const res = await database.executeQuery(`
             insert into privilegios(nombre)
+             output Inserted.idPrivilegio
             values('${obj.nombre}')
         `)
+        return res!![0]
     }
     async get(id: number): Promise<Privilegios | null> {
         const res = await database.executeQuery(`
@@ -156,6 +166,19 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
 
         return res[0] as Privilegios
     }
+
+    async getPrivilefiosByTipoEmpleadoId(id: number): Promise<Privilegios[]> {
+        const res = await database.executeQuery(`
+            select idPrivilegio from EmpPrivilegios where idTipoEmpleado = ${id}
+        `)
+
+
+        if (!res)
+            return []
+
+        return res
+    }
+
     async findAll(): Promise<Privilegios[]> {
         const res = await database.executeQuery(`select * from Privilegios`)
 
@@ -180,7 +203,6 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
     }
 
 }
-
 
 export const privilegiosRepository = new PrivilegiosRepository()
 export const empleadosRepository = new EmpleadosRepository()

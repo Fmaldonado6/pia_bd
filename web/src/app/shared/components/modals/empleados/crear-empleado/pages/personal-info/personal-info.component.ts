@@ -34,7 +34,13 @@ export class PersonalInfoComponent implements OnInit {
         validators: [
           Validators.required
         ]
-      })
+      }),
+      telefono: new FormControl('', {
+        validators: [
+          Validators.required
+        ]
+      }),
+
     })
   }
 

@@ -3,10 +3,14 @@ import { database } from './../database';
 import { Pais } from '../../models/models';
 import { BaseRepository } from './baseRepository';
 class PaisRepository implements BaseRepository<Pais>{
-    async add(obj: Pais): Promise<void> {
-        await database.executeQuery(`
-            insert into Pais(nombre) values('${obj.nombre}')
+    async add(obj: Pais): Promise<Pais> {
+        const res = await database.executeQuery(`
+            insert into Pais(nombre) 
+            output Inserted.idPais
+            values('${obj.nombre}')
         `)
+
+        return res!![0]
     }
     async get(id: number): Promise<Pais | null> {
         const res = await database.executeQuery(`
@@ -43,10 +47,14 @@ class PaisRepository implements BaseRepository<Pais>{
 }
 
 class EstadoRepository implements BaseRepository<Estado>{
-    async add(obj: Pais): Promise<void> {
-        await database.executeQuery(`
-            insert into Estado(nombre,idPais) values('${obj.nombre}','${obj.idPais}')
+    async add(obj: Pais): Promise<Estado> {
+        const res = await database.executeQuery(`
+            insert into Estado(nombre,idPais) 
+            output Inserted.idEstado
+            values('${obj.nombre}','${obj.idPais}')
         `)
+
+        return res!![0]
     }
     async get(id: number): Promise<Estado | null> {
         const res = await database.executeQuery(`
@@ -95,10 +103,14 @@ class EstadoRepository implements BaseRepository<Estado>{
 }
 
 class MunicipioRepository implements BaseRepository<Municipio>{
-    async add(obj: Municipio): Promise<void> {
-        await database.executeQuery(`
-            insert into Municipio(nombre,idEstado) values('${obj.nombre}','${obj.idEstado}')
+    async add(obj: Municipio): Promise<Municipio> {
+        const res = await database.executeQuery(`
+            insert into Municipio(nombre,idEstado) 
+            output Inserted.idMunicipio
+            values('${obj.nombre}','${obj.idEstado}')
         `)
+
+        return res!![0]
     }
     async get(id: number): Promise<Municipio | null> {
         const res = await database.executeQuery(`
@@ -148,11 +160,15 @@ class MunicipioRepository implements BaseRepository<Municipio>{
 }
 
 class ColoniaRepository implements BaseRepository<Colonia>{
-    async add(obj: Colonia): Promise<void> {
-        await database.executeQuery(`
-            insert into Colonia(nombre,idMunicipio) values('${obj.nombre}','${obj.idMunicipio}')
+    async add(obj: Colonia): Promise<Colonia> {
+        const res = await database.executeQuery(`
+            insert into Colonia(nombre,idMunicipio) output Inserted.idColonia values('${obj.nombre}','${obj.idMunicipio}')
         `)
+
+        return res!![0]
+
     }
+
     async get(id: number): Promise<Colonia | null> {
         const res = await database.executeQuery(`
             select * from Colonia where idColonia = ${id}
@@ -173,6 +189,17 @@ class ColoniaRepository implements BaseRepository<Colonia>{
             return []
 
         return res
+    }
+
+    async getColoniaByName(name: string): Promise<Colonia | null> {
+        const res = await database.executeQuery(`
+        select * from Colonia where nombre = '${name}'
+    `)
+
+        if (!res)
+            return null
+
+        return res[0]
     }
 
     async findAll(): Promise<Colonia[]> {
@@ -200,10 +227,14 @@ class ColoniaRepository implements BaseRepository<Colonia>{
 }
 
 class CallesRepository implements BaseRepository<Calle>{
-    async add(obj: Calle): Promise<void> {
-        await database.executeQuery(`
-            insert into Calle(nombre,idColonia) values('${obj.nombre}','${obj.idColonia}')
+    async add(obj: Calle): Promise<Calle> {
+        const res = await database.executeQuery(`
+            insert into Calle(nombre,idColonia) 
+            output Inserted.idCalle
+            values('${obj.nombre}','${obj.idColonia}')
         `)
+
+        return res!![0]
     }
     async get(id: number): Promise<Calle | null> {
         const res = await database.executeQuery(`
@@ -225,6 +256,18 @@ class CallesRepository implements BaseRepository<Calle>{
             return []
 
         return res
+    }
+
+
+    async getCallesByName(name: string): Promise<Calle | null> {
+        const res = await database.executeQuery(`
+        select * from Calle where nombre = '${name}'
+    `)
+
+        if (!res)
+            return null
+
+        return res[0]
     }
 
     async findAll(): Promise<Calle[]> {
@@ -254,3 +297,5 @@ class CallesRepository implements BaseRepository<Calle>{
 export const paisRepository = new PaisRepository()
 export const estadoRepository = new EstadoRepository()
 export const municipioRepository = new MunicipioRepository()
+export const coloniasRepository = new ColoniaRepository()
+export const callesRepository = new CallesRepository()

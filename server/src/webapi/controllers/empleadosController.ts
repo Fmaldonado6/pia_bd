@@ -1,6 +1,8 @@
+import { coloniasRepository, callesRepository } from './../../persistence/repositories/direcionRepository';
+import { PrivilegiosId, Colonia, Calle } from './../../models/models';
 import { Request, Response } from 'express';
 import { Empleado } from '../../models/models';
-import { empleadosRepository, tipoEmpleadoRepository } from './../../persistence/repositories/empleadosRepository';
+import { empleadosRepository, tipoEmpleadoRepository, privilegiosRepository } from './../../persistence/repositories/empleadosRepository';
 import { BaseController, CustomRequest } from './baseController';
 class EmpleadosController extends BaseController {
 
@@ -11,7 +13,7 @@ class EmpleadosController extends BaseController {
 
     config() {
 
-        this.router.post("/", (req, res) => { this.createEmpleado(req, res) })
+        this.router.post("/", this.verifyToken, (req, res) => { this.createEmpleado(req as CustomRequest, res) })
         this.router.get("/info", this.verifyToken, (req, res) => { this.getMyInfo(req as CustomRequest, res) })
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTipoEmpleados(req as CustomRequest, res) })
 
@@ -38,10 +40,53 @@ class EmpleadosController extends BaseController {
         }
     }
 
-    async createEmpleado(req: Request, res: Response) {
+    async createEmpleado(req: CustomRequest, res: Response) {
         try {
 
+            const id = req.idEmpleado
+            const userInfo = await empleadosRepository.get(id)
+
+            if (!userInfo)
+                return res.sendStatus(403)
+
+            const privilegios = await privilegiosRepository.getPrivilefiosByTipoEmpleadoId(userInfo.idTipoEmpleado)
+
+            let accepted = false
+
+            for (let privilegio of privilegios) {
+
+                if (privilegio.idPrivilegio == PrivilegiosId.crearUsuarios)
+                    accepted = true
+
+            }
+
+            if (!accepted)
+                return res.sendStatus(403)
+
             const empleado = req.body as Empleado
+
+            let colonia = await coloniasRepository.getColoniaByName(empleado.nombreColonia)
+
+            if (!colonia) {
+                colonia = new Colonia()
+                colonia.idMunicipio = empleado.idMunicipio
+                colonia.nombre = empleado.nombreColonia
+                colonia = await coloniasRepository.add(colonia)
+            }
+
+            let calle = await callesRepository.getCallesByName(empleado.nombreColonia)
+
+
+            if (!calle) {
+                calle = new Calle()
+                calle.idColonia = colonia.idColonia
+                calle.nombre = empleado.nombreCalle
+                calle = await callesRepository.add(calle)
+            }
+
+
+            empleado.idColonia = colonia.idColonia
+            empleado.idCalle = calle.idCalle
 
             await empleadosRepository.add(empleado)
 

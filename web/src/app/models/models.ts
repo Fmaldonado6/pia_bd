@@ -8,6 +8,8 @@ export class Empleado {
     idColonia: number = 0
     idCalle: number = 0
     idTipoEmpleado: number = 0
+    nombreColonia: string = ""
+    nombreCalle: string = ""
     numero: number = 0
     fechaNacimiento: Date = new Date()
     contrasena: string = ""

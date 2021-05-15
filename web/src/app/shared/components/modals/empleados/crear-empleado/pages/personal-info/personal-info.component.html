@@ -19,6 +19,10 @@
     <mat-label>Apellido materno</mat-label>
     <input matInput formControlName="apellidoMaterno" />
   </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Telefono</mat-label>
+    <input matInput formControlName="telefono" />
+  </mat-form-field>
 
   <button [disabled]="!formInformacion.valid" mat-raised-button color="primary">
     SIGUIENTE

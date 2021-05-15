@@ -9,12 +9,13 @@ interface PersonalInfoForm {
   nombre: string
   apellidoPaterno: string
   apellidoMaterno: string
+  telefono: string
 }
 
 interface AddressForm {
-  idPais: number
-  idEstado: number
-  idMunicipio: number
+  pais: number
+  estado: number
+  municipio: number
   colonia: string
   calle: string
   numero: number
@@ -35,7 +36,7 @@ export class CrearEmpleadoComponent {
   Pages = Pages
   Status = Status
 
-  currentPage = Pages.employeeInfo
+  currentPage = Pages.personalInfo
   currentStatus = Status.loaded
 
   empleado = new Empleado()
@@ -48,16 +49,27 @@ export class CrearEmpleadoComponent {
 
   addPersonalInfo(values: PersonalInfoForm) {
     this.empleado.nombre = `${values.nombre} ${values.apellidoPaterno} ${values.apellidoMaterno}`
+    this.empleado.telefono = values.telefono
+    console.log(this.empleado.nombre)
     this.changePage(Pages.address)
   }
 
   addAddress(values: AddressForm) {
     console.log(values)
+    this.empleado.idPais = values.pais
+    this.empleado.idEstado = values.estado
+    this.empleado.idMunicipio = values.municipio
+    this.empleado.nombreColonia = values.colonia
+    this.empleado.nombreCalle = values.calle
+    this.empleado.numero = values.numero
     this.changePage(Pages.employeeInfo)
   }
 
   addEmployeeInfo(values: EmployeeInfo) {
     console.log(values)
+    this.empleado.idTipoEmpleado = values.tipoEmpleado
+    this.empleado.contrasena = values.password
+    this.addEmployee()
   }
 
   addEmployee() {

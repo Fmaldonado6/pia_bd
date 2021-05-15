@@ -1,6 +1,6 @@
 export interface BaseRepository<T extends any> {
 
-    add(obj: T): Promise<void>;
+    add(obj: T): Promise<T>;
 
     get(id: number): Promise<T | null>;
 
