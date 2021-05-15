@@ -12,6 +12,7 @@
         *ngSwitchCase="Pages.address"
       ></address>
       <employee-info
+        (submitForm)="addEmployeeInfo($event)"
         (iconClicked)="changePage(Pages.address)"
         *ngSwitchCase="Pages.employeeInfo"
       >

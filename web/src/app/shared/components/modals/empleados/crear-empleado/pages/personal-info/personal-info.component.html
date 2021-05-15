@@ -20,5 +20,7 @@
     <input matInput formControlName="apellidoMaterno" />
   </mat-form-field>
 
-  <button mat-raised-button color="primary">SIGUIENTE</button>
+  <button [disabled]="!formInformacion.valid" mat-raised-button color="primary">
+    SIGUIENTE
+  </button>
 </form>

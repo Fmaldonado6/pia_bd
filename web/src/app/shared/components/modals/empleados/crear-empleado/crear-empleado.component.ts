@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Empleado, Estado, Municipio, Pais, Status } from 'src/app/models/models';
 import { DireccionesService } from 'src/app/services/direcciones/direcciones.service';
+import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 
 interface PersonalInfoForm {
   nombre: string
@@ -19,6 +20,11 @@ interface AddressForm {
   numero: number
 }
 
+interface EmployeeInfo {
+  password: string
+  tipoEmpleado: number
+}
+
 @Component({
   selector: 'app-crear-empleado',
   templateUrl: './crear-empleado.component.html',
@@ -29,7 +35,7 @@ export class CrearEmpleadoComponent {
   Pages = Pages
   Status = Status
 
-  currentPage = Pages.personalInfo
+  currentPage = Pages.employeeInfo
   currentStatus = Status.loaded
 
   empleado = new Empleado()
@@ -37,6 +43,7 @@ export class CrearEmpleadoComponent {
 
   constructor(
     private dialogRef: MatDialogRef<CrearEmpleadoComponent>,
+    private empleadosService: EmpleadosService
   ) { }
 
   addPersonalInfo(values: PersonalInfoForm) {
@@ -47,6 +54,18 @@ export class CrearEmpleadoComponent {
   addAddress(values: AddressForm) {
     console.log(values)
     this.changePage(Pages.employeeInfo)
+  }
+
+  addEmployeeInfo(values: EmployeeInfo) {
+    console.log(values)
+  }
+
+  addEmployee() {
+    this.currentStatus = Status.loading
+
+    this.empleadosService.addEmpleado(this.empleado).subscribe(e => {
+      console.log(e)
+    })
   }
 
   close() {
