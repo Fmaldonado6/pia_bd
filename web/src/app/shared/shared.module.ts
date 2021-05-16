@@ -10,6 +10,7 @@ import { AddressComponent } from './components/modals/empleados/crear-empleado/p
 import { EmployeeInfoComponent } from './components/modals/empleados/crear-empleado/pages/employee-info/employee-info.component';
 import { ConfirmMenuComponent } from './components/confirm-menu/confirm-menu.component';
 import { EliminarEmpleadoComponent } from './components/modals/empleados/eliminar-empleado/eliminar-empleado.component';
+import { InfoMenuComponent } from './components/info-menu/info-menu.component';
 
 
 
@@ -23,7 +24,8 @@ import { EliminarEmpleadoComponent } from './components/modals/empleados/elimina
      AddressComponent,
      EmployeeInfoComponent,
      ConfirmMenuComponent,
-     EliminarEmpleadoComponent
+     EliminarEmpleadoComponent,
+     InfoMenuComponent
   ],
   imports: [
     CommonModule,
