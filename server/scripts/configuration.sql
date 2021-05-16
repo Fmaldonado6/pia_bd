@@ -120,6 +120,8 @@ if object_id('Alimentos','U') is null create table Alimentos
     idTipoAlimento int not null,
     constraint fkTipoAlimento foreign key (idTipoAlimento ) references TipoAlimento(idTipoAlimento),
     precio float not null,
+    cantidadDisponible int not null,
+    descripcion varchar(200) not null
 )
 
 if object_id('Pedidos','U') is null create table Pedidos
