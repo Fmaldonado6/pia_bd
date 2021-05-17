@@ -126,7 +126,7 @@ if object_id('Pedidos','U') is null create table Pedidos
 (
     idPedido int not null identity(1,1),
     constraint pkPedido primary key (idPedido),
-    fechaPedido DATETIME not null,
+    fechaPedido Bigint not null,
     subtotal float not null,
     desceutno float not null,
     total float not null
@@ -142,3 +142,28 @@ if object_id('PedidosAlimentos','U') is null create table PedidosAlimentos
     constraint fkAlimentoPedido foreign key (idAlimento) references Alimentos(idAlimento),
 )
 
+IF OBJECT_ID ('Facturas','U') is null create table Facturas
+(
+	idFactura int not null,
+	constraint pk_idFactura primary key (idFactura),
+	idPedido int not null,
+	razonSocial varchar (75) not null,
+	concepto varchar (75) not null,
+	nombre varchar (50) not null,
+	apPaterno varchar (25) not null,
+	apMaterno varchar (25) not null,
+	telefono Bigint not null,
+	RFC varchar (20) not null,
+	fechaFactura Bigint not null,
+	--Foreign
+	idPais int ,
+    constraint fk_idPais foreign key (idPais) references Pais(idPais),
+    idEstado int ,
+    constraint fk_idEstado foreign key (idEstado) references Estado(idEstado),
+    idMunicipio int ,
+    constraint fk_idMunicipio foreign key (idMunicipio) references Municipio(idMunicipio),
+    idColonia int ,
+    constraint fk_idColonia foreign key (idColonia) references Colonia(idColonia),
+    idCalle int ,
+    constraint fk_idCalle foreign key (idCalle) references Calle(idCalle)
+)
