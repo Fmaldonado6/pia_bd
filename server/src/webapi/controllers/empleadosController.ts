@@ -1,4 +1,4 @@
-import { coloniasRepository, callesRepository, paisRepository } from './../../persistence/repositories/direcionRepository';
+import { coloniasRepository, callesRepository, paisRepository, estadoRepository, municipioRepository } from './../../persistence/repositories/direcionRepository';
 import { PrivilegiosId, Colonia, Calle } from './../../models/models';
 import { Request, Response } from 'express';
 import { Empleado } from '../../models/models';
@@ -14,6 +14,7 @@ class EmpleadosController extends BaseController {
     config() {
 
         this.router.post("/", this.verifyToken, (req, res) => { this.createEmpleado(req as CustomRequest, res) })
+        this.router.get("/", this.verifyToken, (req, res) => { this.getEmpleados(req, res) })
         this.router.get("/info", this.verifyToken, (req, res) => { this.getMyInfo(req as CustomRequest, res) })
         this.router.get("/:id", this.verifyToken, (req, res) => { this.getEmpleado(req as CustomRequest, res) })
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTipoEmpleados(req as CustomRequest, res) })
@@ -41,6 +42,19 @@ class EmpleadosController extends BaseController {
         }
     }
 
+    async getEmpleados(req: Request, res: Response) {
+        try {
+
+            const empleados = await empleadosRepository.findAll()
+
+            res.status(200).json(empleados)
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
+
+    }
+
     async getEmpleado(req: CustomRequest, res: Response) {
         try {
 
@@ -52,10 +66,10 @@ class EmpleadosController extends BaseController {
                 return res.sendStatus(404)
 
             const pais = await paisRepository.get(empleado.idPais)
-            const estado = await paisRepository.get(empleado.idPais)
-            const municipio = await paisRepository.get(empleado.idPais)
-            const colonia = await paisRepository.get(empleado.idPais)
-            const calle = await paisRepository.get(empleado.idPais)
+            const estado = await estadoRepository.get(empleado.idEstado)
+            const municipio = await municipioRepository.get(empleado.idMunicipio)
+            const colonia = await coloniasRepository.get(empleado.idColonia)
+            const calle = await callesRepository.get(empleado.idCalle)
 
             const privilegios = await privilegiosRepository.getPrivilefiosByTipoEmpleadoId(empleado.idTipoEmpleado)
             const tipoEmpleado = await tipoEmpleadoRepository.get(empleado.idTipoEmpleado)
@@ -68,7 +82,7 @@ class EmpleadosController extends BaseController {
             if (calle) empleado.nombreCalle = calle.nombre
             if (privilegios) empleado.privilegios = privilegios
             if (tipoEmpleado) empleado.tipoEmpleado = tipoEmpleado
-            
+
             empleado.contrasena = ""
 
             res.status(200).json(empleado)

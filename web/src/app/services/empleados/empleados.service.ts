@@ -20,6 +20,10 @@ export class EmpleadosService extends DataService {
     return this.http.post<Empleado>(`${this.url}/empleados`, empleado).pipe(catchError(this.handleError))
   }
 
+  getEmpleados() {
+    return this.http.get<Empleado[]>(`${this.url}/empleados`).pipe(catchError(this.handleError))
+  }
+
   getEmpleadosInfo(id: string) {
     return this.http.get<Empleado>(`${this.url}/empleados/${id}`).pipe(catchError(this.handleError))
   }

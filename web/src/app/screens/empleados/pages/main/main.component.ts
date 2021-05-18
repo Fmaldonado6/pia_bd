@@ -30,7 +30,8 @@ export class MainComponent implements OnInit {
       title: "Editar o eliminar",
       icon: "edit",
       description: "Edita la información o elimina de nuestros registros a un empleado.",
-      action: "Editar"
+      action: "Editar",
+      onClick: () => { this.openEmployeeList() }
     },
     {
       title: "Tipos de empleado",

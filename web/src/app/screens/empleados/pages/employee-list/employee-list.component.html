@@ -1,1 +1,39 @@
-<p>employee-list works!</p>
+<div class="container" [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <div class="title-container">
+      <span>Empleados Registrados</span>
+      <p>
+        Aquí podras gestionar todo lo relacionado con nuestros empleados
+        empleados registrados
+      </p>
+    </div>
+    <div class="info-container">
+      <div class="empleado-item" *ngFor="let empleado of empleados">
+        <mat-icon color="primary"> account_circle </mat-icon>
+        <span>{{ empleado.nombre }} ({{ empleado.idEmpleado }})</span>
+        <button
+          mat-icon-button
+          class="more-icon"
+          [matMenuTriggerData]="{ empleado: empleado }"
+          [matMenuTriggerFor]="optionsEmpleado"
+        >
+          <mat-icon> more_vert </mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+</div>
+
+<mat-menu #optionsEmpleado="matMenu">
+  <ng-template matMenuContent let-empleado="empleado">
+    <button mat-menu-item routerLink="/empleados/{{ empleado.idEmpleado }}">
+      Ver más
+    </button>
+    <button mat-menu-item>Editar</button>
+    <button mat-menu-item (click)="openDeleteModal(empleado)">Eliminar</button>
+  </ng-template>
+</mat-menu>
