@@ -97,7 +97,7 @@ if object_id('Empleado','U') is null create table Empleado
     idMunicipio int ,
     constraint fkEmpleadoMunicipio foreign key (idMunicipio) references Municipio(idMunicipio),
     idColonia int ,
-    constraint fkEmpladoColonia foreign key (idColonia) references Colonia(idColonia),
+    constraint fkEmpleadoColonia foreign key (idColonia) references Colonia(idColonia),
     idCalle int ,
     constraint fkEmpleadoCalle foreign key (idCalle) references Calle(idCalle),
     numero tinyInt
@@ -120,31 +120,36 @@ if object_id('Alimentos','U') is null create table Alimentos
     idTipoAlimento int not null,
     constraint fkTipoAlimento foreign key (idTipoAlimento ) references TipoAlimento(idTipoAlimento),
     precio float not null,
+    cantidadDisponible int not null,
+    descripcion varchar(200) not null
 )
 
 if object_id('Pedidos','U') is null create table Pedidos
 (
     idPedido int not null identity(1,1),
     constraint pkPedido primary key (idPedido),
+    idEmpleado int not null,
+    constraint fkEmpleado foreign key (idEmpleado) references Empleado(idEmpleado),
     fechaPedido Bigint not null,
     subtotal float not null,
-    desceutno float not null,
+    descuento float not null,
     total float not null
 )
 
 if object_id('PedidosAlimentos','U') is null create table PedidosAlimentos
 (
-    idPedido int not null ,
+    idPedido int not null,
     idAlimento int not null ,
     constraint pkPedidoAlimento primary key (idPedido,idAlimento),
     cantidad int not null,
+    precio float not null,
     constraint fkPedidoAlimento foreign key (idPedido) references Pedidos(idPedido),
     constraint fkAlimentoPedido foreign key (idAlimento) references Alimentos(idAlimento),
 )
 
 IF OBJECT_ID ('Facturas','U') is null create table Facturas
 (
-	idFactura int not null,
+	idFactura int not null identity(1,1),
 	constraint pk_idFactura primary key (idFactura),
 	idPedido int not null,
 	razonSocial varchar (75) not null,
@@ -165,5 +170,6 @@ IF OBJECT_ID ('Facturas','U') is null create table Facturas
     idColonia int ,
     constraint fk_idColonia foreign key (idColonia) references Colonia(idColonia),
     idCalle int ,
-    constraint fk_idCalle foreign key (idCalle) references Calle(idCalle)
+    constraint fk_idCalle foreign key (idCalle) references Calle(idCalle),
+    numero tinyInt
 )
