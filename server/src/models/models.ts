@@ -62,6 +62,13 @@ export class Pedido {
     total: number = 0
 }
 
+export class PedidoAlimento {
+    idPedido: number = 0
+    idAlimento: number = 0
+    cantidad: number = 0
+    precio: number = 0
+}
+
 export class InfoSucursal {
     nombre: string = ""
     horario: string = ""
