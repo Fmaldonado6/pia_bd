@@ -137,5 +137,6 @@ export enum Status {
     loading,
     loaded,
     error,
-    empty
+    empty,
+    success
 }

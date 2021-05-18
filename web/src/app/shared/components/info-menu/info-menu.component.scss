@@ -1,67 +1,28 @@
-.dialog {
-  min-width: 315px;
-  max-width: 315px;
-  height: 175px;
-  overflow: hidden;
-  position: relative;
+
+.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.icon {
+h2 {
+  color: rgb(80, 80, 80);
   text-align: center;
-  border: 1px solid grey;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+mat-icon {
+  transform: scale(1.4);
+  padding: 5px;
+  margin-bottom: 20px;
   border-radius: 100%;
-  margin-top: 20px;
-  transform: scale(2);
-
-  padding: 3px;
 }
 
-.greenIcon {
-  background-color: rgb(74, 191, 110);
-}
-
-.redIcon {
-  background-color: rgb(74, 191, 110);
-}
-
-.body {
-  text-align: center;
-  margin-top: 30px;
-  color: rgb(87, 87, 87);
-}
-
-.body span {
-  font-size: 1.15rem;
-}
-
-.title {
-  position: relative;
-  margin-top: 30px;
-  text-align: center;
-}
-
-.title h3 {
-  font-size: 1.5rem;
-}
-
-.icon mat-icon {
-  transform: scale(3);
+button {
   color: white;
-  margin-top: 35px;
-  border-radius: 100%;
-}
-
-.button {
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: auto;
-  margin-bottom: 15px;
-  color: white;
-}
-
-@media (max-width: 500px) {
-  .dialog {
-    width: 100%;
-    min-width: 200px;
-  }
+  border-radius: 20px;
+  letter-spacing: 2px;
 }

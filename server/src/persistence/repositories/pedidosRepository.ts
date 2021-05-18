@@ -4,7 +4,7 @@ import { BaseRepository } from './baseRepository';
 class PedidosRepository implements BaseRepository<Pedido> {
 
     async add(obj: Pedido): Promise<Pedido> {
-        const date = new Date(obj.fechaPedido)
+        const date = new Date(obj.fechaPedido!!)
         const res = await database.executeQuery(`
         insert into Pedidos(
             idEmpleado, fechaPedido, subtotal, descuento, total
@@ -46,7 +46,7 @@ class PedidosRepository implements BaseRepository<Pedido> {
     }
 
     async update(obj: Pedido): Promise<Pedido> {
-        const date = new Date(obj.fechaPedido)
+        const date = new Date(obj.fechaPedido!!)
         await database.executeQuery(`
         update Pedidos
             set idEmpleado = ${obj.idEmpleado}, fechaPedido = ${date.getTime()}, 

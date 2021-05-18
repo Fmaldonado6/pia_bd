@@ -1,10 +1,10 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
-import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm, ValidatorFn, AbstractControlOptions, AbstractControl, ValidationErrors } from '@angular/forms';
-import { EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { EventEmitter, Output, Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { HeaderType } from '../../../../modal-title/modal-title.component';
-import { TipoEmpleado } from 'src/app/models/models';
+import { Empleado, TipoEmpleado } from 'src/app/models/models';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -28,25 +28,33 @@ export class EmployeeInfoComponent implements OnInit {
 
   @Output() iconClicked = new EventEmitter()
   @Output() submitForm = new EventEmitter()
+  @Input() empleado = new Empleado()
 
   tiposEmpleado: TipoEmpleado[] = []
 
   matcher = new MyErrorStateMatcher();
 
 
-  form: FormGroup
+  form: FormGroup = new FormGroup({})
 
   constructor(
     private empleadosService: EmpleadosService,
     private snackBar: MatSnackBar
   ) {
+
+  }
+
+
+
+  ngOnInit(): void {
+    this.getTiposEmpleados()
     this.form = new FormGroup({
-      tipoEmpleado: new FormControl('', {
+      tipoEmpleado: new FormControl(this.empleado.idTipoEmpleado, {
         validators: [
           Validators.required
         ]
       }),
-      contrasena: new FormControl('', {
+      contrasena: new FormControl(this.empleado.contrasena, {
         validators: [
           Validators.required
         ]
@@ -55,12 +63,6 @@ export class EmployeeInfoComponent implements OnInit {
         Validators.required,
       ])
     })
-  }
-
-
-
-  ngOnInit(): void {
-    this.getTiposEmpleados()
   }
 
   onSubmit(values: any): any {

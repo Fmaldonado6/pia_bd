@@ -50,12 +50,10 @@ export class CrearEmpleadoComponent {
   addPersonalInfo(values: PersonalInfoForm) {
     this.empleado.nombre = `${values.nombre} ${values.apellidoPaterno} ${values.apellidoMaterno}`
     this.empleado.telefono = values.telefono
-    console.log(this.empleado.nombre)
     this.changePage(Pages.address)
   }
 
   addAddress(values: AddressForm) {
-    console.log(values)
     this.empleado.idPais = values.pais
     this.empleado.idEstado = values.estado
     this.empleado.idMunicipio = values.municipio
@@ -66,7 +64,6 @@ export class CrearEmpleadoComponent {
   }
 
   addEmployeeInfo(values: EmployeeInfo) {
-    console.log(values)
     this.empleado.idTipoEmpleado = values.tipoEmpleado
     this.empleado.contrasena = values.password
     this.addEmployee()
@@ -76,7 +73,10 @@ export class CrearEmpleadoComponent {
     this.currentStatus = Status.loading
 
     this.empleadosService.addEmpleado(this.empleado).subscribe(e => {
-      console.log(e)
+      this.currentStatus = Status.success
+      setTimeout(() => {
+        this.dialogRef.close()
+      }, 1500);
     })
   }
 
@@ -85,6 +85,7 @@ export class CrearEmpleadoComponent {
   }
 
   changePage(page: Pages) {
+    console.log(this.empleado)
     this.currentPage = page
   }
 }

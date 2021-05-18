@@ -11,31 +11,31 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class PersonalInfoComponent implements OnInit {
 
-  formInformacion: FormGroup
+  formInformacion: FormGroup = new FormGroup({})
   @Output() iconClicked = new EventEmitter()
   @Output() submitForm = new EventEmitter()
-  @Input() empleado = new Empleado
-
-  constructor() {
+  @Input() empleado = new Empleado()
 
 
+  ngOnInit(): void {
+    const nombre = this.empleado.nombre.split(" ")
     this.formInformacion = new FormGroup({
-      nombre: new FormControl('', {
+      nombre: new FormControl(nombre[0], {
         validators: [
           Validators.required
         ]
       }),
-      apellidoPaterno: new FormControl('', {
+      apellidoPaterno: new FormControl(nombre[1], {
         validators: [
           Validators.required
         ]
       }),
-      apellidoMaterno: new FormControl('', {
+      apellidoMaterno: new FormControl(nombre[2], {
         validators: [
           Validators.required
         ]
       }),
-      telefono: new FormControl('', {
+      telefono: new FormControl(this.empleado.telefono, {
         validators: [
           Validators.required
         ]
@@ -44,12 +44,7 @@ export class PersonalInfoComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-
-  }
-
   onSubmit(values: any) {
-    console.log(values)
     this.submitForm.emit(values)
 
   }

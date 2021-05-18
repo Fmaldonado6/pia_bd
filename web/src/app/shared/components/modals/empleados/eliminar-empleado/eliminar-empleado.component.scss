@@ -9,3 +9,13 @@
   align-items: center;
   justify-content: center;
 }
+
+.info {
+  height: 170px;
+}
+
+@media (max-width: 600px) {
+  .dialog{
+    min-width: fit-content;
+  }
+}
