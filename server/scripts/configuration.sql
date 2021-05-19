@@ -144,7 +144,7 @@ if object_id('PedidosAlimentos','U') is null create table PedidosAlimentos
     cantidad int not null,
     precio float not null,
     constraint fkPedidoAlimento foreign key (idPedido) references Pedidos(idPedido),
-    constraint fkAlimentoPedido foreign key (idAlimento) references Alimentos(idAlimento),
+    constraint fkAlimentoPedido foreign key (idAlimento) references Alimentos(idAlimento)
 )
 
 IF OBJECT_ID ('Facturas','U') is null create table Facturas
