@@ -3,9 +3,16 @@
     *ngSwitchCase="Status.loaded"
     title="Eliminar Empleado"
     body="¿Estás seguro de que quieres eliminar a éste empleado?"
-    (cancelPressed)="cancel()"
+    (cancelPressed)="close()"
+    (confirmPressed)="deleteUser()"
   ></confirm-menu>
   <div class="status" *ngSwitchCase="Status.loading">
     <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+  <div class="status info" *ngSwitchCase="Status.success">
+    <info-menu
+      title="Empleado eliminado correctamente"
+      (clickEvent)="close()"
+    ></info-menu>
   </div>
 </div>

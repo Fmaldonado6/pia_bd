@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Pais, Estado, Municipio, Status } from 'src/app/models/models';
+import { Pais, Estado, Municipio, Empleado } from 'src/app/models/models';
 import { DireccionesService } from 'src/app/services/direcciones/direcciones.service';
 import { HeaderType } from '../../../../modal-title/modal-title.component';
 import { CrearEmpleadoComponent } from '../../crear-empleado.component';
@@ -18,9 +18,10 @@ export class AddressComponent implements OnInit {
   estados: Estado[] = []
   municipios: Municipio[] = []
 
-  formDireccion: FormGroup
+  formDireccion: FormGroup = new FormGroup({})
   @Output() iconClicked = new EventEmitter()
   @Output() submitForm = new EventEmitter()
+  @Input() empleado = new Empleado()
 
   constructor(
     private dialogRef: MatDialogRef<CrearEmpleadoComponent>,
@@ -29,45 +30,44 @@ export class AddressComponent implements OnInit {
 
 
 
+  }
+
+  ngOnInit(): void {
+    this.getPaises()
 
     this.formDireccion = new FormGroup({
 
-      pais: new FormControl('', {
+      pais: new FormControl(this.empleado.idPais, {
         validators: [
           Validators.required
         ]
       }),
-      estado: new FormControl('', {
+      estado: new FormControl(this.empleado.idEstado, {
         validators: [
           Validators.required
         ]
       }),
-      municipio: new FormControl('', {
+      municipio: new FormControl(this.empleado.idMunicipio, {
         validators: [
           Validators.required
         ]
       }),
-      colonia: new FormControl('', {
+      colonia: new FormControl(this.empleado.nombreColonia, {
         validators: [
           Validators.required
         ]
       }),
-      calle: new FormControl('', {
+      calle: new FormControl(this.empleado.nombreCalle, {
         validators: [
           Validators.required
         ]
       }),
-      numero: new FormControl('', {
+      numero: new FormControl(this.empleado.numero, {
         validators: [
           Validators.required
         ]
       }),
     })
-
-  }
-
-  ngOnInit(): void {
-    this.getPaises()
   }
 
   onSubmit(values: any) {

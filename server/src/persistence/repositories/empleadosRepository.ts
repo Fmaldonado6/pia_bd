@@ -118,7 +118,7 @@ class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
 
     async findAll(): Promise<TipoEmpleado[]> {
         const res = await database.executeQuery(`select * from TipoEmpleado`)
-
+        console.log(res)
         if (!res)
             return []
 

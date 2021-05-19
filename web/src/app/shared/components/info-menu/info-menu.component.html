@@ -1,15 +1,14 @@
 <div class="message">
   <div class="icon-container">
     <mat-icon
-    
       [ngStyle]="{ border: '1px solid ' + colors[type], color: colors[type] }"
-      >icons[type]</mat-icon
+      >{{ icons[type] }}</mat-icon
     >
   </div>
   <h2>{{ title }}</h2>
   <button
+    mat-raised-button
     (click)="buttonClicked()"
-    shape="round"
     [ngStyle]="{ 'background-color': buttonColors[type] }"
   >
     {{ accept }}
