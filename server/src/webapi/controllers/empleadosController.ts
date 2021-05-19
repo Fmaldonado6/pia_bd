@@ -171,6 +171,20 @@ class EmpleadosController extends BaseController {
 
     }
 
+    async addTipoEmpleado(req: CustomRequest, res: Response) {
+
+        try {
+
+            const id = req.idEmpleado
+
+
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
+
+    }
+
 
 
     async deleteEmpleado(req: CustomRequest, res: Response) {
