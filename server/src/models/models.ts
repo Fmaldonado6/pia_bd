@@ -1,4 +1,3 @@
-import { Alimentos } from './../../../web/src/app/models/models';
 export class Empleado {
     idEmpleado: number = 0
     nombre: string = ""
