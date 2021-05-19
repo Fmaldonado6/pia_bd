@@ -15,6 +15,7 @@ import { TiposEmpleadoComponent } from './components/modals/empleados/tipos-empl
 import { TipoEmpleadosInfoComponent } from './components/modals/empleados/tipos-empleado/pages/tipo-empleados-info/tipo-empleados-info.component';
 import { TipoEmpleadosPrivilegiosComponent } from './components/modals/empleados/tipos-empleado/pages/tipo-empleados-privilegios/tipo-empleados-privilegios.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { EliminarTipoEmpleadoComponent } from './components/modals/empleados/eliminar-tipo-empleado/eliminar-tipo-empleado.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     InfoMenuComponent,
     TiposEmpleadoComponent,
     TipoEmpleadosInfoComponent,
-    TipoEmpleadosPrivilegiosComponent
+    TipoEmpleadosPrivilegiosComponent,
+    EliminarTipoEmpleadoComponent
   ],
   imports: [
     CommonModule,

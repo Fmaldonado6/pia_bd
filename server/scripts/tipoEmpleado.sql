@@ -24,6 +24,24 @@ EmpPrivilegios
 END
 
 
+
+if not exists(select *
+from TipoEmpleado
+where idTipoEmpleado = 0) 
+BEGIN
+    SET IDENTITY_INSERT TipoEmpleado ON
+
+    insert into
+TipoEmpleado
+        (idTipoEmpleado,nombreTipoEmpleado)
+    values
+        (0, 'Empleado');
+
+
+    SET IDENTITY_INSERT TipoEmpleado OFF
+END
+
+
 if not exists(select *
 from Empleado
 where idEmpleado = 1000) 

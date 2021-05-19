@@ -19,7 +19,6 @@ class AlimentosRepository implements BaseRepository<Alimentos>
 
         return res!![0]
     }
-   
 
     async get(id: number): Promise<Alimentos | null> {
 

@@ -36,4 +36,8 @@ export class EmpleadosService extends DataService {
     return this.http.delete<Empleado>(`${this.url}/empleados/${id}`).pipe(catchError(this.handleError))
   }
 
+  deleteTipoEmpleado(id: number) {
+    return this.http.delete<Empleado>(`${this.url}/empleados/tipos/${id}`).pipe(catchError(this.handleError))
+  }
+
 }
