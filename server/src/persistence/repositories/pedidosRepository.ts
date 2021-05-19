@@ -60,4 +60,73 @@ class PedidosRepository implements BaseRepository<Pedido> {
     }
 }
 
+class PedidoAlimentoRepository {
 
+    async add(obj: PedidoAlimento): Promise<PedidoAlimento> {
+        const res = await database.executeQuery(`
+        insert into PedidosAlimentos(
+            idPedido, idAlimento, cantidad, precio
+        ) 
+        values (
+            ${obj.idPedido}, ${obj.idAlimento}, ${obj.cantidad}, ${obj.precio}
+        )`)
+
+        return new PedidoAlimento()
+    }
+
+
+    async addAllPedidoAlimento(arr: PedidoAlimento[]): Promise<PedidoAlimento[]> {
+
+        for(var i = 0; i < arr.length; i++){
+            this.add(arr[i]);
+        }
+
+    }
+
+
+    async get(id: number): Promise<PedidoAlimento | null> {
+        const res = await database.executeQuery(`
+            select idPedido, idAlimento, nombre, cantidad, precio, idMarca, idTipoAlimento, 
+            cantidadDisponible, descripcion  from PedidosAlimentos as pa 
+            inner join Alimentos as a on pa.idAlimento = a.idAlimento
+            where idPedido = ${id}
+        `)
+        if (!res)
+            return null
+
+        return res[0] 
+    }
+
+    async getPedidosAlimentosByPedidoId(id: number): Promise<PedidoAlimento[]> {
+        const res = await database.executeQuery(`
+        select idPedido, idAlimento, nombre, cantidad, precio, idMarca, idTipoAlimento, 
+        cantidadDisponible, descripcion  from PedidosAlimentos as pa 
+        inner join Alimentos as a on pa.idAlimento = a.idAlimento
+        where idPedido = ${id}
+        `)
+
+        if (!res)
+            return []
+
+        return res as PedidoAlimento[]
+    }
+
+
+    async delete(idPedido: number, idAlimento: number): Promise<void> {
+        await database.executeQuery(`
+            delete from PedidosAlimentos where idPedido = ${idPedido} and idAlimento = ${idAlimento}
+        `)
+    }
+
+    async update(obj: PedidoAlimento): Promise<PedidoAlimento> {
+        await database.executeQuery(`
+        update PedidosAlimentos
+        set cantidad = ${obj.cantidad}, precio = ${obj.precio}
+    `)
+
+        return obj
+    }
+}
+
+export const pedidosRepository = new PedidosRepository()
+export const pedidoAlimentoRepository = new PedidoAlimentoRepository()
