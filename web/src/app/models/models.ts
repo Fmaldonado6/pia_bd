@@ -68,6 +68,7 @@ export class PedidoAlimento {
     idAlimento: number = 0
     cantidad: number = 0
     precio: number = 0
+    alimento: Alimentos = new Alimentos()
 }
 
 export class InfoSucursal {
@@ -130,13 +131,11 @@ export class Factura {
 }
 
 export enum PrivilegiosId {
-    crearUsuarios = 1,
-    borrarUsuarios,
-    editarUsuarios,
-    crearPedidos,
-    verPedidos,
-    almacenarAlimentos,
-    crearFacturas
+    gestionarUsuarios = 1,
+    gestionarPedidos,
+    gestionarAlimentos,
+    gestionarFacturas,
+    gestionarTipoEmpleado,
 }
 export interface Token {
     idEmpleado: number
