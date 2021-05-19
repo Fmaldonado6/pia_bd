@@ -78,6 +78,9 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
 class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
 
     async add(obj: TipoEmpleado): Promise<TipoEmpleado> {
+
+        console.log(obj)
+
         const res = await database.executeQuery(`
         insert into TipoEmpleado(
             sueldo,nombreTipoEmpleado,horaEntrada,horaSalida
@@ -165,6 +168,15 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
             return null
 
         return res[0] as Privilegios
+    }
+
+    async addEmpPrivilegios(idPrivilegio: number, idTipoEmpleado: number): Promise<void> {
+
+        await database.executeQuery(`
+            insert into EmpPrivilegios(idTipoEmpleado,idPrivilegio) values('${idTipoEmpleado}','${idPrivilegio}')
+        `)
+
+
     }
 
     async getPrivilefiosByTipoEmpleadoId(id: number): Promise<Privilegios[]> {

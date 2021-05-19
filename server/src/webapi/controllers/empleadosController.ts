@@ -1,6 +1,6 @@
 import { coloniasRepository, callesRepository, paisRepository, estadoRepository, municipioRepository } from './../../persistence/repositories/direcionRepository';
 import { empleadosRepository, tipoEmpleadoRepository, privilegiosRepository } from './../../persistence/repositories/empleadosRepository';
-import { PrivilegiosId, Colonia, Calle } from './../../models/models';
+import { PrivilegiosId, Colonia, Calle, TipoEmpleado } from './../../models/models';
 import { Request, Response } from 'express';
 import { Empleado } from '../../models/models';
 import { BaseController, CustomRequest } from './baseController';
@@ -17,6 +17,7 @@ class EmpleadosController extends BaseController {
         this.router.get("/", this.verifyToken, (req, res) => { this.getEmpleados(req, res) })
         this.router.get("/info", this.verifyToken, (req, res) => { this.getMyInfo(req as CustomRequest, res) })
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTipoEmpleados(req, res) })
+        this.router.post("/tipos", this.verifyToken, (req, res) => { this.addTipoEmpleado(req as CustomRequest, res) })
         this.router.get("/:id", this.verifyToken, (req, res) => { this.getEmpleado(req as CustomRequest, res) })
         this.router.delete("/:id", this.verifyToken, (req, res) => { this.deleteEmpleado(req as CustomRequest, res) })
 
@@ -176,6 +177,38 @@ class EmpleadosController extends BaseController {
         try {
 
             const id = req.idEmpleado
+
+            const empleado = await empleadosRepository.get(id)
+            console.log(empleado)
+            if (!empleado)
+                return res.sendStatus(403)
+
+            const privilegios = await privilegiosRepository.getPrivilefiosByTipoEmpleadoId(empleado.idTipoEmpleado)
+
+            let found = false
+
+            for (let privilegio of privilegios) {
+                if (privilegio.idPrivilegio == PrivilegiosId.gestionarTipoEmpleado) {
+                    found = true
+                    break
+                }
+            }
+
+            console.log(false)
+
+
+            if (!found)
+                return res.sendStatus(403)
+
+            const tipoEmpleado = req.body as TipoEmpleado
+
+            const newEmpleado = await tipoEmpleadoRepository.add(tipoEmpleado)
+
+            for (let privilegio of tipoEmpleado.privilegios) {
+                await privilegiosRepository.addEmpPrivilegios(privilegio.idPrivilegio, newEmpleado.idTipoEmpleado)
+            }
+
+            res.status(200).json({})
 
 
         } catch (error) {

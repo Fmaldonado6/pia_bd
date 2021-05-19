@@ -14,7 +14,7 @@ export class TiposEmpleadoComponent {
   Status = Status
 
   currentStatus = Status.loaded
-  currentPage = Pages.privilegesPage
+  currentPage = Pages.infoPage
 
   tipoEmpleado = new TipoEmpleado()
 
@@ -41,6 +41,9 @@ export class TiposEmpleadoComponent {
     this.currentStatus = Status.loading
     this.empleadosService.addTipoEmpleado(this.tipoEmpleado).subscribe(e => {
       this.currentStatus = Status.success
+      setTimeout(() => {
+        this.close()
+      }, 1500);
     })
   }
 

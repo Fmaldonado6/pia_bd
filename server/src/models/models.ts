@@ -24,8 +24,8 @@ export class TipoEmpleado {
     idTipoEmpleado: number = 0
     nombreTipoEmpleado: string = ""
     sueldo: number = 0
-    horaEntrada: Date = new Date()
-    horaSalida: Date = new Date()
+    horaEntrada: string = ""
+    horaSalida: string = ""
     privilegios: Privilegios[] = []
 }
 

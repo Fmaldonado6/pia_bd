@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatListOption } from '@angular/material/list';
 import { Privilegios } from 'src/app/models/models';
 import { PrivilegiosService } from 'src/app/services/privilegios/privilegios.service';
+import { HeaderType } from '../../../../modal-title/modal-title.component';
 
 @Component({
   selector: 'tipo-empleados-privilegios',
@@ -10,6 +11,7 @@ import { PrivilegiosService } from 'src/app/services/privilegios/privilegios.ser
   styleUrls: ['./tipo-empleados-privilegios.component.scss']
 })
 export class TipoEmpleadosPrivilegiosComponent implements OnInit {
+  HeaderType = HeaderType
 
   @Output() submitForm = new EventEmitter()
   @Output() iconClicked = new EventEmitter()

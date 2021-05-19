@@ -63,7 +63,7 @@ class PedidosRepository implements BaseRepository<Pedido> {
 class PedidoAlimentoRepository {
 
     async add(obj: PedidoAlimento): Promise<PedidoAlimento> {
-        const res = await database.executeQuery(`
+        await database.executeQuery(`
         insert into PedidosAlimentos(
             idPedido, idAlimento, cantidad, precio
         ) 
@@ -71,7 +71,7 @@ class PedidoAlimentoRepository {
             ${obj.idPedido}, ${obj.idAlimento}, ${obj.cantidad}, ${obj.precio}
         )`)
 
-        return new PedidoAlimento()
+        return obj
     }
 
 
