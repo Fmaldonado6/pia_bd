@@ -156,6 +156,13 @@ class EmpleadosController extends BaseController {
         try {
             const tipos = await tipoEmpleadoRepository.findAll()
 
+            for (let tipo of tipos) {
+
+                const privilegios = await privilegiosRepository.getPrivilefiosByTipoEmpleadoId(tipo.idTipoEmpleado)
+
+                tipo.privilegios = privilegios
+            }
+
             res.status(200).json(tipos)
         } catch (error) {
             console.error(error)
@@ -163,6 +170,8 @@ class EmpleadosController extends BaseController {
         }
 
     }
+
+
 
     async deleteEmpleado(req: CustomRequest, res: Response) {
         try {

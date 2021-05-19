@@ -26,6 +26,7 @@ export class TipoEmpleado {
     sueldo: number = 0
     horaEntrada: Date = new Date()
     horaSalida: Date = new Date()
+    privilegios: Privilegios[] = []
 }
 
 export class Privilegios {

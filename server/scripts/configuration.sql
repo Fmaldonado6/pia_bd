@@ -66,8 +66,8 @@ if object_id('TipoEmpleado','U') is null create table TipoEmpleado
     idTipoEmpleado int not null IDENTITY(1,1),
     constraint pkTipoEmpleado primary key (idTipoEmpleado),
     nombreTipoEmpleado varchar(200) not null,
-    horaEntrada time,
-    horaSalida time,
+    horaEntrada varchar(20),
+    horaSalida varchar(20),
     sueldo float
 )
 
@@ -149,19 +149,19 @@ if object_id('PedidosAlimentos','U') is null create table PedidosAlimentos
 
 IF OBJECT_ID ('Facturas','U') is null create table Facturas
 (
-	idFactura int not null identity(1,1),
-	constraint pk_idFactura primary key (idFactura),
-	idPedido int not null,
-	razonSocial varchar (75) not null,
-	concepto varchar (75) not null,
-	nombre varchar (50) not null,
-	apPaterno varchar (25) not null,
-	apMaterno varchar (25) not null,
-	telefono Bigint not null,
-	RFC varchar (20) not null,
-	fechaFactura Bigint not null,
-	--Foreign
-	idPais int ,
+    idFactura int not null identity(1,1),
+    constraint pk_idFactura primary key (idFactura),
+    idPedido int not null,
+    razonSocial varchar (75) not null,
+    concepto varchar (75) not null,
+    nombre varchar (50) not null,
+    apPaterno varchar (25) not null,
+    apMaterno varchar (25) not null,
+    telefono Bigint not null,
+    RFC varchar (20) not null,
+    fechaFactura Bigint not null,
+    --Foreign
+    idPais int ,
     constraint fk_idPais foreign key (idPais) references Pais(idPais),
     idEstado int ,
     constraint fk_idEstado foreign key (idEstado) references Estado(idEstado),

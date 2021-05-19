@@ -24,6 +24,7 @@ export class EmployeeTypesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTypes()
+    this.openRegisterModal()
   }
 
   getTypes() {

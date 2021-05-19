@@ -2,5 +2,12 @@
   <tipo-empleados-info
     *ngSwitchCase="Pages.infoPage"
     (iconClicked)="close()"
+    (submitForm)="addTipoEmpleadoInfo($event)"
   ></tipo-empleados-info>
+  <tipo-empleados-privilegios
+    *ngSwitchCase="Pages.privilegesPage"
+    (backClicked)="changePage(Pages.infoPage)"
+    (submitForm)="addPrivilegios($event)"
+  >
+  </tipo-empleados-privilegios>
 </div>
