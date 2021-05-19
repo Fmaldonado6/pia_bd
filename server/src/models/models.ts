@@ -1,4 +1,3 @@
-import { Alimentos } from './../../../web/src/app/models/models';
 export class Empleado {
     idEmpleado: number = 0
     nombre: string = ""
@@ -132,11 +131,9 @@ export class Factura {
 }
 
 export enum PrivilegiosId {
-    crearUsuarios = 1,
-    borrarUsuarios,
-    editarUsuarios,
-    crearPedidos,
-    verPedidos,
-    almacenarAlimentos,
-    crearFacturas
+    gestionarUsuarios = 1,
+    gestionarPedidos,
+    gestionarAlimentos,
+    gestionarFacturas,
+    gestionarTipoEmpleado,
 }

@@ -109,7 +109,7 @@ class EmpleadosController extends BaseController {
 
             for (let privilegio of privilegios) {
 
-                if (privilegio.idPrivilegio == PrivilegiosId.crearUsuarios)
+                if (privilegio.idPrivilegio == PrivilegiosId.gestionarUsuarios)
                     accepted = true
 
             }
@@ -201,7 +201,7 @@ class EmpleadosController extends BaseController {
             let found = false
 
             for (let privilegio of privilegios) {
-                if (privilegio.idPrivilegio == PrivilegiosId.borrarUsuarios) {
+                if (privilegio.idPrivilegio == PrivilegiosId.gestionarUsuarios) {
                     found = true
                     break
                 }
