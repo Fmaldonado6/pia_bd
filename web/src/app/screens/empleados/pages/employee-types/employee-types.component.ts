@@ -52,6 +52,10 @@ export class EmployeeTypesComponent implements OnInit {
       }
     })
 
+    dialog.componentInstance.typeDeleted.subscribe(e => {
+      this.getTypes()
+    })
+
   }
 
 }

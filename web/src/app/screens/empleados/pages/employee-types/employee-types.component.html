@@ -14,7 +14,7 @@
       Registrar
     </button>
     <div class="info-container">
-      <div class="empleado-item" *ngFor="let tipo of tipos">
+      <div class="empleado-item" *ngFor="let tipo of tipos | slice: 1">
         <mat-icon color="primary"> account_circle </mat-icon>
         <span>{{ tipo.nombreTipoEmpleado }} </span>
         <button

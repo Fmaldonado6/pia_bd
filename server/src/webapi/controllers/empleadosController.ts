@@ -18,6 +18,7 @@ class EmpleadosController extends BaseController {
         this.router.get("/info", this.verifyToken, (req, res) => { this.getMyInfo(req as CustomRequest, res) })
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTipoEmpleados(req, res) })
         this.router.post("/tipos", this.verifyToken, (req, res) => { this.addTipoEmpleado(req as CustomRequest, res) })
+        this.router.delete("/tipos/:id", this.verifyToken, (req, res) => { this.deleteTipoEmpleado(req as CustomRequest, res) })
         this.router.get("/:id", this.verifyToken, (req, res) => { this.getEmpleado(req as CustomRequest, res) })
         this.router.delete("/:id", this.verifyToken, (req, res) => { this.deleteEmpleado(req as CustomRequest, res) })
 
@@ -179,7 +180,6 @@ class EmpleadosController extends BaseController {
             const id = req.idEmpleado
 
             const empleado = await empleadosRepository.get(id)
-            console.log(empleado)
             if (!empleado)
                 return res.sendStatus(403)
 
@@ -193,9 +193,6 @@ class EmpleadosController extends BaseController {
                     break
                 }
             }
-
-            console.log(false)
-
 
             if (!found)
                 return res.sendStatus(403)
@@ -218,7 +215,38 @@ class EmpleadosController extends BaseController {
 
     }
 
+    async deleteTipoEmpleado(req: CustomRequest, res: Response) {
 
+        try {
+
+            const id = req.idEmpleado
+
+            const hasPermission = await this.hasPermission(id, PrivilegiosId.gestionarTipoEmpleado)
+
+            if (!hasPermission)
+                return res.sendStatus(403)
+
+            const tipoEmpleadoId = Number.parseInt(req.params.id)
+
+            const empleadosConTipoEmpleado = await empleadosRepository.getEmpleadosByTipoEmpleadoId(tipoEmpleadoId)
+
+            for (let empleado of empleadosConTipoEmpleado) {
+                empleado.idTipoEmpleado = 0
+                await empleadosRepository.update(empleado)
+            }
+
+            const deleteId = Number.parseInt(req.params.id)
+
+            await tipoEmpleadoRepository.delete(deleteId)
+
+            res.status(200).json({})
+
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
+
+    }
 
     async deleteEmpleado(req: CustomRequest, res: Response) {
         try {
