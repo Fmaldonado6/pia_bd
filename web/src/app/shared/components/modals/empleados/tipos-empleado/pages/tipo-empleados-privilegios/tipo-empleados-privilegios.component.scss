@@ -1,0 +1,10 @@
+.content {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  mat-selection-list {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+}

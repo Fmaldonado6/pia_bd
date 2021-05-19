@@ -1,16 +1,16 @@
-import { AuthService } from './../../../../services/auth/auth.service';
-import { CrearEmpleadoComponent } from './../../../../shared/components/modals/empleados/crear-empleado/crear-empleado.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SectionCard } from 'src/app/models/models';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { CrearEmpleadoComponent } from 'src/app/shared/components/modals/empleados/crear-empleado/crear-empleado.component';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
   sections: any[] = [
     {
       title: "Mi información",
@@ -38,7 +38,7 @@ export class MainComponent implements OnInit {
       icon: "work",
       description: "Administra los diferentes tipos de empleado que existen en nuestro bar.",
       action: "Administrar",
-      onClick: () => { this.openEmployeeList() }
+      onClick: () => { this.openEmployeeTypes() }
     },
 
   ]
@@ -49,8 +49,7 @@ export class MainComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-  }
+
 
   openMyInfo() {
 
@@ -62,12 +61,14 @@ export class MainComponent implements OnInit {
 
   openEmployeeList() {
     this.router.navigate(["/empleados/list"])
-
   }
 
+  openEmployeeTypes() {
+    this.router.navigate(["/empleados/types"])
+  }
 
   openRegisterModal() {
-    const dialogRef = this.dialog.open(CrearEmpleadoComponent)
+    this.dialog.open(CrearEmpleadoComponent)
   }
 
 }

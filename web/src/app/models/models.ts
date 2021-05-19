@@ -26,6 +26,7 @@ export class TipoEmpleado {
     sueldo: number = 0
     horaEntrada: Date = new Date()
     horaSalida: Date = new Date()
+    privilegios: Privilegios[] = []
 }
 
 export class Privilegios {
@@ -60,6 +61,14 @@ export class Pedido {
     subtotal: number = 0
     descuento: number = 0
     total: number = 0
+}
+
+export class PedidoAlimento {
+    idPedido: number = 0
+    idAlimento: number = 0
+    cantidad: number = 0
+    precio: number = 0
+    alimento: Alimentos = new Alimentos()
 }
 
 export class InfoSucursal {
@@ -121,6 +130,13 @@ export class Factura {
     telefono: string = ""
 }
 
+export enum PrivilegiosId {
+    gestionarUsuarios = 1,
+    gestionarPedidos,
+    gestionarAlimentos,
+    gestionarFacturas,
+    gestionarTipoEmpleado,
+}
 export interface Token {
     idEmpleado: number
 }

@@ -1,22 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'section-card',
   templateUrl: './section-card.component.html',
   styleUrls: ['./section-card.component.scss']
 })
-export class SectionCardComponent implements OnInit {
+export class SectionCardComponent {
 
   @Input() title = ""
   @Input() icon = ""
   @Input() description = ""
   @Input() action = ""
   @Input() route = ""
+  @Output() buttonClicked = new EventEmitter()
 
-
-  constructor() { }
-
-  ngOnInit(): void {
+  clickButton() {
+    this.buttonClicked.emit()
   }
 
 }

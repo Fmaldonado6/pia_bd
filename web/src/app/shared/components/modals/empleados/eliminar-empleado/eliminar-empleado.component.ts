@@ -1,5 +1,5 @@
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Empleado, Status } from 'src/app/models/models';
 
@@ -19,6 +19,8 @@ export class EliminarEmpleadoComponent implements OnInit {
 
   empleado = new Empleado()
 
+  @Output() empleadoEliminado = new EventEmitter()
+
   constructor(
     private dialog: MatDialogRef<EliminarEmpleadoComponent>,
     @Inject(MAT_DIALOG_DATA) private modalData: ModalData,
@@ -34,6 +36,7 @@ export class EliminarEmpleadoComponent implements OnInit {
 
     this.empleadosService.deleteEmpleado(this.empleado.idEmpleado).subscribe(e => {
       this.currentStatus = Status.success
+      this.empleadoEliminado.emit()
     })
   }
 

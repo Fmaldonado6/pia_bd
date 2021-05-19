@@ -75,10 +75,10 @@ class PedidoAlimentoRepository {
     }
 
 
-    async addAllPedidoAlimento(arr: PedidoAlimento[]): Promise<PedidoAlimento[]> {
+    async addAllPedidoAlimento(arr: PedidoAlimento[]): Promise<void> {
 
-        for(var i = 0; i < arr.length; i++){
-            this.add(arr[i]);
+        for (let alimento of arr) {
+            this.add(alimento);
         }
 
     }
@@ -94,7 +94,7 @@ class PedidoAlimentoRepository {
         if (!res)
             return null
 
-        return res[0] 
+        return res[0]
     }
 
     async getPedidosAlimentosByPedidoId(id: number): Promise<PedidoAlimento[]> {

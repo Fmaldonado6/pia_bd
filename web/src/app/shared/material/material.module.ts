@@ -1,5 +1,5 @@
 import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -48,6 +48,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatAutocompleteModule,
         MatDatepickerModule,
         MatFormFieldModule,
+        MatNativeDateModule,
         MatRadioModule,
         MatSelectModule, DragDropModule,
         MatSliderModule,
@@ -73,7 +74,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatSnackBarModule,
         MatTableModule,
         MatSortModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+
     ],
     exports: [
         CommonModule,
@@ -92,6 +94,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatMenuModule,
         MatSidenavModule,
         MatToolbarModule,
+        MatNativeDateModule,
         DragDropModule,
         MatListModule,
         MatGridListModule,

@@ -109,7 +109,7 @@ class EmpleadosController extends BaseController {
 
             for (let privilegio of privilegios) {
 
-                if (privilegio.idPrivilegio == PrivilegiosId.crearUsuarios)
+                if (privilegio.idPrivilegio == PrivilegiosId.gestionarUsuarios)
                     accepted = true
 
             }
@@ -156,6 +156,13 @@ class EmpleadosController extends BaseController {
         try {
             const tipos = await tipoEmpleadoRepository.findAll()
 
+            for (let tipo of tipos) {
+
+                const privilegios = await privilegiosRepository.getPrivilefiosByTipoEmpleadoId(tipo.idTipoEmpleado)
+
+                tipo.privilegios = privilegios
+            }
+
             res.status(200).json(tipos)
         } catch (error) {
             console.error(error)
@@ -163,6 +170,22 @@ class EmpleadosController extends BaseController {
         }
 
     }
+
+    async addTipoEmpleado(req: CustomRequest, res: Response) {
+
+        try {
+
+            const id = req.idEmpleado
+
+
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
+
+    }
+
+
 
     async deleteEmpleado(req: CustomRequest, res: Response) {
         try {
@@ -178,7 +201,7 @@ class EmpleadosController extends BaseController {
             let found = false
 
             for (let privilegio of privilegios) {
-                if (privilegio.idPrivilegio == PrivilegiosId.borrarUsuarios) {
+                if (privilegio.idPrivilegio == PrivilegiosId.gestionarUsuarios) {
                     found = true
                     break
                 }

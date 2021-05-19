@@ -1,0 +1,22 @@
+<modal-title
+  title="Privilegios de Empleado"
+  subtitle="Seleccione los privilegios del tipo de empleado"
+  (closeClicked)="onIconClick()"
+></modal-title>
+<div class="content">
+  <mat-selection-list #privilegiosList>
+    <mat-list-option
+      *ngFor="let privilegio of privilegios"
+      [value]="privilegio"
+    >
+      {{ privilegio.nombre }}
+    </mat-list-option>
+  </mat-selection-list>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSubmit(privilegiosList.selectedOptions.selected)"
+  >
+    Registrar
+  </button>
+</div>

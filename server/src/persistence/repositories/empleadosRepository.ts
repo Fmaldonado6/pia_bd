@@ -84,7 +84,7 @@ class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
         ) 
         output Inserted.idTipoEmpleado
         values (
-            ${obj.sueldo},'${obj.nombreTipoEmpleado}',${obj.horaEntrada},${obj.horaSalida}
+            ${obj.sueldo},'${obj.nombreTipoEmpleado}','${obj.horaEntrada}','${obj.horaSalida}'
         )`)
 
         return res!![0]

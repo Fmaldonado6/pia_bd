@@ -1,0 +1,11 @@
+form {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+}
+
+::ng-deep {
+  .cdk-overlay-container {
+    z-index: 900 !important;
+  }
+}

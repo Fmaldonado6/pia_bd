@@ -1,0 +1,43 @@
+<div class="container" [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <div class="title-container">
+      <span>Tipos de Empleados</span>
+      <p>Aquí podras gestionar los tipos de empleados registrados.</p>
+    </div>
+    <button
+      (click)="openRegisterModal()"
+      mat-raised-button
+      color="primary"
+      class="register-button"
+    >
+      <mat-icon>add</mat-icon>
+      Registrar
+    </button>
+    <div class="info-container">
+      <div class="empleado-item" *ngFor="let tipo of tipos">
+        <mat-icon color="primary"> account_circle </mat-icon>
+        <span>{{ tipo.nombreTipoEmpleado }} </span>
+        <button
+          *ngIf="tipo.idTipoEmpleado != 1"
+          mat-icon-button
+          class="more-icon"
+          [matMenuTriggerData]="{ tipo: tipo }"
+          [matMenuTriggerFor]="optionsEmpleado"
+        >
+          <mat-icon> more_vert </mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+</div>
+
+<mat-menu #optionsEmpleado="matMenu">
+  <ng-template matMenuContent let-tipo="tipo">
+    <button mat-menu-item>Editar</button>
+    <button mat-menu-item (click)="openDeleteModal(tipo)">Eliminar</button>
+  </ng-template>
+</mat-menu>

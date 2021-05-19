@@ -26,6 +26,7 @@ export class TipoEmpleado {
     sueldo: number = 0
     horaEntrada: Date = new Date()
     horaSalida: Date = new Date()
+    privilegios: Privilegios[] = []
 }
 
 export class Privilegios {
@@ -130,11 +131,9 @@ export class Factura {
 }
 
 export enum PrivilegiosId {
-    crearUsuarios = 1,
-    borrarUsuarios,
-    editarUsuarios,
-    crearPedidos,
-    verPedidos,
-    almacenarAlimentos,
-    crearFacturas
+    gestionarUsuarios = 1,
+    gestionarPedidos,
+    gestionarAlimentos,
+    gestionarFacturas,
+    gestionarTipoEmpleado,
 }

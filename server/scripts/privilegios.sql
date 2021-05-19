@@ -8,7 +8,7 @@ BEGIN
     insert into Privilegios
     (idPrivilegio, nombre)
 VALUES
-    (1, 'Crear Usuarios');
+    (1, 'Gestionar Usuarios');
     SET IDENTITY_INSERT Privilegios OFF
 END
 
@@ -22,10 +22,9 @@ BEGIN
     insert into Privilegios
     (idPrivilegio, nombre)
 VALUES
-    (2, 'Borrar Usuarios');
+    (2, 'Gestionar Pedidos');
     SET IDENTITY_INSERT Privilegios OFF
 END
-
 
 if not exists(select *
 from Privilegios
@@ -36,7 +35,7 @@ BEGIN
     insert into Privilegios
     (idPrivilegio, nombre)
 VALUES
-    (3, 'Editar Usuarios');
+    (3, 'Gestionar alimentos');
     SET IDENTITY_INSERT Privilegios OFF
 END
 
@@ -49,7 +48,7 @@ BEGIN
     insert into Privilegios
     (idPrivilegio, nombre)
 VALUES
-    (4, 'Crear Pedidos');
+    (4, 'Gestionar facturas');
     SET IDENTITY_INSERT Privilegios OFF
 END
 
@@ -62,32 +61,6 @@ BEGIN
     insert into Privilegios
     (idPrivilegio, nombre)
 VALUES
-    (5, 'Ver Pedidos');
-    SET IDENTITY_INSERT Privilegios OFF
-END
-
-if not exists(select *
-from Privilegios
-where idPrivilegio = 6) 
-BEGIN
-    SET IDENTITY_INSERT Privilegios ON
-
-    insert into Privilegios
-    (idPrivilegio, nombre)
-VALUES
-    (6, 'Almacenar alimentos');
-    SET IDENTITY_INSERT Privilegios OFF
-END
-
-if not exists(select *
-from Privilegios
-where idPrivilegio = 7) 
-BEGIN
-    SET IDENTITY_INSERT Privilegios ON
-
-    insert into Privilegios
-    (idPrivilegio, nombre)
-VALUES
-    (7, 'Crear facturas');
+    (5, 'Gestionar tipo de empleado');
     SET IDENTITY_INSERT Privilegios OFF
 END
