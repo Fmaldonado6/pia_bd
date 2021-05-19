@@ -1,7 +1,8 @@
 import { EmpleadosService } from './services/empleados/empleados.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Status } from './models/models';
+import { Status, Empleado } from './models/models';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ export class AppComponent implements OnInit {
   isLoggedIn = false
   innerWidth = 0;
   opened: boolean = true;
+
+  currentUser: Empleado = new Empleado()
 
   menuSections = [
     {
@@ -45,7 +48,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private empleadosService: EmpleadosService
+    private empleadosService: EmpleadosService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +67,7 @@ export class AppComponent implements OnInit {
     this.currentStatus = Status.loading
 
     this.empleadosService.getMyInfo().subscribe(e => {
+      this.currentUser = e
       this.authService.setUser(e)
       this.currentStatus = Status.loaded
     }, () => {
@@ -77,6 +82,11 @@ export class AppComponent implements OnInit {
 
     if (this.innerWidth >= 1234)
       this.opened = true
+  }
+
+  signOut() {
+    this.router.navigate(["/"])
+    this.authService.logout()
   }
 
 }
