@@ -28,8 +28,8 @@ export class EmpleadosService extends DataService {
     return this.http.get<Empleado>(`${this.url}/empleados/${id}`).pipe(catchError(this.handleError))
   }
 
-  deleteEmpleado(id:number){
+  deleteEmpleado(id: number) {
     return this.http.delete<Empleado>(`${this.url}/empleados/${id}`).pipe(catchError(this.handleError))
-
   }
+
 }
