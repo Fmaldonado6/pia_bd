@@ -71,7 +71,7 @@ export class CrearEmpleadoComponent {
 
   addEmployee() {
     this.currentStatus = Status.loading
-
+    console.log(this.empleado)
     this.empleadosService.addEmpleado(this.empleado).subscribe(e => {
       this.currentStatus = Status.success
       setTimeout(() => {

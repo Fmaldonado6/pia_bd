@@ -16,7 +16,7 @@ export class TipoEmpleadosInfoComponent implements OnInit {
   ngOnInit(): void {
 
     this.form = new FormGroup({
-      nombre: new FormControl('', [
+      nombreTipoEmpleado: new FormControl('', [
         Validators.required
       ]),
       horaEntrada: new FormControl('', [
@@ -27,7 +27,7 @@ export class TipoEmpleadosInfoComponent implements OnInit {
         Validators.required
 
       ]),
-      salario: new FormControl('', [
+      sueldo: new FormControl('', [
         Validators.required
 
       ]),

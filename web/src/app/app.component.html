@@ -16,20 +16,37 @@
       class="sidenav"
       [(opened)]="opened"
     >
-      <h1>Bar delow</h1>
-      <mat-list>
-        <mat-list-item
-          *ngFor="let menu of menuSections"
-          mat-ripple
-          [routerLink]="menu.route"
-          routerLinkActive="selected-item"
-        >
-          <mat-icon class="material-icons-outlined" mat-list-icon>{{
-            menu.icon
-          }}</mat-icon>
-          <div mat-line>{{ menu.title }}</div>
-        </mat-list-item>
-      </mat-list>
+      <div class="sidenav-content">
+        <h1>Bar delow</h1>
+        <mat-list>
+          <mat-list-item
+            *ngFor="let menu of menuSections"
+            mat-ripple
+            class="menu-item"
+            [routerLink]="menu.route"
+            routerLinkActive="selected-item"
+          >
+            <mat-icon class="material-icons-outlined" mat-list-icon>{{
+              menu.icon
+            }}</mat-icon>
+            <div mat-line>{{ menu.title }}</div>
+          </mat-list-item>
+        </mat-list>
+        <mat-list class="bottom">
+          <mat-list-item >
+            <mat-icon class="material-icons-outlined" mat-list-icon
+              >account_circle</mat-icon
+            >
+            <div mat-line>{{ currentUser.nombre }}</div>
+          </mat-list-item>
+          <mat-list-item (click)="signOut()" mat-ripple class="sign-out">
+            <mat-icon class="material-icons-outlined" mat-list-icon
+              >power_settings_new</mat-icon
+            >
+            <div mat-line>Cerrar sesión</div>
+          </mat-list-item>
+        </mat-list>
+      </div>
     </mat-sidenav>
 
     <mat-sidenav-content>

@@ -34,6 +34,17 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
         `)
     }
 
+    async getEmpleadosByTipoEmpleadoId(id: number): Promise<Empleado[]> {
+
+        const res = await database.executeQuery(`
+            select * from Empleado where idTipoEmpleado=${id} 
+        `)
+        if (!res)
+            return []
+
+        return res
+    }
+
     async get(id: number): Promise<Empleado | null> {
 
         const res = await database.executeQuery(`
@@ -78,6 +89,8 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
 class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
 
     async add(obj: TipoEmpleado): Promise<TipoEmpleado> {
+
+
         const res = await database.executeQuery(`
         insert into TipoEmpleado(
             sueldo,nombreTipoEmpleado,horaEntrada,horaSalida
@@ -118,7 +131,6 @@ class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
 
     async findAll(): Promise<TipoEmpleado[]> {
         const res = await database.executeQuery(`select * from TipoEmpleado`)
-        console.log(res)
         if (!res)
             return []
 
@@ -126,6 +138,10 @@ class TipoEmpleadoRepository implements BaseRepository<TipoEmpleado> {
     }
 
     async delete(id: number): Promise<void> {
+        await database.executeQuery(`
+            delete from EmpPrivilegios where idTipoEmpleado = ${id}
+        `)
+
         await database.executeQuery(`
             delete from TipoEmpleado where idTipoEmpleado = ${id}
         `)
@@ -165,6 +181,15 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
             return null
 
         return res[0] as Privilegios
+    }
+
+    async addEmpPrivilegios(idPrivilegio: number, idTipoEmpleado: number): Promise<void> {
+
+        await database.executeQuery(`
+            insert into EmpPrivilegios(idTipoEmpleado,idPrivilegio) values('${idTipoEmpleado}','${idPrivilegio}')
+        `)
+
+
     }
 
     async getPrivilefiosByTipoEmpleadoId(id: number): Promise<Privilegios[]> {

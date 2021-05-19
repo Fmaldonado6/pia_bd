@@ -1,7 +1,7 @@
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { Privilegios, Status, TipoEmpleado } from 'src/app/models/models';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-tipos-empleado',
@@ -14,9 +14,11 @@ export class TiposEmpleadoComponent {
   Status = Status
 
   currentStatus = Status.loaded
-  currentPage = Pages.privilegesPage
+  currentPage = Pages.infoPage
 
   tipoEmpleado = new TipoEmpleado()
+
+  @Output() typeCreated = new EventEmitter()
 
   constructor(
     private dialogRef: MatDialogRef<TiposEmpleadoComponent>,
@@ -41,6 +43,10 @@ export class TiposEmpleadoComponent {
     this.currentStatus = Status.loading
     this.empleadosService.addTipoEmpleado(this.tipoEmpleado).subscribe(e => {
       this.currentStatus = Status.success
+      this.typeCreated.emit()
+      setTimeout(() => {
+        this.close()
+      }, 1500);
     })
   }
 

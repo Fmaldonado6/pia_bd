@@ -1,13 +1,25 @@
-<div class="dialog" [ngSwitch]="currentPage">
-  <tipo-empleados-info
-    *ngSwitchCase="Pages.infoPage"
-    (iconClicked)="close()"
-    (submitForm)="addTipoEmpleadoInfo($event)"
-  ></tipo-empleados-info>
-  <tipo-empleados-privilegios
-    *ngSwitchCase="Pages.privilegesPage"
-    (backClicked)="changePage(Pages.infoPage)"
-    (submitForm)="addPrivilegios($event)"
-  >
-  </tipo-empleados-privilegios>
+<div class="dialog" [ngSwitch]="currentStatus">
+  <ng-container [ngSwitch]="currentPage" *ngSwitchCase="Status.loaded">
+    <tipo-empleados-info
+      *ngSwitchCase="Pages.infoPage"
+      (iconClicked)="close()"
+      (submitForm)="addTipoEmpleadoInfo($event)"
+    ></tipo-empleados-info>
+    <tipo-empleados-privilegios
+      *ngSwitchCase="Pages.privilegesPage"
+      (iconClicked)="changePage(Pages.infoPage)"
+      (submitForm)="addPrivilegios($event)"
+    >
+    </tipo-empleados-privilegios>
+  </ng-container>
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+
+  <div class="status" *ngSwitchCase="Status.success">
+    <info-menu
+      title="Tipo de empleado registrado correctamente"
+      (clickEvent)="close()"
+    ></info-menu>
+  </div>
 </div>

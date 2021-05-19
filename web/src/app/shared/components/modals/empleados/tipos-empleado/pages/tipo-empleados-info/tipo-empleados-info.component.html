@@ -5,12 +5,12 @@
 ></modal-title>
 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
   <mat-form-field appearance="outline">
-    <mat-label>Nombre</mat-label>
-    <input matInput formControlName="nombre" />
+    <mat-label>Nombre del tipo de empleado</mat-label>
+    <input matInput formControlName="nombreTipoEmpleado" />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Salario (mensual)</mat-label>
-    <input matInput formControlName="salario" type="number" />
+    <input matInput formControlName="sueldo" type="number" />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Hora de entrada</mat-label>

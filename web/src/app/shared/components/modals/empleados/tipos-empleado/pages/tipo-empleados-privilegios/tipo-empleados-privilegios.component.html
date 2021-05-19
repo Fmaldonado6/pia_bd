@@ -1,7 +1,8 @@
 <modal-title
   title="Privilegios de Empleado"
+  [type]="HeaderType.goBack"
   subtitle="Seleccione los privilegios del tipo de empleado"
-  (closeClicked)="onIconClick()"
+  (backClicked)="onIconClick()"
 ></modal-title>
 <div class="content">
   <mat-selection-list #privilegiosList>
