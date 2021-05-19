@@ -11,6 +11,9 @@ import { EmployeeInfoComponent } from './components/modals/empleados/crear-emple
 import { ConfirmMenuComponent } from './components/confirm-menu/confirm-menu.component';
 import { EliminarEmpleadoComponent } from './components/modals/empleados/eliminar-empleado/eliminar-empleado.component';
 import { InfoMenuComponent } from './components/info-menu/info-menu.component';
+import { TiposEmpleadoComponent } from './components/modals/empleados/tipos-empleado/tipos-empleado.component';
+import { TipoEmpleadosInfoComponent } from './components/modals/empleados/tipos-empleado/pages/tipo-empleados-info/tipo-empleados-info.component';
+import { TipoEmpleadosPrivilegiosComponent } from './components/modals/empleados/tipos-empleado/pages/tipo-empleados-privilegios/tipo-empleados-privilegios.component';
 
 
 
@@ -25,7 +28,10 @@ import { InfoMenuComponent } from './components/info-menu/info-menu.component';
      EmployeeInfoComponent,
      ConfirmMenuComponent,
      EliminarEmpleadoComponent,
-     InfoMenuComponent
+     InfoMenuComponent,
+     TiposEmpleadoComponent,
+     TipoEmpleadosInfoComponent,
+     TipoEmpleadosPrivilegiosComponent
   ],
   imports: [
     CommonModule,

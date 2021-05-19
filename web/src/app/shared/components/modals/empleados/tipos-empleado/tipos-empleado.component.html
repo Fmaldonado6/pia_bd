@@ -1,0 +1,6 @@
+<div class="dialog" [ngSwitch]="currentPage">
+  <tipo-empleados-info
+    *ngSwitchCase="Pages.infoPage"
+    (iconClicked)="close()"
+  ></tipo-empleados-info>
+</div>

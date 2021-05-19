@@ -4,7 +4,12 @@
       <span>Tipos de Empleados</span>
       <p>Aquí podras gestionar los tipos de empleados registrados.</p>
     </div>
-    <button mat-raised-button color="primary" class="register-button">
+    <button
+      (click)="openRegisterModal()"
+      mat-raised-button
+      color="primary"
+      class="register-button"
+    >
       <mat-icon>add</mat-icon>
       Registrar
     </button>

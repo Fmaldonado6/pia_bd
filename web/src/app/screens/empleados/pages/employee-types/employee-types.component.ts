@@ -1,6 +1,8 @@
+import { MatDialog } from '@angular/material/dialog';
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { Status, TipoEmpleado } from 'src/app/models/models';
 import { Component, OnInit } from '@angular/core';
+import { TiposEmpleadoComponent } from 'src/app/shared/components/modals/empleados/tipos-empleado/tipos-empleado.component';
 
 @Component({
   selector: 'app-employee-types',
@@ -16,7 +18,8 @@ export class EmployeeTypesComponent implements OnInit {
   tipos: TipoEmpleado[] = []
 
   constructor(
-    private empleadosService: EmpleadosService
+    private empleadosService: EmpleadosService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +32,10 @@ export class EmployeeTypesComponent implements OnInit {
       this.currentStatus = Status.loaded
     })
 
+  }
+
+  openRegisterModal() {
+    this.dialog.open(TiposEmpleadoComponent)
   }
 
   openDeleteModal(tipo: TipoEmpleado) {
