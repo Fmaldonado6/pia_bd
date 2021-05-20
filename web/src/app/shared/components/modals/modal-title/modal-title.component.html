@@ -3,14 +3,14 @@
     <mat-icon
       *ngIf="type == HeaderType.goBack"
       class="clickable back"
-      (click)="emitGoBack()"
+      (click)="emitIconClicked()"
       >chevron_left</mat-icon
     >
     <span class="mat-body-2 title">{{ title }}</span>
     <mat-icon
       *ngIf="type == HeaderType.close"
       class="clickable close"
-      (click)="emitClose()"
+      (click)="emitIconClicked()"
       >close</mat-icon
     >
   </div>

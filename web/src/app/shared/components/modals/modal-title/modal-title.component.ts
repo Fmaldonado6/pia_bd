@@ -12,16 +12,11 @@ export class ModalTitleComponent {
   @Input() subtitle: string = "";
   @Input() type = HeaderType.close
 
-  @Output() backClicked = new EventEmitter()
-  @Output() closeClicked = new EventEmitter()
+  @Output() iconClicked = new EventEmitter()
 
 
-  emitGoBack() {
-    this.backClicked.emit()
-  }
-
-  emitClose() {
-    this.closeClicked.emit()
+  emitIconClicked() {
+    this.iconClicked.emit()
   }
 
 }

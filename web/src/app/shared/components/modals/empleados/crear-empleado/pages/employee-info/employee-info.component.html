@@ -1,8 +1,8 @@
 <modal-title
-  title="Registrar Empleado"
+  [title]="edit ?'Editar Empleado':' Registrar Empleado'"
   [type]="HeaderType.goBack"
   subtitle="Ingrese la información personal del empleado"
-  (backClicked)="onIconClick()"
+  (iconClicked)="onIconClick()"
 ></modal-title>
 <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
   <mat-form-field appearance="outline">

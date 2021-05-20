@@ -22,6 +22,7 @@ export class AddressComponent implements OnInit {
   @Output() iconClicked = new EventEmitter()
   @Output() submitForm = new EventEmitter()
   @Input() empleado = new Empleado()
+  @Input() edit = false
 
   constructor(
     private dialogRef: MatDialogRef<CrearEmpleadoComponent>,

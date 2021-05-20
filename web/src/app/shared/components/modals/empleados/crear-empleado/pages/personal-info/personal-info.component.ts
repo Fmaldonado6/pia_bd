@@ -1,3 +1,4 @@
+import { HeaderType } from './../../../../modal-title/modal-title.component';
 import { Empleado } from 'src/app/models/models';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -10,11 +11,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./personal-info.component.scss']
 })
 export class PersonalInfoComponent implements OnInit {
-
+  HeaderType = HeaderType
   formInformacion: FormGroup = new FormGroup({})
   @Output() iconClicked = new EventEmitter()
   @Output() submitForm = new EventEmitter()
   @Input() empleado = new Empleado()
+  @Input() edit = false
 
 
   ngOnInit(): void {

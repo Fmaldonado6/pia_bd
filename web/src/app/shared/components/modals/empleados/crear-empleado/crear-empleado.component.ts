@@ -67,7 +67,15 @@ export class CrearEmpleadoComponent implements OnInit {
     this.empleado.nombreColonia = values.colonia
     this.empleado.nombreCalle = values.calle
     this.empleado.numero = values.numero
-    this.changePage(Pages.employeeInfo)
+
+    if (!this.edit)
+      this.changePage(Pages.employeeInfo)
+    else
+      this.updateUser()
+  }
+
+  updateUser() {
+
   }
 
   addEmployeeInfo(values: EmployeeInfo) {
@@ -78,7 +86,6 @@ export class CrearEmpleadoComponent implements OnInit {
 
   addEmployee() {
     this.currentStatus = Status.loading
-    console.log(this.empleado)
     this.empleadosService.addEmpleado(this.empleado).subscribe(e => {
       this.currentStatus = Status.success
       setTimeout(() => {

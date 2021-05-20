@@ -12,6 +12,7 @@ export class EditarInformacionComponent implements OnInit {
   HeaderType = HeaderType
   @Output() iconClicked = new EventEmitter()
   @Input() empleado = new Empleado()
+  @Input() edit = false
 
   form = new FormGroup({})
 

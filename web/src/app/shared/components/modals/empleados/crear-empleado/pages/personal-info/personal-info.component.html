@@ -1,7 +1,8 @@
 <modal-title
-  title="Registrar Empleado"
+  [type]="edit ? HeaderType.goBack : HeaderType.close"
+  [title]="edit ? 'Editar Empleado' : 'Registrar Empleado'"
   subtitle="Ingrese la información personal del empleado"
-  (closeClicked)="onIconClick()"
+  (iconClicked)="onIconClick()"
 ></modal-title>
 <form
   (ngSubmit)="onSubmit(formInformacion.value)"

@@ -5,15 +5,18 @@
         (submitForm)="addPersonalInfo($event)"
         (iconClicked)="close()"
         [empleado]="empleado"
+        [edit]="edit"
         *ngSwitchCase="Pages.personalInfo"
       ></personal-info>
       <address
         (iconClicked)="changePage(Pages.personalInfo)"
         (submitForm)="addAddress($event)"
+        [edit]="edit"
         *ngSwitchCase="Pages.address"
       ></address>
       <employee-info
         (submitForm)="addEmployeeInfo($event)"
+        [edit]="edit"
         (iconClicked)="changePage(Pages.address)"
         *ngSwitchCase="Pages.employeeInfo"
       >

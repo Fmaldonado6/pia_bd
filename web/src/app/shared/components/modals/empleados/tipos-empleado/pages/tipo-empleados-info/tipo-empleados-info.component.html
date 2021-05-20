@@ -1,7 +1,7 @@
 <modal-title
   title="Registrar Tipo de Empleado"
   subtitle="Ingrese la información del tipo de empleado"
-  (closeClicked)="onIconClick()"
+  (iconClicked)="onIconClick()"
 ></modal-title>
 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
   <mat-form-field appearance="outline">

@@ -29,6 +29,7 @@ export class EmployeeInfoComponent implements OnInit {
   @Output() iconClicked = new EventEmitter()
   @Output() submitForm = new EventEmitter()
   @Input() empleado = new Empleado()
+  @Input() edit = false
 
   tiposEmpleado: TipoEmpleado[] = []
 
