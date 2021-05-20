@@ -9,13 +9,13 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
         insert into Empleado(
             idPais,idEstado,idMunicipio,idColonia,idCalle,
             nombre,telefono,contrasena,fechaNacimiento,
-            idTipoEmpleado,numero
+            idTipoEmpleado,numero,apellidoPaterno,apellidoMaterno
         ) 
         output Inserted.idEmpleado
         values (
             ${obj.idPais},${obj.idEstado},${obj.idMunicipio},${obj.idColonia},${obj.idCalle},
             '${obj.nombre}',${obj.telefono},'${obj.contrasena}',${date.getTime()},
-            ${obj.idTipoEmpleado},${obj.numero}
+            ${obj.idTipoEmpleado},${obj.numero},'${obj.apellidoPaterno}','${obj.apellidoMaterno}'
         )`)
 
         return res!![0]
@@ -76,7 +76,7 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
         update Empleado
             set idPais=${obj.idPais},idEstado = ${obj.idEstado},idMunicipio = ${obj.idMunicipio},idColonia = ${obj.idColonia},idCalle = ${obj.idCalle},
             nombre = '${obj.nombre}',telefono = ${obj.telefono},contrasena = '${obj.contrasena}',fechaNacimiento = ${obj.fechaNacimiento},
-            numero = ${obj.numero},idTipoEmpleado = ${obj.idTipoEmpleado}
+            numero = ${obj.numero},idTipoEmpleado = ${obj.idTipoEmpleado}, apellidoPaterno = '${obj.apellidoPaterno}', apellidoMaterno = '${obj.apellidoMaterno}'
         where idEmpleado = ${obj.idEmpleado}
         
         `)
