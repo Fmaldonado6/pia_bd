@@ -236,9 +236,6 @@ class EmpleadosController extends BaseController {
             if (!oldUserData)
                 return res.sendStatus(404)
 
-            if (oldUserData.contrasena != password.oldPasswrod)
-                return res.sendStatus(403)
-
             oldUserData.contrasena = password.newPassword
 
             await empleadosRepository.update(oldUserData)

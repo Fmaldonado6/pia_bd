@@ -146,7 +146,25 @@ class PedidosController extends BaseController {
             if (!hasPermission)
                 return res.sendStatus(403)
 
+
             const pedido = req.body as Pedido
+
+            const alimentos = await pedidoAlimentoRepository.getPedidosAlimentosByPedidoId(pedido.idPedido)
+
+
+            for (let alimento of pedido.alimentos) {
+                if (alimentos.includes(alimento))
+                    await pedidoAlimentoRepository.update(alimento)
+                else
+                    await pedidoAlimentoRepository.add(alimento)
+            }
+
+            for (let alimento of alimentos) {
+
+                if (!pedido.alimentos.includes(alimento))
+                    await pedidoAlimentoRepository.delete(alimento.idPedido, alimento.idAlimento)
+            }
+
 
             await pedidosRepository.update(pedido);
 
@@ -165,7 +183,7 @@ class PedidosController extends BaseController {
     // async getPedidosAlimentos(req: Request, res: Response) {
     //     try {
 
-       //     res.status(200).json(pedidosAlimentos)
+    //     res.status(200).json(pedidosAlimentos)
 
 
     //     } catch (error) {
