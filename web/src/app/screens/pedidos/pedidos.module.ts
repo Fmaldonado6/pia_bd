@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 
 import { PedidosRoutingModule } from './pedidos-routing.module';
 import { MainComponent } from './pages/main/main.component';
+import { ListaPedidosComponent } from './pages/lista-pedidos/lista-pedidos.component';
 
 
 @NgModule({
   declarations: [
-    MainComponent
+    MainComponent,
+    ListaPedidosComponent
   ],
   imports: [
     CommonModule,
