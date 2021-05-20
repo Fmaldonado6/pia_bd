@@ -7,8 +7,12 @@ class Database {
     sql: SqlClient = require("msnodesqlv8");
     connectionString = "server=.;Database=barDB;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}"
     async connect() {
+        try {
+            await databaseConfiguration.config()
 
-        await databaseConfiguration.config()
+        } catch (error) {
+            console.error(error)
+        }
 
     }
     executeQuery(query: string): Promise<any[] | undefined> {
