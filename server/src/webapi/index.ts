@@ -1,3 +1,4 @@
+import { pedidosController } from './controllers/pedidosController';
 import { alimentosController } from './controllers/alimentosController';
 import { direccionController } from './controllers/direccionController';
 import { empleadosController } from './controllers/empleadosController';
@@ -35,6 +36,7 @@ class Server {
         this.app.use("/privilegios", privilegiosController.router)
         this.app.use("/direcciones", direccionController.router)
         this.app.use("/alimentos", alimentosController.router)
+        this.app.use("/pedidos", pedidosController.router)
 
     }
 
