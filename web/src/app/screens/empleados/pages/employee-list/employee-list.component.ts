@@ -63,12 +63,19 @@ export class EmployeeListComponent implements OnInit {
       }
     })
 
+    dialog.componentInstance.userEdited.subscribe(e => {
+      this.getEmpleados()
+    })
 
   }
 
   openRegisterModal() {
 
     const dialog = this.dialog.open(CrearEmpleadoComponent)
+
+    dialog.componentInstance.userCreated.subscribe(e => {
+      this.getEmpleados()
+    })
 
   }
 

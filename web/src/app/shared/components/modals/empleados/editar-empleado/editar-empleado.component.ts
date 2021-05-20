@@ -1,5 +1,5 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { Status, Empleado } from 'src/app/models/models';
 
 interface ModalData {
@@ -21,6 +21,8 @@ export class EditarEmpleadoComponent implements OnInit {
 
   empleado = new Empleado()
 
+  @Output() userEdited = new EventEmitter()
+
   constructor(
     private dialogRef: MatDialogRef<EditarEmpleadoComponent>,
     @Inject(MAT_DIALOG_DATA) private modalData: ModalData
@@ -33,6 +35,10 @@ export class EditarEmpleadoComponent implements OnInit {
 
   close() {
     this.dialogRef.close()
+  }
+
+  onUserEdited() {
+    this.userEdited.emit()
   }
 
   changePage(page: Pages) {

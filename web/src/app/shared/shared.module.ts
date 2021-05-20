@@ -20,7 +20,6 @@ import { EliminarTipoEmpleadoComponent } from './components/modals/empleados/eli
 import { CrearPedidosComponent } from './components/modals/pedidos/crear-pedidos/crear-pedidos.component';
 import { EditarEmpleadoComponent } from './components/modals/empleados/editar-empleado/editar-empleado.component';
 import { EditarEmpleadoMainComponent } from './components/modals/empleados/editar-empleado/pages/editar-empleado-main/editar-empleado-main.component';
-import { EditarInformacionComponent } from './components/modals/empleados/editar-empleado/pages/editar-informacion/editar-informacion.component';
 
 
 @NgModule({
@@ -42,7 +41,6 @@ import { EditarInformacionComponent } from './components/modals/empleados/editar
     CrearPedidosComponent,
     EditarEmpleadoComponent,
     EditarEmpleadoMainComponent,
-    EditarInformacionComponent
   ],
   imports: [
     CommonModule,

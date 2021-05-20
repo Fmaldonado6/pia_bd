@@ -31,7 +31,7 @@ interface EmployeeInfo {
   templateUrl: './crear-empleado.component.html',
   styleUrls: ['./crear-empleado.component.scss']
 })
-export class CrearEmpleadoComponent implements OnInit {
+export class CrearEmpleadoComponent {
 
   Pages = Pages
   Status = Status
@@ -49,9 +49,7 @@ export class CrearEmpleadoComponent implements OnInit {
     private dialogRef: MatDialogRef<CrearEmpleadoComponent>,
     private empleadosService: EmpleadosService
   ) { }
-  ngOnInit(): void {
-    console.log(this.empleado)
-  }
+
 
   addPersonalInfo(values: PersonalInfoForm) {
     this.empleado.nombre = values.nombre
