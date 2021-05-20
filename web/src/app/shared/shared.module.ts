@@ -19,6 +19,7 @@ import { EliminarTipoEmpleadoComponent } from './components/modals/empleados/eli
 import { CrearPedidosComponent } from './components/modals/pedidos/crear-pedidos/crear-pedidos.component';
 import { EditarEmpleadoComponent } from './components/modals/empleados/editar-empleado/editar-empleado.component';
 import { EditarEmpleadoMainComponent } from './components/modals/empleados/editar-empleado/pages/editar-empleado-main/editar-empleado-main.component';
+import { EditarContrasenaComponent } from './components/modals/empleados/editar-empleado/pages/editar-contrasena/editar-contrasena.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { EditarEmpleadoMainComponent } from './components/modals/empleados/edita
     CrearPedidosComponent,
     EditarEmpleadoComponent,
     EditarEmpleadoMainComponent,
+    EditarContrasenaComponent,
   ],
   imports: [
     CommonModule,

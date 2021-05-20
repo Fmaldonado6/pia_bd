@@ -101,9 +101,14 @@ export class CrearEmpleadoComponent {
     }, 1500);
   }
 
-  close() {
+  clickIcon() {
     if (this.edit)
       return this.iconClicked.emit()
+    this.close()
+  }
+
+  close() {
+
 
     this.dialogRef.close()
   }

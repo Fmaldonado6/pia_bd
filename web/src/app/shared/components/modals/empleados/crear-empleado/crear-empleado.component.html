@@ -3,7 +3,7 @@
     <ng-container [ngSwitch]="currentPage">
       <personal-info
         (submitForm)="addPersonalInfo($event)"
-        (iconClicked)="close()"
+        (iconClicked)="clickIcon()"
         [empleado]="empleado"
         [edit]="edit"
         *ngSwitchCase="Pages.personalInfo"
