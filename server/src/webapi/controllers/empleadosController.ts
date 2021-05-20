@@ -1,3 +1,4 @@
+import { pedidosRepository, pedidoAlimentoRepository } from './../../persistence/repositories/pedidosRepository';
 import { coloniasRepository, callesRepository, paisRepository, estadoRepository, municipioRepository } from './../../persistence/repositories/direcionRepository';
 import { empleadosRepository, tipoEmpleadoRepository, privilegiosRepository } from './../../persistence/repositories/empleadosRepository';
 import { PrivilegiosId, Colonia, Calle, TipoEmpleado } from './../../models/models';
@@ -252,26 +253,23 @@ class EmpleadosController extends BaseController {
         try {
 
             const id = req.idEmpleado
-            const empleado = await empleadosRepository.get(id)
 
-            if (!empleado)
-                return res.sendStatus(403)
+            const hasPermission = await this.hasPermission(id, PrivilegiosId.gestionarUsuarios)
 
-            const privilegios = await privilegiosRepository.getPrivilefiosByTipoEmpleadoId(empleado.idTipoEmpleado)
-
-            let found = false
-
-            for (let privilegio of privilegios) {
-                if (privilegio.idPrivilegio == PrivilegiosId.gestionarUsuarios) {
-                    found = true
-                    break
-                }
-            }
-
-            if (!found)
+            if (!hasPermission)
                 return res.sendStatus(403)
 
             const deleteId = Number.parseInt(req.params.id)
+
+            const pedidos = await pedidosRepository.getPedidosByEmpleadoId(id)
+
+            for (let pedido of pedidos) {
+
+                pedido.idEmpleado = 0
+
+                await pedidosRepository.update(pedido)
+
+            }
 
             await empleadosRepository.delete(deleteId);
 
