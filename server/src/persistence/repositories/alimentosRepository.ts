@@ -1,11 +1,11 @@
 import { database } from './../database';
-import { Alimentos,TipoAlimento,Marca } from './../../models/models';
+import { Alimentos, TipoAlimento, Marca } from './../../models/models';
 import { BaseRepository } from './baseRepository';
-class AlimentosRepository implements BaseRepository<Alimentos> 
+class AlimentosRepository implements BaseRepository<Alimentos>
 {
 
     async add(obj: Alimentos): Promise<Alimentos> {
-     
+
         const res = await database.executeQuery(`
         insert into Alimentos(
             nombre,idMarca, idTipoAlimento,precio, 
@@ -32,6 +32,19 @@ class AlimentosRepository implements BaseRepository<Alimentos>
         return res[0] as Alimentos
 
     }
+
+    async getAlimentosByMarcaId(idMarca: number): Promise<Alimentos[]> {
+
+        const res = await database.executeQuery(`
+            select * from Alimentos where idMarca = ${idMarca}
+        `)
+
+        if (!res)
+            return []
+
+        return res
+    }
+
     async findAll(): Promise<Alimentos[]> {
         const res = await database.executeQuery(`select * from Alimentos`)
 
@@ -89,7 +102,7 @@ class TipoAlimentoRepository implements BaseRepository<TipoAlimento> {
         return res[0] as TipoAlimento
     }
 
-    
+
 
     async findAll(): Promise<TipoAlimento[]> {
         const res = await database.executeQuery(`select * from TipoAlimento`)
@@ -147,7 +160,7 @@ class MarcaRepository implements BaseRepository<Marca> {
         return res[0] as Marca
     }
 
-    
+
 
     async findAll(): Promise<Marca[]> {
         const res = await database.executeQuery(`select * from Marca`)

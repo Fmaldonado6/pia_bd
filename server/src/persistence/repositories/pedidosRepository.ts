@@ -31,6 +31,19 @@ class PedidosRepository implements BaseRepository<Pedido> {
         return res[0] as Pedido
 
     }
+
+    async getPedidosByEmpleadoId(idEmpleado: number): Promise<Pedido[]> {
+
+        const res = await database.executeQuery(`
+        select * from Pedidos where idEmpleado = ${idEmpleado}
+    `)
+
+        if (!res)
+            return []
+
+        return res
+    }
+
     async findAll(): Promise<Pedido[]> {
         const res = await database.executeQuery(`select * from Pedidos`)
 
@@ -112,6 +125,19 @@ class PedidoAlimentoRepository {
 
         return res as PedidoAlimento[]
     }
+
+    async getPedidosAlimentosByAlimentoId(id: number): Promise<PedidoAlimento[]> {
+        const res = await database.executeQuery(`
+        select * from PedidosAlimentos
+        where idAlimento = ${id}
+        `)
+
+        if (!res)
+            return []
+
+        return res as PedidoAlimento[]
+    }
+
 
 
     async delete(idPedido: number, idAlimento: number): Promise<void> {

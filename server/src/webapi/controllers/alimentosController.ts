@@ -1,4 +1,5 @@
-import { alimentosRepository, tipoAlimentoRepository, marcaRepository} from './../../persistence/repositories/alimentosRepository';
+import { pedidoAlimentoRepository } from './../../persistence/repositories/pedidosRepository';
+import { alimentosRepository, tipoAlimentoRepository, marcaRepository } from './../../persistence/repositories/alimentosRepository';
 import { Alimentos, Marca, PrivilegiosId, TipoAlimento } from './../../models/models';
 import { Request, Response } from 'express';
 import { BaseController, CustomRequest } from './baseController';
@@ -17,14 +18,14 @@ class AlimentosController extends BaseController {
         this.router.post("/", this.verifyToken, (req, res) => { this.createAlimento(req as CustomRequest, res) })
         this.router.put("/", this.verifyToken, (req, res) => { this.editAlimento(req as CustomRequest, res) })
         this.router.delete("/:id", this.verifyToken, (req, res) => { this.deleteAlimento(req as CustomRequest, res) })
-        
+
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTiposAlimentos(req, res) })
         this.router.get("/tipos/:id", this.verifyToken, (req, res) => { this.getTipoAlimento(req, res) })
-        this.router.post("/tipos", this.verifyToken, (req, res) =>{ this.createTipoAlimento(req as CustomRequest, res)})
-        this.router.put("/tipos", this.verifyToken, (req, res) => { this.editTipoAlimento(req as CustomRequest, res)})
-        this.router.delete("/tipos/:id", this.verifyToken, (req, res) => { this.deleteTipoAlimento(req as CustomRequest, res)})
+        this.router.post("/tipos", this.verifyToken, (req, res) => { this.createTipoAlimento(req as CustomRequest, res) })
+        this.router.put("/tipos", this.verifyToken, (req, res) => { this.editTipoAlimento(req as CustomRequest, res) })
+        this.router.delete("/tipos/:id", this.verifyToken, (req, res) => { this.deleteTipoAlimento(req as CustomRequest, res) })
 
-        this.router.post("/marcas", this.verifyToken, (req, res) => { this.getMarcas(req, res)})
+        this.router.post("/marcas", this.verifyToken, (req, res) => { this.getMarcas(req, res) })
         this.router.get("/marcas/:id", this.verifyToken, (req, res) => { this.getMarca(req, res) })
         this.router.post("/marcas", this.verifyToken, (req, res) => { this.createMarca(req as CustomRequest, res) })
         this.router.put("/marcas", this.verifyToken, (req, res) => { this.editMarca(req as CustomRequest, res) })
@@ -45,17 +46,17 @@ class AlimentosController extends BaseController {
         }
     }
 
-    async getAlimento(req: Request, res: Response){
-        try{
+    async getAlimento(req: Request, res: Response) {
+        try {
             const idAlimento = Number.parseInt(req.params.id)
             const alimento = await alimentosRepository.get(idAlimento)
 
-            if(!alimento)
-            return res.sendStatus(404)
+            if (!alimento)
+                return res.sendStatus(404)
 
             res.status(200).json(alimento)
-            
-        }catch (error) {
+
+        } catch (error) {
             console.error(error)
             res.sendStatus(500)
         }
@@ -132,13 +133,13 @@ class AlimentosController extends BaseController {
 
         }
     }
-    
+
     async editAlimento(req: CustomRequest, res: Response) {
         try {
 
             const id = req.idEmpleado
             const empleado = await empleadosRepository.get(id)
-            
+
             if (!empleado)
                 return res.sendStatus(403)
 
@@ -156,7 +157,7 @@ class AlimentosController extends BaseController {
             if (!found)
                 return res.sendStatus(403)
 
-            const alimento = req.body as Alimentos    
+            const alimento = req.body as Alimentos
 
             await alimentosRepository.update(alimento);
 
@@ -184,24 +185,24 @@ class AlimentosController extends BaseController {
 
     }
 
-    async getTipoAlimento(req: Request, res: Response){
+    async getTipoAlimento(req: Request, res: Response) {
         try {
             const idTipoAlimento = Number.parseInt(req.params.id)
             const tipoAlimento = await tipoAlimentoRepository.get(idTipoAlimento);
 
-            if(!tipoAlimento)
-            return res.sendStatus(404)
+            if (!tipoAlimento)
+                return res.sendStatus(404)
 
             res.status(200).json(tipoAlimento)
 
         } catch (error) {
             console.error(error)
             res.sendStatus(500)
-            
+
         }
     }
 
-    async createTipoAlimento(req: CustomRequest, res: Response){
+    async createTipoAlimento(req: CustomRequest, res: Response) {
         try {
             const id = req.idEmpleado
             const userInfo = await empleadosRepository.get(id)
@@ -277,7 +278,7 @@ class AlimentosController extends BaseController {
 
             const id = req.idEmpleado
             const empleado = await empleadosRepository.get(id)
-            
+
             if (!empleado)
                 return res.sendStatus(403)
 
@@ -295,7 +296,7 @@ class AlimentosController extends BaseController {
             if (!found)
                 return res.sendStatus(403)
 
-            const tipoAlimento = req.body as TipoAlimento    
+            const tipoAlimento = req.body as TipoAlimento
 
             await tipoAlimentoRepository.update(tipoAlimento);
 
@@ -324,17 +325,17 @@ class AlimentosController extends BaseController {
         }
     }
 
-    async getMarca(req: Request, res: Response){
-        try{
+    async getMarca(req: Request, res: Response) {
+        try {
             const idMarca = Number.parseInt(req.params.id)
             const marca = await marcaRepository.get(idMarca)
 
-            if(!marca)
-            return res.sendStatus(404)
+            if (!marca)
+                return res.sendStatus(404)
 
             res.status(200).json(marca)
-            
-        }catch (error) {
+
+        } catch (error) {
             console.error(error)
             res.sendStatus(500)
         }
@@ -398,9 +399,22 @@ class AlimentosController extends BaseController {
             if (!found)
                 return res.sendStatus(403)
 
-            const deleteId = Number.parseInt(req.params.id)
+            const marcaId = Number.parseInt(req.params.id)
 
-            await marcaRepository.delete(deleteId);
+            const alimentos = await alimentosRepository.getAlimentosByMarcaId(marcaId)
+
+            for (let alimento of alimentos) {
+
+                const pedidos = await pedidoAlimentoRepository.getPedidosAlimentosByAlimentoId(alimento.idAlimento)
+
+                for (let pedido of pedidos) {
+                    await pedidoAlimentoRepository.delete(pedido.idPedido, pedido.idAlimento)
+                }
+
+                await alimentosRepository.delete(alimento.idAlimento)
+            }
+
+            await marcaRepository.delete(marcaId);
 
             res.status(200).json()
 
@@ -411,13 +425,13 @@ class AlimentosController extends BaseController {
 
         }
     }
-    
+
     async editMarca(req: CustomRequest, res: Response) {
         try {
 
             const id = req.idEmpleado
             const empleado = await empleadosRepository.get(id)
-            
+
             if (!empleado)
                 return res.sendStatus(403)
 
@@ -435,7 +449,7 @@ class AlimentosController extends BaseController {
             if (!found)
                 return res.sendStatus(403)
 
-            const marca = req.body as Marca    
+            const marca = req.body as Marca
 
             await marcaRepository.update(marca);
 
