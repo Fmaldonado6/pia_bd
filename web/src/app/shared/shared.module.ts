@@ -18,6 +18,9 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { EliminarTipoEmpleadoComponent } from './components/modals/empleados/eliminar-tipo-empleado/eliminar-tipo-empleado.component';
 // import { PedidosComponent } from './components/modals/pedidos/pedidos.component';
 import { CrearPedidosComponent } from './components/modals/pedidos/crear-pedidos/crear-pedidos.component';
+import { EditarEmpleadoComponent } from './components/modals/empleados/editar-empleado/editar-empleado.component';
+import { EditarEmpleadoMainComponent } from './components/modals/empleados/editar-empleado/pages/editar-empleado-main/editar-empleado-main.component';
+import { EditarInformacionComponent } from './components/modals/empleados/editar-empleado/pages/editar-informacion/editar-informacion.component';
 
 
 @NgModule({
@@ -36,7 +39,10 @@ import { CrearPedidosComponent } from './components/modals/pedidos/crear-pedidos
     TipoEmpleadosInfoComponent,
     TipoEmpleadosPrivilegiosComponent,
     EliminarTipoEmpleadoComponent,
-    CrearPedidosComponent
+    CrearPedidosComponent,
+    EditarEmpleadoComponent,
+    EditarEmpleadoMainComponent,
+    EditarInformacionComponent
   ],
   imports: [
     CommonModule,

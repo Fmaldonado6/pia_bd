@@ -83,8 +83,8 @@ if object_id('EmpPrivilegios','U') is null create table EmpPrivilegios
 if object_id('Empleado','U') is null create table Empleado
 (
     nombre varchar(200) not null,
-    apellidoPaterno varchar(200) not null,
-    apellidoMaterno varchar(200) not null,
+    apellidoPaterno varchar(200) ,
+    apellidoMaterno varchar(200) ,
     telefono Bigint,
     contrasena varchar(200) not null,
     fechaNacimiento Bigint ,

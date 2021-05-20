@@ -1,0 +1,26 @@
+<modal-title
+  [type]="HeaderType.goBack"
+  title="Editar Información"
+  subtitle="Edite los datos del empleado"
+  (backClicked)="onIconClick()"
+>
+</modal-title>
+<form>
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Apellido paterno</mat-label>
+    <input matInput formControlName="apellidoPaterno" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Apellido materno</mat-label>
+    <input matInput formControlName="apellidoMaterno" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Telefono</mat-label>
+    <input matInput formControlName="telefono" />
+  </mat-form-field>
+  <button mat-raised-button color="primary">ACTUALIZAR</button>
+</form>

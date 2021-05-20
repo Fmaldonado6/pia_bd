@@ -33,7 +33,7 @@
     <button mat-menu-item routerLink="/empleados/{{ empleado.idEmpleado }}">
       Ver más
     </button>
-    <button mat-menu-item>Editar</button>
+    <button mat-menu-item (click)="openEditModal(empleado)">Editar</button>
     <button mat-menu-item (click)="openDeleteModal(empleado)">Eliminar</button>
   </ng-template>
 </mat-menu>

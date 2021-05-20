@@ -1,6 +1,8 @@
 export class Empleado {
     idEmpleado: number = 0
     nombre: string = ""
+    apellidoPaterno: string = ""
+    apellidoMaterno: string = ""
     telefono: string = ""
     idPais: number = 0
     idMunicipio: number = 0

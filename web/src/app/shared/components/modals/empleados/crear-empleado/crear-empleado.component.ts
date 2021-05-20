@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Empleado, Estado, Municipio, Pais, Status } from 'src/app/models/models';
 import { DireccionesService } from 'src/app/services/direcciones/direcciones.service';
@@ -27,11 +27,11 @@ interface EmployeeInfo {
 }
 
 @Component({
-  selector: 'app-crear-empleado',
+  selector: 'crear-empleado',
   templateUrl: './crear-empleado.component.html',
   styleUrls: ['./crear-empleado.component.scss']
 })
-export class CrearEmpleadoComponent {
+export class CrearEmpleadoComponent implements OnInit {
 
   Pages = Pages
   Status = Status
@@ -39,16 +39,23 @@ export class CrearEmpleadoComponent {
   currentPage = Pages.personalInfo
   currentStatus = Status.loaded
 
-  empleado = new Empleado()
+  @Input() empleado = new Empleado()
+  @Input() edit = false
 
+  @Output() iconClicked = new EventEmitter()
 
   constructor(
     private dialogRef: MatDialogRef<CrearEmpleadoComponent>,
     private empleadosService: EmpleadosService
   ) { }
+  ngOnInit(): void {
+    console.log(this.empleado)
+  }
 
   addPersonalInfo(values: PersonalInfoForm) {
-    this.empleado.nombre = `${values.nombre} ${values.apellidoPaterno} ${values.apellidoMaterno}`
+    this.empleado.nombre = values.nombre
+    this.empleado.apellidoMaterno = values.apellidoMaterno
+    this.empleado.apellidoPaterno = values.apellidoPaterno
     this.empleado.telefono = values.telefono
     this.changePage(Pages.address)
   }
@@ -81,6 +88,9 @@ export class CrearEmpleadoComponent {
   }
 
   close() {
+    if (this.edit)
+      return this.iconClicked.emit()
+
     this.dialogRef.close()
   }
 

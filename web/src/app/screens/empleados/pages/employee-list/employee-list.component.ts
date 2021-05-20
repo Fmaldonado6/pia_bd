@@ -1,3 +1,4 @@
+import { EditarEmpleadoComponent } from './../../../../shared/components/modals/empleados/editar-empleado/editar-empleado.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { Empleado, Status } from 'src/app/models/models';
@@ -24,6 +25,7 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmpleados()
+    this.openEditModal(new Empleado())
   }
 
   getEmpleados() {
@@ -45,6 +47,16 @@ export class EmployeeListComponent implements OnInit {
     dialog.componentInstance.empleadoEliminado.subscribe(e => {
       this.getEmpleados()
     })
+  }
+
+  openEditModal(empleado: Empleado) {
+    console.log(empleado)
+    const dialog = this.dialog.open(EditarEmpleadoComponent, {
+      data: {
+        empleado: empleado
+      }
+    })
+
   }
 
 }

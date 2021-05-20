@@ -1,0 +1,17 @@
+<modal-title
+  title="Editar Empleado"
+  subtitle="Seleccione la opción que quiera editar"
+  (closeClicked)="onIconClick()"
+>
+</modal-title>
+<mat-list>
+  <mat-list-item mat-ripple (click)="onTileClicked(Pages.editInfo)">
+    <mat-icon mat-list-icon>account_circle</mat-icon>
+    <div mat-line>Editar información</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item mat-ripple (click)="onTileClicked(Pages.changePassword)">
+    <mat-icon mat-list-icon>vpn_key</mat-icon>
+    <div mat-line>Cambiar contraseña</div>
+  </mat-list-item>
+</mat-list>
