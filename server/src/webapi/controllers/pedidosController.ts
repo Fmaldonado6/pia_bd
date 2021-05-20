@@ -1,9 +1,9 @@
-import { PrivilegiosId } from './../../../../web/src/app/models/models';
 import { pedidosRepository, pedidoAlimentoRepository} from './../../persistence/repositories/pedidosRepository';
-import { Pedido, PedidoAlimento } from './../../models/models';
+import { Pedido, PedidoAlimento, PrivilegiosId } from './../../models/models';
 import { Request, Response } from 'express';
 import { BaseController, CustomRequest } from './baseController';
-import { empleadosRepository, privilegiosRepository } from '../../persistence/repositories/empleadosRepository';
+import { alimentosRepository } from '../../persistence/repositories/alimentosRepository';
+
 class PedidosController extends BaseController {
 
     constructor() {
@@ -20,10 +20,9 @@ class PedidosController extends BaseController {
         this.router.delete("/:id", this.verifyToken, (req, res) => { this.deletePedido(req as CustomRequest, res) })
 
         this.router.get("/pedido_alimento/:id", this.verifyToken, (req, res) => { this.getPedidosAlimentos(req, res) })
-        this.router.get("/pedido_alimento/:id", this.verifyToken, (req, res) => { this.getPedidoAlimento(req, res) })
-        this.router.post("/pedido_alimento/create", this.verifyToken, (req, res) => { this.createPedidoAlimento(req as CustomRequest, res) })
+        this.router.post("/pedido_alimento/create", this.verifyToken, (req, res) => { this.createPedidoAlimentos(req as CustomRequest, res) })
         this.router.put("/pedido_alimento/edit", this.verifyToken, (req, res) => { this.editPedidoAlimento(req as CustomRequest, res) })
-        this.router.delete("/pedido_alimento/:id", this.verifyToken, (req, res) => { this.deletePedidoAlimento(req as CustomRequest, res) })
+        this.router.delete("/pedido_alimento/:idPedido/:idAlimento", this.verifyToken, (req, res) => { this.deletePedidoAlimento(req as CustomRequest, res) })
     }
 
     //----------------------------------------PEDIDOS-----------------------------------------------------------
@@ -40,7 +39,7 @@ class PedidosController extends BaseController {
         }
     }
 
-    async getPedido(req: CustomRequest, res: Response){
+    async getPedido(req: Request, res: Response){
         try{
             const idPedido = Number.parseInt(req.params.id)
             const pedido = await pedidosRepository.get(idPedido)
@@ -127,10 +126,17 @@ class PedidosController extends BaseController {
 
     async getPedidosAlimentos(req: Request, res: Response) {
         try {
+            const idPedido = Number.parseInt(req.params.id)
 
-            const pedidosAlimentos = await pedidoAlimentoRepository.getPedidosAlimentosByPedidoId(idPedidoAlimento)
+            const pedidosAlimentos = await pedidoAlimentoRepository.getPedidosAlimentosByPedidoId(idPedido)
 
-            res.status(200).json(pedidos)
+            for (let detalle of pedidosAlimentos){
+                const alimento = await alimentosRepository.get(detalle.idAlimento)
+                if(alimento)
+                detalle.alimento = alimento
+            }
+
+            res.status(200).json(pedidosAlimentos)
 
         } catch (error) {
             console.error(error)
@@ -138,23 +144,9 @@ class PedidosController extends BaseController {
         }
     }
 
-    async getPedidoAlimento(req: CustomRequest, res: Response){
-        try{
-            const idPedido = Number.parseInt(req.params.id)
-            const pedido = await pedidosRepository.get(idPedido)
 
-            if(!pedido)
-            return res.sendStatus(404)
 
-            res.status(200).json(pedido)
-            
-        }catch (error) {
-            console.error(error)
-            res.sendStatus(500)
-        }
-    }
-
-    async createPedidoAlimento(req: CustomRequest, res: Response) {
+    async createPedidoAlimentos(req: CustomRequest, res: Response) {
         try {
             const id = req.idEmpleado
             const hasPermission = await this.hasPermission(id, PrivilegiosId.gestionarPedidos)
@@ -162,11 +154,11 @@ class PedidosController extends BaseController {
             if (!hasPermission)
                 return res.sendStatus(403)
 
-            const pedido = req.body as Pedido
+            const pedidoAlimentos = req.body as PedidoAlimento[]
 
-            await pedidosRepository.add(pedido)
+            await pedidoAlimentoRepository.addAllPedidoAlimento(pedidoAlimentos)
 
-            res.status(200).json(pedido)
+            res.status(200).json(pedidoAlimentos)
 
         } catch (error) {
             console.error(error)
@@ -184,9 +176,10 @@ class PedidosController extends BaseController {
             if (!hasPermission)
                 return res.sendStatus(403)
 
-            const deleteId = Number.parseInt(req.params.id)
+            const idPedido = Number.parseInt(req.params.idPedido)
+            const idAlimento = Number.parseInt(req.params.idAlimento)
 
-            await pedidosRepository.delete(deleteId);
+            await pedidoAlimentoRepository.delete(idPedido,idAlimento);
 
             res.status(200).json()
 
@@ -207,9 +200,9 @@ class PedidosController extends BaseController {
             if (!hasPermission)
                 return res.sendStatus(403)
 
-            const pedido = req.body as Pedido    
+            const pedidoAlimento = req.body as PedidoAlimento   
 
-            await pedidosRepository.update(pedido);
+            await pedidoAlimentoRepository.update(pedidoAlimento);
 
             res.status(200).json()
 
