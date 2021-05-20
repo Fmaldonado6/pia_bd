@@ -29,8 +29,7 @@ export class EditarEmpleadoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.empleado = this.modalData.empleado
-    console.log(this.empleado)
+    Object.assign(this.empleado, this.modalData.empleado)
   }
 
   close() {
