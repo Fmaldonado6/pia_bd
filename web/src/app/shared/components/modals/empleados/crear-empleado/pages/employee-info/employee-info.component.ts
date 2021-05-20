@@ -31,7 +31,7 @@ export class EmployeeInfoComponent implements OnInit {
   @Input() empleado = new Empleado()
   @Input() edit = false
 
-  tiposEmpleado: TipoEmpleado[] = []
+
 
   matcher = new MyErrorStateMatcher();
 
@@ -39,22 +39,12 @@ export class EmployeeInfoComponent implements OnInit {
   form: FormGroup = new FormGroup({})
 
   constructor(
-    private empleadosService: EmpleadosService,
     private snackBar: MatSnackBar
-  ) {
-
-  }
-
-
+  ) { }
 
   ngOnInit(): void {
-    this.getTiposEmpleados()
     this.form = new FormGroup({
-      tipoEmpleado: new FormControl(this.empleado.idTipoEmpleado, {
-        validators: [
-          Validators.required
-        ]
-      }),
+
       contrasena: new FormControl(this.empleado.contrasena, {
         validators: [
           Validators.required
@@ -76,11 +66,6 @@ export class EmployeeInfoComponent implements OnInit {
   }
 
 
-  getTiposEmpleados() {
-    this.empleadosService.getTiposEmpleados().subscribe(e => {
-      this.tiposEmpleado = e
-    })
-  }
 
 
   onIconClick() {

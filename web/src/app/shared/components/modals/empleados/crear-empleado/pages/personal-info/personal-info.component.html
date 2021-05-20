@@ -9,6 +9,19 @@
   [formGroup]="formInformacion"
 >
   <mat-form-field appearance="outline">
+    <mat-label>Tipo de empleado</mat-label>
+    <mat-select
+      [disabled]="tiposEmpleado.length == 0"
+      formControlName="tipoEmpleado"
+    >
+      <mat-option
+        *ngFor="let tipo of tiposEmpleado"
+        [value]="tipo.idTipoEmpleado"
+        >{{ tipo.nombreTipoEmpleado }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Nombre</mat-label>
     <input matInput formControlName="nombre" />
   </mat-form-field>

@@ -1,7 +1,8 @@
 import { HeaderType } from './../../../../modal-title/modal-title.component';
-import { Empleado } from 'src/app/models/models';
+import { Empleado, TipoEmpleado } from 'src/app/models/models';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 
 
 
@@ -18,21 +19,32 @@ export class PersonalInfoComponent implements OnInit {
   @Input() empleado = new Empleado()
   @Input() edit = false
 
+  tiposEmpleado: TipoEmpleado[] = []
+
+  constructor(
+    private empleadosService: EmpleadosService,
+  ) { }
 
   ngOnInit(): void {
-    const nombre = this.empleado.nombre.split(" ")
+    this.getTiposEmpleados()
+
     this.formInformacion = new FormGroup({
-      nombre: new FormControl(nombre[0], {
+      tipoEmpleado: new FormControl(this.empleado.idTipoEmpleado, {
         validators: [
           Validators.required
         ]
       }),
-      apellidoPaterno: new FormControl(nombre[1], {
+      nombre: new FormControl(this.empleado.nombre, {
         validators: [
           Validators.required
         ]
       }),
-      apellidoMaterno: new FormControl(nombre[2], {
+      apellidoPaterno: new FormControl(this.empleado.apellidoPaterno, {
+        validators: [
+          Validators.required
+        ]
+      }),
+      apellidoMaterno: new FormControl(this.empleado.apellidoMaterno, {
         validators: [
           Validators.required
         ]
@@ -43,6 +55,13 @@ export class PersonalInfoComponent implements OnInit {
         ]
       }),
 
+    })
+  }
+
+
+  getTiposEmpleados() {
+    this.empleadosService.getTiposEmpleados().subscribe(e => {
+      this.tiposEmpleado = e
     })
   }
 

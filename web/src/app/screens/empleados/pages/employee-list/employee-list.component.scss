@@ -60,3 +60,15 @@
     margin-left: auto;
   }
 }
+
+.register-button {
+  margin-bottom: 20px;
+  display: flex;
+  padding-right: 30px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  margin-left: auto;
+  mat-icon {
+    transform: scale(0.75);
+  }
+}

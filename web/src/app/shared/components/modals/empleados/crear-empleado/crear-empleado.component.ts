@@ -10,6 +10,7 @@ interface PersonalInfoForm {
   apellidoPaterno: string
   apellidoMaterno: string
   telefono: string
+  tipoEmpleado: number
 }
 
 interface AddressForm {
@@ -22,8 +23,7 @@ interface AddressForm {
 }
 
 interface EmployeeInfo {
-  password: string
-  tipoEmpleado: number
+  contrasena: string
 }
 
 @Component({
@@ -43,6 +43,7 @@ export class CrearEmpleadoComponent implements OnInit {
   @Input() edit = false
 
   @Output() iconClicked = new EventEmitter()
+  @Output() userCreated = new EventEmitter()
 
   constructor(
     private dialogRef: MatDialogRef<CrearEmpleadoComponent>,
@@ -57,6 +58,7 @@ export class CrearEmpleadoComponent implements OnInit {
     this.empleado.apellidoMaterno = values.apellidoMaterno
     this.empleado.apellidoPaterno = values.apellidoPaterno
     this.empleado.telefono = values.telefono
+    this.empleado.idTipoEmpleado = values.tipoEmpleado
     this.changePage(Pages.address)
   }
 
@@ -75,23 +77,30 @@ export class CrearEmpleadoComponent implements OnInit {
   }
 
   updateUser() {
-
+    this.currentStatus = Status.loading
+    this.empleadosService.updateEmpleado(this.empleado).subscribe(e => {
+      this.success()
+    })
   }
 
   addEmployeeInfo(values: EmployeeInfo) {
-    this.empleado.idTipoEmpleado = values.tipoEmpleado
-    this.empleado.contrasena = values.password
+    this.empleado.contrasena = values.contrasena
     this.addEmployee()
   }
 
   addEmployee() {
     this.currentStatus = Status.loading
     this.empleadosService.addEmpleado(this.empleado).subscribe(e => {
-      this.currentStatus = Status.success
-      setTimeout(() => {
-        this.dialogRef.close()
-      }, 1500);
+      this.success()
     })
+  }
+
+  success() {
+    this.currentStatus = Status.success
+    this.userCreated.emit()
+    setTimeout(() => {
+      this.dialogRef.close()
+    }, 1500);
   }
 
   close() {
@@ -102,7 +111,6 @@ export class CrearEmpleadoComponent implements OnInit {
   }
 
   changePage(page: Pages) {
-    console.log(this.empleado)
     this.currentPage = page
   }
 }

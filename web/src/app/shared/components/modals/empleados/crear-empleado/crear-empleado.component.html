@@ -11,12 +11,14 @@
       <address
         (iconClicked)="changePage(Pages.personalInfo)"
         (submitForm)="addAddress($event)"
+        [empleado]="empleado"
         [edit]="edit"
         *ngSwitchCase="Pages.address"
       ></address>
       <employee-info
         (submitForm)="addEmployeeInfo($event)"
         [edit]="edit"
+        [empleado]="empleado"
         (iconClicked)="changePage(Pages.address)"
         *ngSwitchCase="Pages.employeeInfo"
       >

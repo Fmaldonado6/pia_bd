@@ -36,6 +36,13 @@ export class AddressComponent implements OnInit {
   ngOnInit(): void {
     this.getPaises()
 
+    if (!this.empleado.nombreCalle && this.empleado.idCalle)
+      this.getCalle(this.empleado.idCalle)
+
+
+    if (!this.empleado.nombreColonia && this.empleado.idColonia)
+      this.getColonia(this.empleado.idColonia)
+
     this.formDireccion = new FormGroup({
 
       pais: new FormControl(this.empleado.idPais, {
@@ -72,7 +79,6 @@ export class AddressComponent implements OnInit {
   }
 
   onSubmit(values: any) {
-    console.log(values)
     this.submitForm.emit(values)
 
   }
@@ -81,20 +87,37 @@ export class AddressComponent implements OnInit {
   getPaises() {
     this.direccionesService.getPaises().subscribe(e => {
       this.paises = e
+      this.formDireccion.patchValue({ pais: this.empleado.idPais })
     })
   }
 
   getEstados(id: number) {
     this.direccionesService.getEstados(id).subscribe(e => {
-      console.log(e)
       this.estados = e
+      this.formDireccion.patchValue({ estado: this.empleado.idEstado })
+
     })
   }
 
   getMunicipios(id: number) {
     this.direccionesService.getMunicipios(id).subscribe(e => {
-      console.log(e)
       this.municipios = e
+      this.formDireccion.patchValue({ municipio: this.empleado.idMunicipio })
+
+    })
+  }
+
+  getColonia(id: number) {
+    this.direccionesService.getColonia(id).subscribe(e => {
+      this.formDireccion.patchValue({ colonia: e.nombre })
+
+    })
+  }
+
+  getCalle(id: number) {
+    this.direccionesService.getCalle(id).subscribe(e => {
+      this.formDireccion.patchValue({ calle: e.nombre })
+
     })
   }
 

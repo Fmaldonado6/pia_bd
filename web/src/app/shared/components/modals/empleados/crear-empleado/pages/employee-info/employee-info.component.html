@@ -1,23 +1,10 @@
 <modal-title
-  [title]="edit ?'Editar Empleado':' Registrar Empleado'"
+  [title]="edit ? 'Editar Empleado' : ' Registrar Empleado'"
   [type]="HeaderType.goBack"
   subtitle="Ingrese la información personal del empleado"
   (iconClicked)="onIconClick()"
 ></modal-title>
 <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
-  <mat-form-field appearance="outline">
-    <mat-label>Tipo de empleado</mat-label>
-    <mat-select
-      [disabled]="tiposEmpleado.length == 0"
-      formControlName="tipoEmpleado"
-    >
-      <mat-option
-        *ngFor="let tipo of tiposEmpleado"
-        [value]="tipo.idTipoEmpleado"
-        >{{ tipo.nombreTipoEmpleado }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Contraseña</mat-label>
     <input matInput type="password" formControlName="contrasena" />

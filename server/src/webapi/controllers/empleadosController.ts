@@ -20,11 +20,11 @@ class EmpleadosController extends BaseController {
         this.router.put("/password", this.verifyToken, (req, res) => { this.updatePassword(req as CustomRequest, res) })
 
         this.router.get("/info", this.verifyToken, (req, res) => { this.getMyInfo(req as CustomRequest, res) })
-        
+
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTipoEmpleados(req, res) })
         this.router.post("/tipos", this.verifyToken, (req, res) => { this.addTipoEmpleado(req as CustomRequest, res) })
         this.router.delete("/tipos/:id", this.verifyToken, (req, res) => { this.deleteTipoEmpleado(req as CustomRequest, res) })
-        
+
         this.router.get("/:id", this.verifyToken, (req, res) => { this.getEmpleado(req as CustomRequest, res) })
         this.router.delete("/:id", this.verifyToken, (req, res) => { this.deleteEmpleado(req as CustomRequest, res) })
 
@@ -261,7 +261,7 @@ class EmpleadosController extends BaseController {
             const updateUser = req.body as Empleado
             const hasPermission = await this.hasPermission(id, PrivilegiosId.gestionarUsuarios)
 
-            if (!hasPermission)
+            if (!hasPermission && updateUser.idEmpleado != id)
                 return res.sendStatus(403)
 
             const oldUserData = await empleadosRepository.get(updateUser.idEmpleado)

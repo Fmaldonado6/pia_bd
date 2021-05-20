@@ -102,7 +102,7 @@ if object_id('Empleado','U') is null create table Empleado
     constraint fkEmpleadoColonia foreign key (idColonia) references Colonia(idColonia),
     idCalle int ,
     constraint fkEmpleadoCalle foreign key (idCalle) references Calle(idCalle),
-    numero tinyInt
+    numero int
 )
 
 if object_id('Marca','U') is null create table Marca
