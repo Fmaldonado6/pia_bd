@@ -1,9 +1,10 @@
 import { alimentosRepository } from './../../persistence/repositories/alimentosRepository';
 import { pedidosRepository, pedidoAlimentoRepository } from './../../persistence/repositories/pedidosRepository';
+
 import { Pedido, PedidoAlimento, PrivilegiosId } from './../../models/models';
 import { Request, Response } from 'express';
 import { BaseController, CustomRequest } from './baseController';
-import { empleadosRepository, privilegiosRepository } from '../../persistence/repositories/empleadosRepository';
+
 class PedidosController extends BaseController {
 
     constructor() {
@@ -18,7 +19,6 @@ class PedidosController extends BaseController {
         this.router.post("/", this.verifyToken, (req, res) => { this.createPedido(req as CustomRequest, res) })
         this.router.put("/", this.verifyToken, (req, res) => { this.editPedido(req as CustomRequest, res) })
         this.router.delete("/:id", this.verifyToken, (req, res) => { this.deletePedido(req as CustomRequest, res) })
-
 
     }
 
@@ -43,6 +43,7 @@ class PedidosController extends BaseController {
             res.sendStatus(500)
         }
     }
+
 
     async getPedido(req: CustomRequest, res: Response) {
         try {
@@ -164,6 +165,7 @@ class PedidosController extends BaseController {
     // async getPedidosAlimentos(req: Request, res: Response) {
     //     try {
 
+       //     res.status(200).json(pedidosAlimentos)
 
 
     //     } catch (error) {
