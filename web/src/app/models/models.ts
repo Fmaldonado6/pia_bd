@@ -147,7 +147,8 @@ export interface SectionCard {
     title: string
     icon: string
     description: string
-    action: string
+    action: string,
+    onClick: Function
 }
 
 

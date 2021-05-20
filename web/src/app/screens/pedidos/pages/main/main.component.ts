@@ -16,7 +16,9 @@ export class MainComponent implements OnInit {
       title: "Crear",
       icon: "monetization_on",
       description: "Registra un nuevo pedido",
-      action: "Crear"
+      action: "Crear",
+      onClick: () => { this.changePage("/pedidos") }
+
     },
 
   ]
@@ -29,8 +31,11 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  changePage(route: string) {
+    this.router.navigate([route])
+  }
 
-  openRegisterModal(){
+  openRegisterModal() {
     this.dialog.open(CrearPedidosComponent)
   }
 
