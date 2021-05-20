@@ -1,5 +1,9 @@
+import { CrearPedidosComponent } from './../../../../shared/components/modals/pedidos/crear-pedidos/crear-pedidos.component';
 import { Component, OnInit } from '@angular/core';
 import { SectionCard } from 'src/app/models/models';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-main',
@@ -14,11 +18,20 @@ export class MainComponent implements OnInit {
       description: "Registra un nuevo pedido",
       action: "Crear"
     },
-    
+
   ]
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+    private router: Router
+
+  ) { }
 
   ngOnInit(): void {
+  }
+
+
+  openRegisterModal(){
+    this.dialog.open(CrearPedidosComponent)
   }
 
 }
