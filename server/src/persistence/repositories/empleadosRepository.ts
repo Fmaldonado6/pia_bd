@@ -76,7 +76,7 @@ class EmpleadosRepository implements BaseRepository<Empleado> {
         update Empleado
             set idPais=${obj.idPais},idEstado = ${obj.idEstado},idMunicipio = ${obj.idMunicipio},idColonia = ${obj.idColonia},idCalle = ${obj.idCalle},
             nombre = '${obj.nombre}',telefono = ${obj.telefono},contrasena = '${obj.contrasena}',fechaNacimiento = ${obj.fechaNacimiento},
-            numero = ${obj.numero}
+            numero = ${obj.numero},idTipoEmpleado = ${obj.idTipoEmpleado}
         where idEmpleado = ${obj.idEmpleado}
         
         `)
