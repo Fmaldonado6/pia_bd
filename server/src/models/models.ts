@@ -140,3 +140,9 @@ export enum PrivilegiosId {
     gestionarFacturas,
     gestionarTipoEmpleado,
 }
+
+export interface PasswordResponse {
+    oldPasswrod: string
+    newPassword: string
+    idEmpleado: number
+}

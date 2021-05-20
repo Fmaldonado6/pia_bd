@@ -1,8 +1,8 @@
 import { pedidosRepository, pedidoAlimentoRepository } from './../../persistence/repositories/pedidosRepository';
 import { coloniasRepository, callesRepository, paisRepository, estadoRepository, municipioRepository } from './../../persistence/repositories/direcionRepository';
 import { empleadosRepository, tipoEmpleadoRepository, privilegiosRepository } from './../../persistence/repositories/empleadosRepository';
-import { PrivilegiosId, Colonia, Calle, TipoEmpleado } from './../../models/models';
-import { Request, Response } from 'express';
+import { PrivilegiosId, Colonia, Calle, TipoEmpleado, PasswordResponse } from './../../models/models';
+import { json, Request, Response } from 'express';
 import { Empleado } from '../../models/models';
 import { BaseController, CustomRequest } from './baseController';
 class EmpleadosController extends BaseController {
@@ -16,12 +16,18 @@ class EmpleadosController extends BaseController {
 
         this.router.post("/", this.verifyToken, (req, res) => { this.createEmpleado(req as CustomRequest, res) })
         this.router.get("/", this.verifyToken, (req, res) => { this.getEmpleados(req, res) })
+        this.router.put("/", this.verifyToken, (req, res) => { this.updateUser(req as CustomRequest, res) })
+        this.router.put("/password", this.verifyToken, (req, res) => { this.updatePassword(req as CustomRequest, res) })
+
         this.router.get("/info", this.verifyToken, (req, res) => { this.getMyInfo(req as CustomRequest, res) })
+        
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTipoEmpleados(req, res) })
         this.router.post("/tipos", this.verifyToken, (req, res) => { this.addTipoEmpleado(req as CustomRequest, res) })
         this.router.delete("/tipos/:id", this.verifyToken, (req, res) => { this.deleteTipoEmpleado(req as CustomRequest, res) })
+        
         this.router.get("/:id", this.verifyToken, (req, res) => { this.getEmpleado(req as CustomRequest, res) })
         this.router.delete("/:id", this.verifyToken, (req, res) => { this.deleteEmpleado(req as CustomRequest, res) })
+
 
 
     }
@@ -207,6 +213,67 @@ class EmpleadosController extends BaseController {
             }
 
             res.status(200).json({})
+
+
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
+
+    }
+
+    async updatePassword(req: CustomRequest, res: Response) {
+        try {
+            const id = req.idEmpleado
+            const password = req.body as PasswordResponse
+            const hasPermission = await this.hasPermission(id, PrivilegiosId.gestionarUsuarios)
+
+            if (!hasPermission && password.idEmpleado != id)
+                return res.sendStatus(403)
+
+            const oldUserData = await empleadosRepository.get(password.idEmpleado)
+
+            if (!oldUserData)
+                return res.sendStatus(404)
+
+            if (oldUserData.contrasena != password.oldPasswrod)
+                return res.sendStatus(403)
+
+            oldUserData.contrasena = password.newPassword
+
+            await empleadosRepository.update(oldUserData)
+
+            oldUserData.contrasena = ""
+
+            res.status(200).json(oldUserData)
+
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
+    }
+
+    async updateUser(req: CustomRequest, res: Response) {
+
+        try {
+
+            const id = req.idEmpleado
+            const updateUser = req.body as Empleado
+            const hasPermission = await this.hasPermission(id, PrivilegiosId.gestionarUsuarios)
+
+            if (!hasPermission)
+                return res.sendStatus(403)
+
+            const oldUserData = await empleadosRepository.get(updateUser.idEmpleado)
+
+            if (!oldUserData)
+                return res.sendStatus(404)
+
+            updateUser.contrasena = oldUserData.contrasena
+
+            await empleadosRepository.update(updateUser)
+
+            res.status(200).json(updateUser)
 
 
         } catch (error) {
