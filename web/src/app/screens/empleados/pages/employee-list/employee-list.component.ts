@@ -1,9 +1,12 @@
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { CrearEmpleadoComponent } from './../../../../shared/components/modals/empleados/crear-empleado/crear-empleado.component';
 import { EditarEmpleadoComponent } from './../../../../shared/components/modals/empleados/editar-empleado/editar-empleado.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { Empleado, Status } from 'src/app/models/models';
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { EliminarEmpleadoComponent } from 'src/app/shared/components/modals/empleados/eliminar-empleado/eliminar-empleado.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee-list',
@@ -19,13 +22,14 @@ export class EmployeeListComponent implements OnInit {
 
   constructor(
     private empleadosService: EmpleadosService,
-    private dialog: MatDialog
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
 
   ) { }
 
   ngOnInit(): void {
     this.getEmpleados()
-    this.openEditModal(new Empleado())
   }
 
   getEmpleados() {
@@ -36,7 +40,10 @@ export class EmployeeListComponent implements OnInit {
     })
   }
 
-  openDeleteModal(empleado: Empleado) {
+  openDeleteModal(empleado: Empleado): any {
+
+    if (empleado.idEmpleado == this.authService.loggedUser.value?.idEmpleado)
+      return this.snackBar.open("No puedes eliminar el usuario actual", "CERRAR", { duration: 2000 })
 
     const dialog = this.dialog.open(EliminarEmpleadoComponent, {
       data: {
@@ -50,12 +57,18 @@ export class EmployeeListComponent implements OnInit {
   }
 
   openEditModal(empleado: Empleado) {
-    console.log(empleado)
     const dialog = this.dialog.open(EditarEmpleadoComponent, {
       data: {
         empleado: empleado
       }
     })
+
+
+  }
+
+  openRegisterModal() {
+
+    const dialog = this.dialog.open(CrearEmpleadoComponent)
 
   }
 
