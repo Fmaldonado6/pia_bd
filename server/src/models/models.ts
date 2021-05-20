@@ -142,6 +142,6 @@ export enum PrivilegiosId {
 }
 
 export interface PasswordResponse {
-    oldPasswrod: string
+    newPassword: string
     idEmpleado: number
 }
