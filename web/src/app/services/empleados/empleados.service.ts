@@ -1,3 +1,4 @@
+import { PasswordResponse } from './../../../../../server/src/models/models';
 import { Empleado, TipoEmpleado } from 'src/app/models/models';
 import { catchError } from 'rxjs/operators';
 import { DataService } from './../data/data.service';
@@ -42,6 +43,11 @@ export class EmpleadosService extends DataService {
 
   updateEmpleado(empleado: Empleado) {
     return this.http.put<Empleado>(`${this.url}/empleados`, empleado).pipe(catchError(this.handleError))
+
+  }
+
+  updatePassword(password: PasswordResponse) {
+    return this.http.put<Empleado>(`${this.url}/empleados/password`, password).pipe(catchError(this.handleError))
 
   }
 

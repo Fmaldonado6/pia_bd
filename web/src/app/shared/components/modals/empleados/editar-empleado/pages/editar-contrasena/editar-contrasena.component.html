@@ -1,6 +1,32 @@
-<modal-title
-  title="Editar Empleado"
-  subtitle="Seleccione la opción que quiera editar"
-  (iconClicked)="onIconClick()"
->
-</modal-title>
+<ng-container [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <modal-title
+      [type]="HeaderType.goBack"
+      title="Cambiar Contraseña"
+      subtitle="Ingrese su nueva contraseña"
+      (iconClicked)="onIconClick()"
+    >
+    </modal-title>
+    <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="contrasena" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmar contraseña</mat-label>
+        <input matInput type="password" formControlName="confirmarContrasena" />
+      </mat-form-field>
+      <button [disabled]="!form.valid" mat-raised-button color="primary">
+        CAMBIAR
+      </button>
+    </form>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+
+  <div class="status" *ngSwitchCase="Status.success">
+    <info-menu title="Contraseña actualizada" (clickEvent)="close()"></info-menu>
+  </div>
+</ng-container>

@@ -159,3 +159,9 @@ export enum Status {
     success,
     forbidden
 }
+
+export class PasswordResponse {
+    oldPasswrod: string = ""
+    newPassword: string = ""
+    idEmpleado: number = 0
+}

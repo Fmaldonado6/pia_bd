@@ -16,7 +16,7 @@ export class EditarEmpleadoComponent implements OnInit {
   Status = Status
   Pages = Pages
 
-  currentPage = Pages.main
+  currentPage = Pages.changePassword
   currentStatus = Status.loaded
 
   empleado = new Empleado()
