@@ -22,4 +22,20 @@
       (clickEvent)="close()"
     ></info-menu>
   </div>
+
+  <div class="status" *ngSwitchCase="Status.forbidden">
+    <info-menu
+      [type]="InfoTypes.badRequest"
+      title="No tienes permisos para registrar tipos de empleados"
+      (clickEvent)="close()"
+    ></info-menu>
+  </div>
+
+  <div class="status" *ngSwitchCase="Status.error">
+    <info-menu
+      [type]="InfoTypes.badRequest"
+      title="Ocurrio un error al registrar el tipo de empleado"
+      (clickEvent)="close()"
+    ></info-menu>
+  </div>
 </div>

@@ -156,5 +156,6 @@ export enum Status {
     loaded,
     error,
     empty,
-    success
+    success,
+    forbidden
 }

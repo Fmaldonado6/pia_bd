@@ -6,31 +6,31 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./info-menu.component.scss']
 })
 export class InfoMenuComponent {
-  @Input() type = Types.success
+  @Input() type = InfoTypes.success
   @Input() title = "Completado!";
   @Input() accept = "Aceptar"
   @Output() clickEvent = new EventEmitter();
 
   buttonColors = {
-    [Types.success]: " rgb(111, 204, 111)",
-    [Types.badRequest]: "#ef5350"
+    [InfoTypes.success]: " rgb(111, 204, 111)",
+    [InfoTypes.badRequest]: "#ef5350"
   }
 
 
   colors = {
-    [Types.success]: " rgb(111, 204, 111)",
-    [Types.badRequest]: "#ef5350"
+    [InfoTypes.success]: " rgb(111, 204, 111)",
+    [InfoTypes.badRequest]: "#ef5350"
   }
 
   icons = {
-    [Types.success]: "check",
-    [Types.badRequest]: "close"
+    [InfoTypes.success]: "check",
+    [InfoTypes.badRequest]: "close"
   }
 
   buttonClicked() { this.clickEvent.emit() }
 
 }
-export enum Types {
+export enum InfoTypes {
   success,
   badRequest
 }
