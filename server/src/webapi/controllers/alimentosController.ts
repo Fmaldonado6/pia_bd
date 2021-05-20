@@ -1,7 +1,5 @@
-import { Marca } from './../../../../web/src/app/models/models';
-
 import { alimentosRepository, tipoAlimentoRepository, marcaRepository} from './../../persistence/repositories/alimentosRepository';
-import { Alimentos, PrivilegiosId, TipoAlimento } from './../../models/models';
+import { Alimentos, Marca, PrivilegiosId, TipoAlimento } from './../../models/models';
 import { Request, Response } from 'express';
 import { BaseController, CustomRequest } from './baseController';
 import { empleadosRepository, privilegiosRepository } from '../../persistence/repositories/empleadosRepository';
@@ -15,10 +13,10 @@ class AlimentosController extends BaseController {
     config() {
 
         this.router.get("/alimentos", this.verifyToken, (req, res) => { this.getAlimentos(req, res) })
-        this.router.get("/alimento/:id", this.verifyToken, (req, res) => { this.getAlimento(req, res) })
+        this.router.get("/alimentos/:id", this.verifyToken, (req, res) => { this.getAlimento(req, res) })
         this.router.post("/alimentos/create", this.verifyToken, (req, res) => { this.createAlimento(req as CustomRequest, res) })
         this.router.put("/alimentos/edit", this.verifyToken, (req, res) => { this.editAlimento(req as CustomRequest, res) })
-        this.router.delete("/alimento/:id", this.verifyToken, (req, res) => { this.deleteAlimento(req as CustomRequest, res) })
+        this.router.delete("/alimentos/:id", this.verifyToken, (req, res) => { this.deleteAlimento(req as CustomRequest, res) })
         
         this.router.get("/tipo_alimento", this.verifyToken, (req, res) => { this.getTiposAlimentos(req, res) })
         this.router.get("/tipo_alimento/:id", this.verifyToken, (req, res) => { this.getTipoAlimento(req, res) })
@@ -47,7 +45,7 @@ class AlimentosController extends BaseController {
         }
     }
 
-    async getAlimento(req: CustomRequest, res: Response){
+    async getAlimento(req: Request, res: Response){
         try{
             const idAlimento = Number.parseInt(req.params.id)
             const alimento = await alimentosRepository.get(idAlimento)
@@ -186,7 +184,7 @@ class AlimentosController extends BaseController {
 
     }
 
-    async getTipoAlimento(req: CustomRequest, res: Response){
+    async getTipoAlimento(req: Request, res: Response){
         try {
             const idTipoAlimento = Number.parseInt(req.params.id)
             const tipoAlimento = await tipoAlimentoRepository.get(idTipoAlimento);
@@ -326,7 +324,7 @@ class AlimentosController extends BaseController {
         }
     }
 
-    async getMarca(req: CustomRequest, res: Response){
+    async getMarca(req: Request, res: Response){
         try{
             const idMarca = Number.parseInt(req.params.id)
             const marca = await marcaRepository.get(idMarca)
