@@ -16,7 +16,7 @@ import { TipoEmpleadosInfoComponent } from './components/modals/empleados/tipos-
 import { TipoEmpleadosPrivilegiosComponent } from './components/modals/empleados/tipos-empleado/pages/tipo-empleados-privilegios/tipo-empleados-privilegios.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { EliminarTipoEmpleadoComponent } from './components/modals/empleados/eliminar-tipo-empleado/eliminar-tipo-empleado.component';
-import { PedidosComponent } from './components/modals/pedidos/pedidos.component';
+// import { PedidosComponent } from './components/modals/pedidos/pedidos.component';
 import { CrearPedidosComponent } from './components/modals/pedidos/crear-pedidos/crear-pedidos.component';
 
 
@@ -36,7 +36,6 @@ import { CrearPedidosComponent } from './components/modals/pedidos/crear-pedidos
     TipoEmpleadosInfoComponent,
     TipoEmpleadosPrivilegiosComponent,
     EliminarTipoEmpleadoComponent,
-    PedidosComponent,
     CrearPedidosComponent
   ],
   imports: [
