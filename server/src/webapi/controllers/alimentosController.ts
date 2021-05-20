@@ -12,11 +12,11 @@ class AlimentosController extends BaseController {
 
     config() {
 
-        this.router.get("/alimentos", this.verifyToken, (req, res) => { this.getAlimentos(req, res) })
-        this.router.get("/alimentos/:id", this.verifyToken, (req, res) => { this.getAlimento(req, res) })
-        this.router.post("/alimentos/create", this.verifyToken, (req, res) => { this.createAlimento(req as CustomRequest, res) })
-        this.router.put("/alimentos/edit", this.verifyToken, (req, res) => { this.editAlimento(req as CustomRequest, res) })
-        this.router.delete("/alimentos/:id", this.verifyToken, (req, res) => { this.deleteAlimento(req as CustomRequest, res) })
+        this.router.get("/", this.verifyToken, (req, res) => { this.getAlimentos(req, res) })
+        this.router.get("/:id", this.verifyToken, (req, res) => { this.getAlimento(req, res) })
+        this.router.post("/create", this.verifyToken, (req, res) => { this.createAlimento(req as CustomRequest, res) })
+        this.router.put("/edit", this.verifyToken, (req, res) => { this.editAlimento(req as CustomRequest, res) })
+        this.router.delete("/:id", this.verifyToken, (req, res) => { this.deleteAlimento(req as CustomRequest, res) })
         
         this.router.get("/tipo_alimento", this.verifyToken, (req, res) => { this.getTiposAlimentos(req, res) })
         this.router.get("/tipo_alimento/:id", this.verifyToken, (req, res) => { this.getTipoAlimento(req, res) })

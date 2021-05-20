@@ -97,11 +97,13 @@ class PedidoAlimentoRepository {
         return res[0]
     }
 
+    // select idPedido, idAlimento,  cantidad, precio, nombre, idMarca, idTipoAlimento, 
+    //     cantidadDisponible, descripcion  from PedidosAlimentos as pa 
+    //     inner join Alimentos as a on pa.idAlimento = a.idAlimento
+    //     where idPedido = ${id}
     async getPedidosAlimentosByPedidoId(id: number): Promise<PedidoAlimento[]> {
         const res = await database.executeQuery(`
-        select idPedido, idAlimento, nombre, cantidad, precio, idMarca, idTipoAlimento, 
-        cantidadDisponible, descripcion  from PedidosAlimentos as pa 
-        inner join Alimentos as a on pa.idAlimento = a.idAlimento
+        select idPedido, idAlimento,  cantidad, precio from PedidosAlimentos
         where idPedido = ${id}
         `)
 
@@ -114,7 +116,8 @@ class PedidoAlimentoRepository {
 
     async delete(idPedido: number, idAlimento: number): Promise<void> {
         await database.executeQuery(`
-            delete from PedidosAlimentos where idPedido = ${idPedido} and idAlimento = ${idAlimento}
+            delete from PedidosAlimentos 
+            where idPedido = ${idPedido} and idAlimento = ${idAlimento}
         `)
     }
 
@@ -122,6 +125,7 @@ class PedidoAlimentoRepository {
         await database.executeQuery(`
         update PedidosAlimentos
         set cantidad = ${obj.cantidad}, precio = ${obj.precio}
+        where idPedido = ${obj.idPedido} and idAlimento = ${obj.idAlimento}
     `)
 
         return obj
