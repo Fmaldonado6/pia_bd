@@ -23,6 +23,7 @@ class EmpleadosController extends BaseController {
 
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTipoEmpleados(req, res) })
         this.router.post("/tipos", this.verifyToken, (req, res) => { this.addTipoEmpleado(req as CustomRequest, res) })
+        this.router.put("/tipos", this.verifyToken, (req, res) => { this.updateTipoEmpleado(req as CustomRequest, res) })
         this.router.delete("/tipos/:id", this.verifyToken, (req, res) => { this.deleteTipoEmpleado(req as CustomRequest, res) })
 
         this.router.get("/:id", this.verifyToken, (req, res) => { this.getEmpleado(req as CustomRequest, res) })
@@ -271,6 +272,31 @@ class EmpleadosController extends BaseController {
             await empleadosRepository.update(updateUser)
 
             res.status(200).json(updateUser)
+
+
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
+
+    }
+
+    async updateTipoEmpleado(req: CustomRequest, res: Response) {
+
+        try {
+
+            const id = req.idEmpleado
+
+            const hasPermission = this.hasPermission(id, PrivilegiosId.gestionarTipoEmpleado)
+
+            if (!hasPermission)
+                return res.sendStatus(403)
+
+            const tipoEmpleado = req.body as TipoEmpleado
+
+            await tipoEmpleadoRepository.update(tipoEmpleado)
+
+            res.status(200).json(tipoEmpleado)
 
 
         } catch (error) {

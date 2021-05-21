@@ -4,11 +4,15 @@
       *ngSwitchCase="Pages.infoPage"
       (iconClicked)="close()"
       (submitForm)="addTipoEmpleadoInfo($event)"
+      [tipoEmpleado]="tipoEmpleado"
+      [edit]="edit"
     ></tipo-empleados-info>
     <tipo-empleados-privilegios
+      [tipoEmpleado]="tipoEmpleado"
       *ngSwitchCase="Pages.privilegesPage"
       (iconClicked)="changePage(Pages.infoPage)"
       (submitForm)="addPrivilegios($event)"
+      [edit]="edit"
     >
     </tipo-empleados-privilegios>
   </ng-container>
@@ -18,7 +22,9 @@
 
   <div class="status" *ngSwitchCase="Status.success">
     <info-menu
-      title="Tipo de empleado registrado correctamente"
+      title="Tipo de empleado {{
+        edit ? 'actualizado' : 'registrado'
+      }} correctamente"
       (clickEvent)="close()"
     ></info-menu>
   </div>
@@ -26,7 +32,9 @@
   <div class="status" *ngSwitchCase="Status.forbidden">
     <info-menu
       [type]="InfoTypes.badRequest"
-      title="No tienes permisos para registrar tipos de empleados"
+      title="No tienes permisos para {{
+        edit ? 'actualizar' : 'registrar'
+      }} tipos de empleados"
       (clickEvent)="close()"
     ></info-menu>
   </div>
@@ -34,8 +42,11 @@
   <div class="status" *ngSwitchCase="Status.error">
     <info-menu
       [type]="InfoTypes.badRequest"
-      title="Ocurrio un error al registrar el tipo de empleado"
-      (clickEvent)="close()"
+      title="Ocurrio un error al {{
+        edit ? 'actualizar' : 'registrar'
+      }} el tipo de empleado"
+      accept="REINTENTAR"
+      (clickEvent)="changePage(Pages.infoPage)"
     ></info-menu>
   </div>
 </div>

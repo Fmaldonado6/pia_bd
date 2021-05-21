@@ -1,16 +1,20 @@
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { Privilegios, Status, TipoEmpleado } from 'src/app/models/models';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { Forbbiden } from 'src/app/models/exceptions';
 import { InfoTypes } from '../../../info-menu/info-menu.component';
+
+interface ModalData {
+  tipoEmpleado: TipoEmpleado
+}
 
 @Component({
   selector: 'app-tipos-empleado',
   templateUrl: './tipos-empleado.component.html',
   styleUrls: ['./tipos-empleado.component.scss']
 })
-export class TiposEmpleadoComponent {
+export class TiposEmpleadoComponent implements OnInit {
   InfoTypes = InfoTypes
   Pages = Pages
   Status = Status
@@ -22,10 +26,20 @@ export class TiposEmpleadoComponent {
 
   @Output() typeCreated = new EventEmitter()
 
+  edit = false
+
   constructor(
     private dialogRef: MatDialogRef<TiposEmpleadoComponent>,
-    private empleadosService: EmpleadosService
+    private empleadosService: EmpleadosService,
+    @Inject(MAT_DIALOG_DATA) private modalData: ModalData
   ) { }
+
+  ngOnInit(): void {
+    if (this.modalData) {
+      this.edit = true
+      Object.assign(this.tipoEmpleado, this.modalData.tipoEmpleado)
+    }
+  }
 
 
   addTipoEmpleadoInfo(values: TipoEmpleado) {
@@ -38,24 +52,45 @@ export class TiposEmpleadoComponent {
 
   addPrivilegios(values: Privilegios[]) {
     this.tipoEmpleado.privilegios = values
-    this.addTipoEmpleado()
+
+    if (this.edit)
+      this.updateTipoEmpleado()
+    else
+      this.addTipoEmpleado()
+  }
+
+  updateTipoEmpleado() {
+    this.currentStatus = Status.loading
+    this.empleadosService.updateTipoEmpleado(this.tipoEmpleado).subscribe(e => {
+      this.success()
+    }, e => {
+      this.error(e)
+    })
   }
 
   addTipoEmpleado() {
     this.currentStatus = Status.loading
     this.empleadosService.addTipoEmpleado(this.tipoEmpleado).subscribe(e => {
-      this.currentStatus = Status.success
-      this.typeCreated.emit()
-      setTimeout(() => {
-        this.close()
-      }, 1500);
+      this.success()
     }, e => {
-
-      if (e instanceof Forbbiden)
-        this.currentStatus = Status.forbidden
-      else
-        this.currentStatus = Status.error
+      this.error(e)
     })
+  }
+
+
+  success() {
+    this.currentStatus = Status.success
+    this.typeCreated.emit()
+    setTimeout(() => {
+      this.close()
+    }, 1500);
+  }
+
+  error(e: Error) {
+    if (e instanceof Forbbiden)
+      this.currentStatus = Status.forbidden
+    else
+      this.currentStatus = Status.error
   }
 
   close() {
@@ -63,6 +98,7 @@ export class TiposEmpleadoComponent {
   }
 
   changePage(page: Pages) {
+    this.currentStatus = Status.loaded
     this.currentPage = page
   }
 

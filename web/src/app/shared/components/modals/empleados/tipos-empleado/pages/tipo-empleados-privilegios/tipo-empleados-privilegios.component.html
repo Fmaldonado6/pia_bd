@@ -8,6 +8,7 @@
   <mat-selection-list #privilegiosList>
     <mat-list-option
       *ngFor="let privilegio of privilegios"
+      [selected]="includes(privilegio)"
       [value]="privilegio"
     >
       {{ privilegio.nombre }}
@@ -18,6 +19,6 @@
     color="primary"
     (click)="onSubmit(privilegiosList.selectedOptions.selected)"
   >
-    Registrar
+    {{ edit ? "ACTUALIZAR " : "REGISTRAR" }}
   </button>
 </div>

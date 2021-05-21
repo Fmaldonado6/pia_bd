@@ -37,7 +37,7 @@
 
 <mat-menu #optionsEmpleado="matMenu">
   <ng-template matMenuContent let-tipo="tipo">
-    <button mat-menu-item>Editar</button>
+    <button mat-menu-item (click)="openEditModal(tipo)">Editar</button>
     <button mat-menu-item (click)="openDeleteModal(tipo)">Eliminar</button>
   </ng-template>
 </mat-menu>

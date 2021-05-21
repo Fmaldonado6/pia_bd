@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatListOption } from '@angular/material/list';
-import { Privilegios } from 'src/app/models/models';
+import { Privilegios, TipoEmpleado } from 'src/app/models/models';
 import { PrivilegiosService } from 'src/app/services/privilegios/privilegios.service';
 import { HeaderType } from '../../../../modal-title/modal-title.component';
 
@@ -15,6 +15,8 @@ export class TipoEmpleadosPrivilegiosComponent implements OnInit {
 
   @Output() submitForm = new EventEmitter()
   @Output() iconClicked = new EventEmitter()
+  @Input() tipoEmpleado = new TipoEmpleado()
+  @Input() edit = false
 
   form: FormGroup = new FormGroup({})
 
@@ -44,6 +46,15 @@ export class TipoEmpleadosPrivilegiosComponent implements OnInit {
     }
 
     this.submitForm.emit(selectedPrivilegios)
+  }
+
+  includes(privilegio: Privilegios): boolean {
+    for (let empleadoPrivilegio of this.tipoEmpleado.privilegios) {
+      if (empleadoPrivilegio.idPrivilegio == privilegio.idPrivilegio)
+        return true
+    }
+    return false
+
   }
 
   onIconClick() {

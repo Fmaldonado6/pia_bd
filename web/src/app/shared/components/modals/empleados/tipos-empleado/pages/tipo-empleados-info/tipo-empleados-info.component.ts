@@ -1,5 +1,6 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TipoEmpleado } from 'src/app/models/models';
 
 @Component({
   selector: 'tipo-empleados-info',
@@ -9,6 +10,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class TipoEmpleadosInfoComponent implements OnInit {
   @Output() submitForm = new EventEmitter()
   @Output() iconClicked = new EventEmitter()
+  @Input() tipoEmpleado = new TipoEmpleado()
+  @Input() edit = false
 
   form: FormGroup = new FormGroup({})
 
@@ -16,18 +19,18 @@ export class TipoEmpleadosInfoComponent implements OnInit {
   ngOnInit(): void {
 
     this.form = new FormGroup({
-      nombreTipoEmpleado: new FormControl('', [
+      nombreTipoEmpleado: new FormControl(this.tipoEmpleado.nombreTipoEmpleado, [
         Validators.required
       ]),
-      horaEntrada: new FormControl('', [
-        Validators.required
-
-      ]),
-      horaSalida: new FormControl('', [
+      horaEntrada: new FormControl(this.tipoEmpleado.horaEntrada, [
         Validators.required
 
       ]),
-      sueldo: new FormControl('', [
+      horaSalida: new FormControl(this.tipoEmpleado.horaSalida, [
+        Validators.required
+
+      ]),
+      sueldo: new FormControl(this.tipoEmpleado.sueldo, [
         Validators.required
 
       ]),
@@ -37,7 +40,6 @@ export class TipoEmpleadosInfoComponent implements OnInit {
   }
 
   onSubmit(values: any) {
-    console.log(values)
     this.submitForm.emit(values)
   }
 

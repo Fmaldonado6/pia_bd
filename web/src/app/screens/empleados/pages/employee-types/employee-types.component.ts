@@ -44,6 +44,19 @@ export class EmployeeTypesComponent implements OnInit {
     })
   }
 
+  openEditModal(tipo: TipoEmpleado) {
+    const dialog = this.dialog.open(TiposEmpleadoComponent,
+      {
+        data: {
+          tipoEmpleado: tipo
+        }
+      })
+
+    dialog.componentInstance.typeCreated.subscribe(e => {
+      this.getTypes()
+    })
+  }
+
   openDeleteModal(tipo: TipoEmpleado) {
 
     const dialog = this.dialog.open(EliminarTipoEmpleadoComponent, {
