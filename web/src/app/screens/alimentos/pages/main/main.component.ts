@@ -11,16 +11,25 @@ export class MainComponent {
 
   sections: SectionCard[] = [
     {
-      title: "Alimentos",
+      title: "Agregar alimentos",
       icon: "fastfood",
-      description: "Agrega o edita las descripciones, precios y nombres de nuestros alimentos",
-      action: "Gestionar Alimentos"
+      description: "Agrega un nuevo alimento.",
+      action: "Gestionar Alimentos",
+      onClick: () => { this.changePage("/pedidos") }
     },
     {
-      title: "Bebidas",
-      icon: "beer-outline",
-      description: "Agrega o edita las descripciones, precios y nombres de nuestras bebidas.",
-      action: "Gestionar Bebidas"
+      title: "Editar alimentos",
+      icon: "edit",
+      description: "Edita las descripciones, precios o nombres de nuestros alimentos.",
+      action: "Gestionar Bebidas",
+      onClick: () => { this.changePage("/pedidos") }
+    },
+    {
+      title: "Eliminar alimentos",
+      icon: "edit",
+      description: "Eliminar alguno de los alimentos.",
+      action: "Gestionar Bebidas",
+      onClick: () => { this.changePage("/pedidos") }
     },
   ]
 
