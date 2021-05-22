@@ -166,3 +166,4 @@ export class PasswordResponse {
     newPassword: string = ""
     idEmpleado: number = 0
 }
+

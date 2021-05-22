@@ -1,5 +1,3 @@
-import { EmployeeListComponent } from './pages/employee-list/employee-list.component';
-import { PedidosService } from './../../../../../services/pedidos/pedidos.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Pedido, Empleado, Status } from 'src/app/models/models';

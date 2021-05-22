@@ -45,6 +45,20 @@ class AlimentosRepository implements BaseRepository<Alimentos>
         return res
     }
 
+
+    async getAlimentosByTipoId(idTipo: number): Promise<Alimentos[]> {
+
+        const res = await database.executeQuery(`
+            select * from Alimentos where idTipoAlimento = ${idTipo}
+        `)
+
+        if (!res)
+            return []
+
+        return res
+    }
+
+
     async findAll(): Promise<Alimentos[]> {
         const res = await database.executeQuery(`select * from Alimentos`)
 

@@ -1,0 +1,17 @@
+.alimento-cantidad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin: 20px 0px;
+
+  span {
+    font-size: 70px;
+    margin: 0px 50px;
+  }
+}
+
+.add {
+  display: flex;
+  flex-direction: column;
+}

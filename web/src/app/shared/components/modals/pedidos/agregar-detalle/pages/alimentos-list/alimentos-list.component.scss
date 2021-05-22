@@ -1,0 +1,71 @@
+.alimento-section {
+  display: flex;
+  height: 50px;
+  min-height: 50px;
+  align-items: center;
+  font-size: 16px;
+  padding: 0px 10px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.192);
+  &:hover {
+    background-color: rgba(39, 39, 39, 0.24);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.empty-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  color: gray;
+}
+
+.alimentos-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cantidad {
+  background-color: rgba(206, 206, 206, 0.199);
+  width: 20px;
+  margin-left: auto;
+  height: 20px;
+  border-radius: 100%;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-section {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  mat-icon {
+    transform: scale(2);
+    margin-bottom: 20px;
+  }
+}
+
+.list-section {
+  display: flex;
+  max-height: 400px;
+  overflow-y: auto;
+  flex-direction: column;
+}
+
+.list-header {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}

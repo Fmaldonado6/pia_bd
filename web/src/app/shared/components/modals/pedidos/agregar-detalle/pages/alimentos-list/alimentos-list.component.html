@@ -1,1 +1,51 @@
-<p>alimentos-list works!</p>
+<modal-title
+  title="Añadir alimento"
+  [type]="HeaderType.goBack"
+  subtitle="Seleccione el alimento que quiera agregar"
+  (iconClicked)="onIconClick()"
+></modal-title>
+<div class="list-header">
+  <mat-form-field appearance="outline">
+    <mat-label>Buscar alimento</mat-label>
+    <input
+      autocomplete="off"
+      #input
+      (input)="filterList(input.value)"
+      matInput
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <div class="alimentos-title">
+    <span>Nombre</span>
+    <span>Cantidad</span>
+  </div>
+</div>
+<div
+  class="list-section"
+  *ngIf="alimentos.length > 0 && currentStatus == Status.loaded"
+>
+  <div
+    class="alimento-section"
+    *ngFor="let alimento of alimentosFilter"
+    (click)="onAddAlimento(alimento)"
+    mat-ripple
+  >
+    <span>{{ alimento.nombre }}</span>
+    <div class="cantidad">
+      <span>{{ alimento.cantidadDisponible }}</span>
+    </div>
+  </div>
+
+  <div class="empty-search" *ngIf="alimentosFilter.length == 0">
+    <mat-icon>help_outline</mat-icon>
+    <span>No hay resultados</span>
+  </div>
+</div>
+
+<div
+  class="empty-section"
+  *ngIf="alimentos.length == 0 && currentStatus == Status.loaded"
+>
+  <mat-icon>help_outline</mat-icon>
+  <span>No hay alimentos registrados</span>
+</div>

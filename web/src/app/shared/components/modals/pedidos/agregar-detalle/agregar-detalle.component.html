@@ -6,7 +6,18 @@
       [tipoAlimentos]="tipoAlimentos"
       (iconClicked)="close()"
     ></main>
-    <alimentos-list *ngSwitchCase="Pages.alimentosList"></alimentos-list>
+    <alimentos-list
+      [typeSelected]="typeSelected"
+      (addAlimento)="addAlimento($event)"
+      (iconClicked)="changePage(Pages.main)"
+      *ngSwitchCase="Pages.alimentosList"
+    ></alimentos-list>
+    <alimentos-cantidad
+      [alimento]="alimento"
+      (addAlimento)="addAlimentoPedido($event)"
+      (iconClicked)="changePage(Pages.alimentosList)"
+      *ngSwitchCase="Pages.alimentosCantidad"
+    ></alimentos-cantidad>
   </ng-container>
 
   <div class="status" *ngSwitchCase="Status.loading">

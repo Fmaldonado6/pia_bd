@@ -17,21 +17,23 @@ class AlimentosController extends BaseController {
         this.router.post("/", this.verifyToken, (req, res) => { this.createAlimento(req as CustomRequest, res) })
         this.router.put("/", this.verifyToken, (req, res) => { this.editAlimento(req as CustomRequest, res) })
         this.router.delete("/:id", this.verifyToken, (req, res) => { this.deleteAlimento(req as CustomRequest, res) })
-        
+        this.router.get("/tipo/:id", this.verifyToken, (req, res) => { this.getAlimentosByTipoId(req as CustomRequest, res) })
+
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTiposAlimentos(req, res) })
         this.router.get("/tipos/:id", this.verifyToken, (req, res) => { this.getTipoAlimento(req, res) })
         this.router.post("/tipos", this.verifyToken, (req, res) => { this.createTipoAlimento(req as CustomRequest, res) })
         this.router.put("/tipos", this.verifyToken, (req, res) => { this.editTipoAlimento(req as CustomRequest, res) })
         this.router.delete("/tipos/:id", this.verifyToken, (req, res) => { this.deleteTipoAlimento(req as CustomRequest, res) })
-        
-        this.router.post("/marcas", this.verifyToken, (req, res) => { this.getMarcas(req, res) })
+
+        this.router.get("/marcas", this.verifyToken, (req, res) => { this.getMarcas(req, res) })
         this.router.get("/marcas/:id", this.verifyToken, (req, res) => { this.getMarca(req, res) })
         this.router.post("/marcas", this.verifyToken, (req, res) => { this.createMarca(req as CustomRequest, res) })
         this.router.put("/marcas", this.verifyToken, (req, res) => { this.editMarca(req as CustomRequest, res) })
         this.router.delete("/marcas/:id", this.verifyToken, (req, res) => { this.deleteMarca(req as CustomRequest, res) })
+
         this.router.get("/:id", this.verifyToken, (req, res) => { this.getAlimento(req, res) })
     }
-    
+
     //ALIMENTOS
 
     async getAlimentos(req: Request, res: Response) {
@@ -60,6 +62,28 @@ class AlimentosController extends BaseController {
             console.error(error)
             res.sendStatus(500)
         }
+    }
+
+
+    async getAlimentosByTipoId(req: CustomRequest, res: Response) {
+        try {
+
+            const id = req.idEmpleado
+            const tipoId = Number.parseInt(req.params.id)
+            const hasPermission = await this.hasPermission(id, PrivilegiosId.gestionarAlimentos)
+
+            if (!hasPermission)
+                return res.sendStatus(403)
+
+            const alimentos = await alimentosRepository.getAlimentosByTipoId(tipoId)
+
+            res.status(200).json(alimentos)
+
+        } catch (error) {
+            console.error(error)
+            res.sendStatus(500)
+        }
+
     }
 
     async createAlimento(req: CustomRequest, res: Response) {

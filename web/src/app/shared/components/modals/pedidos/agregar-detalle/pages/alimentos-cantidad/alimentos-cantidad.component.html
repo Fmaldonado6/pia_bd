@@ -1,1 +1,31 @@
-<p>alimentos-cantidad works!</p>
+<modal-title
+  title="Añadir alimento"
+  [type]="HeaderType.goBack"
+  subtitle="Ingrese la cantidad que quiera agregar"
+  (iconClicked)="onIconClick()"
+></modal-title>
+
+<div class="alimento-cantidad">
+  <button
+    (click)="remove()"
+    [disabled]="cantidad == 1"
+    color="primary"
+    mat-mini-fab
+  >
+    <mat-icon>remove</mat-icon>
+  </button>
+  <span>{{ cantidad }}</span>
+  <button
+    (click)="add()"
+    [disabled]="cantidad == alimento.cantidadDisponible"
+    color="primary"
+    mat-mini-fab
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div class="add">
+  <button (click)="onAddAlimento()" mat-raised-button color="primary">
+    AÑADIR
+  </button>
+</div>
