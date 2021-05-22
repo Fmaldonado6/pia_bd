@@ -1,0 +1,31 @@
+.alimento-section {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  align-items: center;
+  font-size: 16px;
+  padding: 0px 10px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(39, 39, 39, 0.24);
+  }
+}
+
+.empty-section {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  mat-icon {
+    transform: scale(2);
+    margin-bottom: 20px;
+  }
+}
+
+.list-section {
+  margin-top: 20px;
+}

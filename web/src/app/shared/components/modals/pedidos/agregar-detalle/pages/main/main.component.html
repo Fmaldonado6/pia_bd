@@ -1,0 +1,17 @@
+<modal-title
+  title="Añadir alimento"
+  subtitle="Ingrese la información personal del empleado"
+  (iconClicked)="onIconClick()"
+></modal-title>
+<div class="list-section" *ngIf="tipoAlimentos.length > 0 else empty">
+  <div class="alimento-section" mat-ripple>
+    <span>Cerveza</span>
+    <mat-icon>chevron_right</mat-icon>
+  </div>
+</div>
+<ng-template #empty>
+  <div class="empty-section">
+    <mat-icon>help_outline</mat-icon>
+    <span>No hay alimentos registrados</span>
+  </div>
+</ng-template>

@@ -1,0 +1,51 @@
+<div class="container" [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <div class="title-container">
+      <span>Pedido ({{ pedido.idPedido }})</span>
+      <p>Aquí podrás gestionar los detalles del pedido seleccionado</p>
+    </div>
+    <div class="info-container">
+      <span class="section-title">Información del pedido</span>
+      <mat-list>
+        <mat-list-item>
+          Número del empleado asociado: {{ pedido.idEmpleado }}
+        </mat-list-item>
+        <mat-list-item>
+          Número del pedido: {{ pedido.idPedido }}
+        </mat-list-item>
+        <mat-list-item>
+          Fecha de creación:
+          {{ pedido.fechaPedido | date: "fullDate" }}
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="info-container">
+      <div class="info-title-container">
+        <span class="section-title">Detalle del pedido</span>
+        <button
+          (click)="openAddAddDialog()"
+          mat-raised-button
+          color="primary"
+          class="register-button"
+        >
+          <mat-icon>add</mat-icon>
+          Añadir
+        </button>
+      </div>
+
+      <div class="empty-container">
+        <mat-icon>fastfood</mat-icon>
+        <span>No hay detalles agregados</span>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="detail-item">
+        <span>Total:</span>
+        <span>$100</span>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+</div>

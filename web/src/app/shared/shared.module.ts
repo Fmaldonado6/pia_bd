@@ -20,6 +20,10 @@ import { CrearPedidosComponent } from './components/modals/pedidos/crear-pedidos
 import { EditarEmpleadoComponent } from './components/modals/empleados/editar-empleado/editar-empleado.component';
 import { EditarEmpleadoMainComponent } from './components/modals/empleados/editar-empleado/pages/editar-empleado-main/editar-empleado-main.component';
 import { EditarContrasenaComponent } from './components/modals/empleados/editar-empleado/pages/editar-contrasena/editar-contrasena.component';
+import { AgregarDetalleComponent } from './components/modals/pedidos/agregar-detalle/agregar-detalle.component';
+import { MainComponent } from './components/modals/pedidos/agregar-detalle/pages/main/main.component';
+import { AlimentosListComponent } from './components/modals/pedidos/agregar-detalle/pages/alimentos-list/alimentos-list.component';
+import { AlimentosCantidadComponent } from './components/modals/pedidos/agregar-detalle/pages/alimentos-cantidad/alimentos-cantidad.component';
 
 
 @NgModule({
@@ -42,6 +46,10 @@ import { EditarContrasenaComponent } from './components/modals/empleados/editar-
     EditarEmpleadoComponent,
     EditarEmpleadoMainComponent,
     EditarContrasenaComponent,
+    AgregarDetalleComponent,
+    MainComponent,
+    AlimentosListComponent,
+    AlimentosCantidadComponent,
   ],
   imports: [
     CommonModule,
