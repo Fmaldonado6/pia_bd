@@ -1,9 +1,12 @@
-import { Alimentos, TipoAlimento } from './../../../../../models/models';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Statement } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
-import { Status } from 'src/app/models/models';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Status, Alimentos, TipoAlimento, PedidoAlimento, Pedido } from 'src/app/models/models';
 import { TiposAlimentosService } from 'src/app/services/tipos-alimentos/tipos-alimentos.service';
+
+interface ModalData {
+  pedido: Pedido
+}
 
 @Component({
   selector: 'app-agregar-detalle',
@@ -15,25 +18,31 @@ export class AgregarDetalleComponent implements OnInit {
   Pages = Pages
   Status = Status
 
-  currentPage = Pages.main
+  currentPage = Pages.alimentosCantidad
   currentStatus = Status.loaded
 
   tipoAlimentos: TipoAlimento[] = []
   typeSelected = new TipoAlimento()
   alimento = new Alimentos()
+
+  pedido = new Pedido()
+
   constructor(
     private dialog: MatDialogRef<AgregarDetalleComponent>,
-    private tiposAlimentosService: TiposAlimentosService
+    private tiposAlimentosService: TiposAlimentosService,
+    @Inject(MAT_DIALOG_DATA) private modalData: ModalData
   ) { }
 
   ngOnInit(): void {
+
+    Object.assign(this.pedido, this.modalData.pedido)
+
     this.getTiposAlimentos()
   }
 
   getTiposAlimentos() {
     this.tiposAlimentosService.getTipoAlimentos().subscribe(e => {
       this.tipoAlimentos = e
-      console.log(e)
     })
   }
 
@@ -53,6 +62,15 @@ export class AgregarDetalleComponent implements OnInit {
 
   close() {
     this.dialog.close()
+  }
+
+  addAlimento(alimento: Alimentos) {
+    this.alimento = alimento
+    this.changePage(Pages.alimentosCantidad)
+  }
+
+  addAlimentoPedido(pedidoAlimento: PedidoAlimento) {
+    console.log(pedidoAlimento)
   }
 
 }
