@@ -35,6 +35,7 @@ export class EmployeeInfoComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
+  patternContra: any = /d/;
 
   form: FormGroup = new FormGroup({})
 
@@ -47,7 +48,10 @@ export class EmployeeInfoComponent implements OnInit {
 
       contrasena: new FormControl(this.empleado.contrasena, {
         validators: [
-          Validators.required
+          Validators.required,
+          Validators.pattern(/^[A-Z/a-z]+[A-Z/a-z/1-9]+$/),
+          Validators.minLength(8),
+          
         ]
       }),
       confirmarContrasena: new FormControl('', [
@@ -64,9 +68,6 @@ export class EmployeeInfoComponent implements OnInit {
     this.submitForm.emit(values)
 
   }
-
-
-
 
   onIconClick() {
     this.iconClicked.emit()

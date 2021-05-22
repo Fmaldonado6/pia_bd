@@ -36,22 +36,27 @@ export class PersonalInfoComponent implements OnInit {
       }),
       nombre: new FormControl(this.empleado.nombre, {
         validators: [
-          Validators.required
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z/0-9]+$/),
         ]
       }),
       apellidoPaterno: new FormControl(this.empleado.apellidoPaterno, {
         validators: [
-          Validators.required
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z/0-9]+$/),
         ]
       }),
       apellidoMaterno: new FormControl(this.empleado.apellidoMaterno, {
         validators: [
-          Validators.required
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z/0-9]+$/),
         ]
       }),
       telefono: new FormControl(this.empleado.telefono, {
         validators: [
-          Validators.required
+          Validators.required,
+          Validators.minLength(10),
+          Validators.pattern(/^[0-9]+$/),
         ]
       }),
 
@@ -66,6 +71,7 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   onSubmit(values: any) {
+    
     this.submitForm.emit(values)
 
   }
@@ -73,8 +79,4 @@ export class PersonalInfoComponent implements OnInit {
   onIconClick() {
     this.iconClicked.emit()
   }
-
-
-
-
 }
