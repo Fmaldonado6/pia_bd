@@ -15,7 +15,7 @@ export class MainComponent {
       icon: "monetization_on",
       description: "Crea, edita y elimina las facturas",
       action: "Gestionar Facturas",
-      onClick: () => { this.changePage("/pedidos") }
+      onClick: () => { this.changePage("/factura-crear") }
     },
     {
       title: "Ver Facturas",
