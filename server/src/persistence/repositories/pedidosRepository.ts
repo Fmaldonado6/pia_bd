@@ -15,7 +15,8 @@ class PedidosRepository implements BaseRepository<Pedido> {
             ${obj.descuento}, ${obj.total}
         )`)
 
-        return res!![0]
+
+        return res!![0] as Pedido
     }
 
 
@@ -28,7 +29,11 @@ class PedidosRepository implements BaseRepository<Pedido> {
         if (!res)
             return null
 
-        return res[0] as Pedido
+        const pedido = res[0] as Pedido
+
+        pedido.fechaPedido = new Date(res[0].fechaPedido)
+
+        return pedido
 
     }
 

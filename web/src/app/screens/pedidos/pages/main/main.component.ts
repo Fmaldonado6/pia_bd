@@ -20,6 +20,14 @@ export class MainComponent implements OnInit {
       onClick: () => { this.changePage("/pedidos") }
 
     },
+    {
+      title: "Ver pedidos",
+      icon: "monetization_on",
+      description: "Ver todos los pedidos registrados",
+      action: "Ver",
+      onClick: () => { this.changePage("/pedidos") }
+
+    },
 
   ]
   constructor(

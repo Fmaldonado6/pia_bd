@@ -1,8 +1,8 @@
 import { alimentosRepository } from './../../persistence/repositories/alimentosRepository';
 import { pedidosRepository, pedidoAlimentoRepository } from './../../persistence/repositories/pedidosRepository';
 
-import { Pedido, PedidoAlimento, PrivilegiosId } from './../../models/models';
-import { Request, Response } from 'express';
+import { Pedido, PrivilegiosId } from './../../models/models';
+import { Response } from 'express';
 import { BaseController, CustomRequest } from './baseController';
 
 class PedidosController extends BaseController {
@@ -36,6 +36,10 @@ class PedidosController extends BaseController {
 
             const pedidos = await pedidosRepository.findAll()
 
+            pedidos.forEach(e => {
+                e.fechaPedido = new Date(e.fechaPedido as any)
+            })
+
             res.status(200).json(pedidos)
 
         } catch (error) {
@@ -63,11 +67,11 @@ class PedidosController extends BaseController {
 
             const pedidosAlimento = await pedidoAlimentoRepository.getPedidosAlimentosByPedidoId(idPedido)
 
-            for (let pedido of pedidosAlimento) {
+            for (let pedidoAlimento of pedidosAlimento) {
 
-                const alimento = await alimentosRepository.get(pedido.idAlimento)
+                const alimento = await alimentosRepository.get(pedidoAlimento.idAlimento)
                 if (alimento)
-                    pedido.alimento = alimento
+                    pedidoAlimento.alimento = alimento
             }
 
             pedido.alimentos = pedidosAlimento
@@ -88,7 +92,9 @@ class PedidosController extends BaseController {
             if (!hasPermission)
                 return res.sendStatus(403)
 
-            const pedido = req.body as Pedido
+            const pedido = Object.assign(new Pedido(), req.body as Pedido)
+
+            pedido.fechaPedido = new Date()
 
             const nuevoPedido = await pedidosRepository.add(pedido)
 
@@ -177,104 +183,6 @@ class PedidosController extends BaseController {
 
         }
     }
-
-    // //------------------------------------------PEDIDO ALIMENTO---------------------------------------------
-
-    // async getPedidosAlimentos(req: Request, res: Response) {
-    //     try {
-
-    //     res.status(200).json(pedidosAlimentos)
-
-
-    //     } catch (error) {
-    //         console.error(error)
-    //         res.sendStatus(500)
-    //     }
-    // }
-
-    // async getPedidoAlimento(req: CustomRequest, res: Response) {
-    //     try {
-    //         const idPedido = Number.parseInt(req.params.id)
-    //         const pedido = await pedidosRepository.get(idPedido)
-
-    //         if (!pedido)
-    //             return res.sendStatus(404)
-
-    //         res.status(200).json(pedido)
-
-    //     } catch (error) {
-    //         console.error(error)
-    //         res.sendStatus(500)
-    //     }
-    // }
-
-    // async createPedidoAlimento(req: CustomRequest, res: Response) {
-    //     try {
-    //         const id = req.idEmpleado
-    //         const hasPermission = await this.hasPermission(id, PrivilegiosId.gestionarPedidos)
-
-    //         if (!hasPermission)
-    //             return res.sendStatus(403)
-
-    //         const pedido = req.body as Pedido
-
-    //         await pedidosRepository.add(pedido)
-
-    //         res.status(200).json(pedido)
-
-    //     } catch (error) {
-    //         console.error(error)
-    //         res.sendStatus(500)
-    //     }
-    // }
-
-
-    // async deletePedidoAlimento(req: CustomRequest, res: Response) {
-    //     try {
-
-    //         const id = req.idEmpleado
-    //         const hasPermission = await this.hasPermission(id, PrivilegiosId.gestionarPedidos)
-
-    //         if (!hasPermission)
-    //             return res.sendStatus(403)
-
-    //         const deleteId = Number.parseInt(req.params.id)
-
-    //         await pedidosRepository.delete(deleteId);
-
-    //         res.status(200).json()
-
-
-    //     } catch (error) {
-    //         console.error(error)
-    //         res.sendStatus(500)
-
-    //     }
-    // }
-
-    // async editPedidoAlimento(req: CustomRequest, res: Response) {
-    //     try {
-
-    //         const id = req.idEmpleado
-    //         const hasPermission = await this.hasPermission(id, PrivilegiosId.gestionarPedidos)
-
-    //         if (!hasPermission)
-    //             return res.sendStatus(403)
-
-    //         const pedido = req.body as Pedido
-
-    //         await pedidosRepository.update(pedido);
-
-    //         res.status(200).json()
-
-
-    //     } catch (error) {
-    //         console.error(error)
-    //         res.sendStatus(500)
-
-    //     }
-    // }
-
 }
 
 export const pedidosController = new PedidosController()
