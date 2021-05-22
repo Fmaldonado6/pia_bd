@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
     {
       icon: "fastfood",
       title: "Alimentos y Bebidas",
-      route: "/comida"
+      route: "/alimentos"
     },
     {
       icon: "sticky_note_2",

@@ -23,6 +23,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: "alimentos",
+    loadChildren: () => import('./screens/alimentos/alimentos.module').then(m => m.AlimentosModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: "",
     redirectTo: "auth",
     pathMatch: 'full'
