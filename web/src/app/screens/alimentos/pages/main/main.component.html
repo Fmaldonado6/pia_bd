@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="title-container">
+      <span>Alimentos</span>
+      <p>
+        Aqui puedes consultar todos los alimentos y bebidas.
+      </p>
+      <!-- E laa neta nose que ponerle ahi upsi -->
+    </div>
+    <div class="card-container">
+      <section-card
+        *ngFor="let section of sections"
+        [title]="section.title"
+        [description]="section.description"
+        [icon]="section.icon"
+        [action]="section.action"
+      ></section-card>
+    </div>
+  </div>
