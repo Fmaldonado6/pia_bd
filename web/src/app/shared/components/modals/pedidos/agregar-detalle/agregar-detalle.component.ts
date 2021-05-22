@@ -1,3 +1,4 @@
+import { Alimentos, TipoAlimento } from './../../../../../models/models';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Statement } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
@@ -17,12 +18,37 @@ export class AgregarDetalleComponent implements OnInit {
   currentPage = Pages.main
   currentStatus = Status.loaded
 
+  tipoAlimentos: TipoAlimento[] = []
+  typeSelected = new TipoAlimento()
+  alimento = new Alimentos()
   constructor(
     private dialog: MatDialogRef<AgregarDetalleComponent>,
     private tiposAlimentosService: TiposAlimentosService
   ) { }
 
   ngOnInit(): void {
+    this.getTiposAlimentos()
+  }
+
+  getTiposAlimentos() {
+    this.tiposAlimentosService.getTipoAlimentos().subscribe(e => {
+      this.tipoAlimentos = e
+      console.log(e)
+    })
+  }
+
+  selectType(tipo: TipoAlimento) {
+    this.typeSelected = tipo
+    this.changePage(Pages.alimentosList)
+  }
+
+  selectFood(alimento: Alimentos) {
+    this.alimento = alimento
+    this.changePage(Pages.alimentosCantidad)
+  }
+
+  changePage(pages: Pages) {
+    this.currentPage = pages
   }
 
   close() {

@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { TipoAlimento } from 'src/app/models/models';
 
 @Component({
   selector: 'main',
@@ -8,11 +9,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class MainComponent {
 
   @Output() iconClicked = new EventEmitter()
+  @Output() typeSelected = new EventEmitter<TipoAlimento>()
+  @Input() tipoAlimentos: TipoAlimento[] = []
 
-  tipoAlimentos = []
 
   onIconClick() {
     this.iconClicked.emit()
+  }
+
+  onTypeSelected(tipo: TipoAlimento) {
+    this.typeSelected.emit(tipo)
   }
 
 }

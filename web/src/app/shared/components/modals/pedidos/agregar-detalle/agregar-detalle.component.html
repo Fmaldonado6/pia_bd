@@ -1,6 +1,12 @@
 <div class="dialog" [ngSwitch]="currentStatus">
-  <ng-container *ngSwitchCase="Status.loaded">
-    <main (iconClicked)="close()"></main>
+  <ng-container [ngSwitch]="currentPage" *ngSwitchCase="Status.loaded">
+    <main
+      *ngSwitchCase="Pages.main"
+      (typeSelected)="selectType($event)"
+      [tipoAlimentos]="tipoAlimentos"
+      (iconClicked)="close()"
+    ></main>
+    <alimentos-list *ngSwitchCase="Pages.alimentosList"></alimentos-list>
   </ng-container>
 
   <div class="status" *ngSwitchCase="Status.loading">

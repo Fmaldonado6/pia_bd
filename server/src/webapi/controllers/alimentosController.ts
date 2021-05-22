@@ -14,24 +14,24 @@ class AlimentosController extends BaseController {
     config() {
 
         this.router.get("/", this.verifyToken, (req, res) => { this.getAlimentos(req, res) })
-        this.router.get("/:id", this.verifyToken, (req, res) => { this.getAlimento(req, res) })
         this.router.post("/", this.verifyToken, (req, res) => { this.createAlimento(req as CustomRequest, res) })
         this.router.put("/", this.verifyToken, (req, res) => { this.editAlimento(req as CustomRequest, res) })
         this.router.delete("/:id", this.verifyToken, (req, res) => { this.deleteAlimento(req as CustomRequest, res) })
-
+        
         this.router.get("/tipos", this.verifyToken, (req, res) => { this.getTiposAlimentos(req, res) })
         this.router.get("/tipos/:id", this.verifyToken, (req, res) => { this.getTipoAlimento(req, res) })
         this.router.post("/tipos", this.verifyToken, (req, res) => { this.createTipoAlimento(req as CustomRequest, res) })
         this.router.put("/tipos", this.verifyToken, (req, res) => { this.editTipoAlimento(req as CustomRequest, res) })
         this.router.delete("/tipos/:id", this.verifyToken, (req, res) => { this.deleteTipoAlimento(req as CustomRequest, res) })
-
+        
         this.router.post("/marcas", this.verifyToken, (req, res) => { this.getMarcas(req, res) })
         this.router.get("/marcas/:id", this.verifyToken, (req, res) => { this.getMarca(req, res) })
         this.router.post("/marcas", this.verifyToken, (req, res) => { this.createMarca(req as CustomRequest, res) })
         this.router.put("/marcas", this.verifyToken, (req, res) => { this.editMarca(req as CustomRequest, res) })
         this.router.delete("/marcas/:id", this.verifyToken, (req, res) => { this.deleteMarca(req as CustomRequest, res) })
+        this.router.get("/:id", this.verifyToken, (req, res) => { this.getAlimento(req, res) })
     }
-
+    
     //ALIMENTOS
 
     async getAlimentos(req: Request, res: Response) {

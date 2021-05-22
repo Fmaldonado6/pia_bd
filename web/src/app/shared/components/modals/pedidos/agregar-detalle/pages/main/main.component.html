@@ -3,9 +3,14 @@
   subtitle="Ingrese la información personal del empleado"
   (iconClicked)="onIconClick()"
 ></modal-title>
-<div class="list-section" *ngIf="tipoAlimentos.length > 0 else empty">
-  <div class="alimento-section" mat-ripple>
-    <span>Cerveza</span>
+<div class="list-section" *ngIf="tipoAlimentos.length > 0; else empty">
+  <div
+    class="alimento-section"
+    *ngFor="let tipo of tipoAlimentos"
+    (click)="onTypeSelected(tipo)"
+    mat-ripple
+  >
+    <span>{{ tipo.nombre }}</span>
     <mat-icon>chevron_right</mat-icon>
   </div>
 </div>
