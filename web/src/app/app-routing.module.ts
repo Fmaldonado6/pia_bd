@@ -28,6 +28,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'facturacion',
+    loadChildren: ( ) => import('./screens/facturacion/facturacion.module').then(m => m.FacturacionModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: "",
     redirectTo: "auth",
     pathMatch: 'full'

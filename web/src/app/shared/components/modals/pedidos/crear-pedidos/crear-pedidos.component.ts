@@ -1,7 +1,8 @@
+import { EmployeeListComponent } from './pages/employee-list/employee-list.component';
 import { PedidosService } from './../../../../../services/pedidos/pedidos.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Pedido } from 'src/app/models/models';
+import { Pedido, Empleado, Status } from 'src/app/models/models';
 
 
 interface miPedido{
@@ -20,6 +21,18 @@ interface miPedido{
 
 export class CrearPedidosComponent {
 
+  @Input() edit = false
+  @Output() iconClicked = new EventEmitter()
+
+
+  Status = Status
+  Pages = Pages
+
+
+  currentPage = Pages.employeeList
+
+  currentStatus = Status.loaded
+
   pedido = new Pedido()
 
   constructor(
@@ -33,4 +46,20 @@ export class CrearPedidosComponent {
     this.pedido.descuento = values.descuentoPed
   }
 
+  clickIcon() {
+    if (this.edit)
+      return this.iconClicked.emit()
+    this.close()
+  }
+
+  close() {
+
+
+    this.dialogRef.close()
+  }
+
+}
+
+enum Pages {
+  employeeList
 }
