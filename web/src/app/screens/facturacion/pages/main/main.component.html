@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="title-container">
+      <span>Facturación</span>
+      <p>
+        Aquí podrás gestionar todo lo relacionado con las facturas o consultar las facturas.
+      </p>
+    </div>
+    <div class="card-container">
+      <section-card
+        *ngFor="let section of sections"
+        [title]="section.title"
+        [description]="section.description"
+        [icon]="section.icon"
+        [action]="section.action"
+        (buttonClicked)="section.onClick()"
+      ></section-card>
+    </div>
+  </div>

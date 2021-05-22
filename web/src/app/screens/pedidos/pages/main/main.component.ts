@@ -17,7 +17,7 @@ export class MainComponent implements OnInit {
       icon: "monetization_on",
       description: "Registra un nuevo pedido",
       action: "Crear",
-      onClick: () => { this.changePage("/pedidos") }
+      onClick: () => { this.openRegisterModal() }
 
     },
     {
