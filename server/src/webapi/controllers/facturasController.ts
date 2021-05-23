@@ -1,7 +1,9 @@
-import { facturasRepository } from './../../persistence/repositories/facturasRepository';
-import { Factura, PrivilegiosId } from './../../models/models';
+import { alimentosRepository } from './../../persistence/repositories/alimentosRepository';
+import { facturaDetalleRepository, facturasRepository } from './../../persistence/repositories/facturasRepository';
+import { Factura, FacturaDetalle, PrivilegiosId } from './../../models/models';
 import { Request, Response } from 'express';
 import { BaseController, CustomRequest } from './baseController';
+import { pedidoAlimentoRepository } from '../../persistence/repositories/pedidosRepository';
 
 class FacturasController extends BaseController {
 
@@ -78,9 +80,31 @@ class FacturasController extends BaseController {
 
             const factura = req.body as Factura
 
+            factura.fechaFactura = new Date()
+
+            const pedidoDetalles = await pedidoAlimentoRepository.getPedidosAlimentosByPedidoId(factura.idPedido)
+
+
             const nuevaFactura = await facturasRepository.add(factura)
 
             factura.idFactura = nuevaFactura.idFactura
+
+            for (let pedidoDetalle of pedidoDetalles) {
+
+                const alimento = await alimentosRepository.get(pedidoDetalle.idAlimento)
+
+                const facturaDetalle = new FacturaDetalle()
+
+                facturaDetalle.idFactura = factura.idFactura
+                facturaDetalle.idAlimento = pedidoDetalle.idAlimento
+                facturaDetalle.cantidad = pedidoDetalle.cantidad
+                facturaDetalle.precio = pedidoDetalle.precio
+
+                if (alimento)
+                    facturaDetalle.nombreAlimento = alimento.nombre
+
+                await facturaDetalleRepository.add(facturaDetalle)
+            }
 
             res.status(200).json(factura)
 
@@ -101,7 +125,7 @@ class FacturasController extends BaseController {
                 return res.sendStatus(403)
 
             const deleteId = Number.parseInt(req.params.id)
-            
+
             await facturasRepository.delete(deleteId);
 
             res.status(200).json()

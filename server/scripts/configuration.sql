@@ -175,3 +175,17 @@ IF OBJECT_ID ('Facturas','U') is null create table Facturas
     constraint fk_idCalle foreign key (idCalle) references Calle(idCalle),
     numero tinyInt
 )
+
+
+IF OBJECT_ID ('FacturasDetalle','U') is null create table FacturasDetalle
+(
+    idFactura int not null,
+    idAlimento int not null,
+    constraint pk_idFacturaDetalle primary key (idFactura,idAlimento),
+    cantidad int not null,
+    nombreAlimento int not null,
+    precio int not null
+    constraint fk_facturaDetalle foreign key (idFactura) references Facturas(idFactura)
+)
+
+

@@ -1,5 +1,5 @@
 import { database } from './../database';
-import { Factura } from './../../models/models';
+import { Factura, FacturaDetalle } from './../../models/models';
 import { BaseRepository } from './baseRepository';
 class FacturasRepository implements BaseRepository<Factura> {
 
@@ -65,4 +65,77 @@ class FacturasRepository implements BaseRepository<Factura> {
     }
 }
 
+class FacturaDetalleRepository {
+
+    async add(obj: FacturaDetalle): Promise<FacturaDetalle> {
+        await database.executeQuery(`
+        insert into FacturaDetalle(
+            idFactura, idAlimento, cantidad,nombreAlimento ,precio
+        ) 
+        values (
+            ${obj.idFactura}, ${obj.idAlimento}, ${obj.cantidad},${obj.nombreAlimento}, ${obj.precio}
+        )`)
+
+        return obj
+    }
+
+
+
+    async get(id: number): Promise<FacturaDetalle | null> {
+        const res = await database.executeQuery(`
+            select * from FacturaDetalle where idFactura = ${id}
+        `)
+        if (!res)
+            return null
+
+        return res[0]
+    }
+
+
+    async getFacturaDetalleByFacturaId(id: number): Promise<FacturaDetalle[]> {
+        const res = await database.executeQuery(`
+        select * from FacturaDetalle
+        where idFactura = ${id}
+        `)
+
+        if (!res)
+            return []
+
+        return res as FacturaDetalle[]
+    }
+
+    async getFacturaDetalleByAlimentoId(id: number): Promise<FacturaDetalle[]> {
+        const res = await database.executeQuery(`
+        select * from FacturaDetalle
+        where idAlimento = ${id}
+        `)
+
+        if (!res)
+            return []
+
+        return res as FacturaDetalle[]
+    }
+
+
+
+    async delete(idPedido: number, idAlimento: number): Promise<void> {
+        await database.executeQuery(`
+            delete from FacturaDetalle 
+            where idFactura = ${idPedido} and idAlimento = ${idAlimento}
+        `)
+    }
+
+    async update(obj: FacturaDetalle): Promise<FacturaDetalle> {
+        await database.executeQuery(`
+        update FacturaDetalle
+        set cantidad = ${obj.cantidad}, precio = ${obj.precio}, nombreAlimento = ${obj.nombreAlimento}
+        where idFactura = ${obj.idFactura} and idAlimento = ${obj.idAlimento}
+    `)
+
+        return obj
+    }
+}
+
+
 export const facturasRepository = new FacturasRepository()
+export const facturaDetalleRepository = new FacturaDetalleRepository()
