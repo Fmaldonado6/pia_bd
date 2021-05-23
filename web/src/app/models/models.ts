@@ -63,6 +63,8 @@ export class Pedido {
     subtotal: number = 0
     descuento: number = 0
     total: number = 0
+    alimentos: PedidoAlimento[] = []
+
 }
 
 export class PedidoAlimento {

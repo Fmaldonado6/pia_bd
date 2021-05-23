@@ -33,10 +33,28 @@
         </button>
       </div>
 
-      <div class="empty-container">
-        <mat-icon>fastfood</mat-icon>
-        <span>No hay detalles agregados</span>
+      <div
+        class="detail-container"
+        *ngIf="pedido.alimentos.length > 0; else empty"
+      >
+        <div
+          class="detail"
+          mat-ripple
+          *ngFor="let alimento of pedido.alimentos"
+          (click)="openEditIdemDialog(alimento)"
+        >
+          <span class="nombre">{{ alimento.alimento.nombre }}</span>
+          <span class="cantidad">(x{{ alimento.cantidad }})</span>
+          <span class="precio">{{ alimento.precio | currency: "MXN" }}</span>
+        </div>
       </div>
+
+      <ng-template #empty>
+        <div class="empty-container">
+          <mat-icon>fastfood</mat-icon>
+          <span>No hay detalles agregados</span>
+        </div>
+      </ng-template>
       <mat-divider></mat-divider>
       <div class="detail-item">
         <span>Total:</span>

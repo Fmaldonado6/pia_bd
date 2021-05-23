@@ -58,6 +58,12 @@ class AlimentosRepository implements BaseRepository<Alimentos>
         return res
     }
 
+    async addAlimentoQuantityById(id: number, quantity: number) {
+        await database.executeQuery(`
+        update Alimentos set cantidadDisponible = cantidadDisponible + ${quantity}
+        where idAlimento = ${id}
+        `)
+    }
 
     async findAll(): Promise<Alimentos[]> {
         const res = await database.executeQuery(`select * from Alimentos`)

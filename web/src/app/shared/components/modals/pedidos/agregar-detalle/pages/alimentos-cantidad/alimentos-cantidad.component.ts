@@ -26,8 +26,8 @@ export class AlimentosCantidadComponent {
 
     const pedidoAlimento = new PedidoAlimento()
     pedidoAlimento.cantidad = this.cantidad
-    pedidoAlimento.alimento = this.alimento
-    pedidoAlimento.precio = this.alimento.precio
+    pedidoAlimento.idAlimento = this.alimento.idAlimento
+    pedidoAlimento.precio = this.alimento.precio * this.cantidad
 
     this.addAlimento.emit(pedidoAlimento)
   }

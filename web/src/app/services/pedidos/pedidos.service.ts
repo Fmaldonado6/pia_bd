@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class PedidosService extends DataService{
+export class PedidosService extends DataService {
 
   addPedido(pedido: Pedido) {
     return this.http.post(`${this.url}/pedidos`, pedido).pipe(catchError(this.handleError))
@@ -18,6 +18,11 @@ export class PedidosService extends DataService{
 
   deletePedido(id: number) {
     return this.http.delete<Pedido>(`${this.url}/pedidos/${id}`).pipe(catchError(this.handleError))
+  }
+
+  editPedido(pedido: Pedido) {
+    return this.http.put<Pedido>(`${this.url}/pedidos`, pedido).pipe(catchError(this.handleError))
+
   }
 
 }

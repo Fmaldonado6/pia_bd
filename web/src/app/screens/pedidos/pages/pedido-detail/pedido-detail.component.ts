@@ -1,3 +1,5 @@
+import { PedidoAlimento } from './../../../../models/models';
+import { EditarDetalleComponent } from './../../../../shared/components/modals/pedidos/editar-detalle/editar-detalle.component';
 import { AgregarDetalleComponent } from './../../../../shared/components/modals/pedidos/agregar-detalle/agregar-detalle.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -30,11 +32,20 @@ export class PedidoDetailComponent implements OnInit {
 
     this.id = this.activatedRoute.snapshot.params.id
     this.getPedido()
-    this.openAddAddDialog()
   }
 
   openAddAddDialog() {
-    this.dialog.open(AgregarDetalleComponent)
+    const dialog = this.dialog.open(AgregarDetalleComponent, {
+      data: {
+        pedido: this.pedido
+      }
+    })
+  }
+
+  openEditIdemDialog(detalle: PedidoAlimento) {
+    console.log(detalle)
+    this.dialog.open(EditarDetalleComponent)
+
   }
 
   getPedido() {

@@ -143,7 +143,7 @@ class PedidoAlimentoRepository {
         return res as PedidoAlimento[]
     }
 
-
+  
 
     async delete(idPedido: number, idAlimento: number): Promise<void> {
         await database.executeQuery(`

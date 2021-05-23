@@ -159,16 +159,33 @@ class PedidosController extends BaseController {
 
 
             for (let alimento of pedido.alimentos) {
-                if (alimentos.includes(alimento))
+
+                const found = alimentos.find(x => x.idAlimento == alimento.idAlimento)
+
+                if (found) {
+
+                    const quantity = alimento.cantidad - found.cantidad
+
+                    await alimentosRepository.addAlimentoQuantityById(alimento.idAlimento, -quantity)
+
                     await pedidoAlimentoRepository.update(alimento)
-                else
+                }
+                else {
+
+                    await alimentosRepository.addAlimentoQuantityById(alimento.idAlimento, -alimento.cantidad)
+
                     await pedidoAlimentoRepository.add(alimento)
+                }
             }
 
             for (let alimento of alimentos) {
 
-                if (!pedido.alimentos.includes(alimento))
+                if (!alimentos.find(x => x.idAlimento == alimento.idAlimento)) {
+                    await alimentosRepository.addAlimentoQuantityById(alimento.idAlimento, alimento.cantidad)
+
                     await pedidoAlimentoRepository.delete(alimento.idPedido, alimento.idAlimento)
+                }
+
             }
 
 
