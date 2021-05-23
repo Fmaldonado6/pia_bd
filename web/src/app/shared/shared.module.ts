@@ -29,6 +29,7 @@ import { EditarDetalleComponent } from './components/modals/pedidos/editar-detal
 import { CrearAlimentoComponent } from './components/modals/alimentos/crear-alimento/crear-alimento.component';
 import { EliminarAlimentoComponent } from './components/modals/alimentos/eliminar-alimento/eliminar-alimento.component';
 import { EditarAlimentoComponent } from './components/modals/alimentos/editar-alimento/editar-alimento.component';
+import { AlimentoInfoComponent } from './components/modals/alimentos/crear-alimento/pages/alimento-info/alimento-info.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { EditarAlimentoComponent } from './components/modals/alimentos/editar-al
     CrearAlimentoComponent,
     EliminarAlimentoComponent,
     EditarAlimentoComponent,
+    AlimentoInfoComponent,
   ],
   imports: [
     CommonModule,

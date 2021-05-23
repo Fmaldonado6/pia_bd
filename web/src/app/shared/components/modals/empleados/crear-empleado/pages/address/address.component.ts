@@ -63,11 +63,13 @@ export class AddressComponent implements OnInit {
       colonia: new FormControl(this.empleado.nombreColonia, {
         validators: [
           Validators.required,
+          Validators.pattern(/^[a-z A-ZÁ-ÿ\u00f1\u00d1/0-9]+$/),
         ]
       }),
       calle: new FormControl(this.empleado.nombreCalle, {
         validators: [
           Validators.required,
+          Validators.pattern(/^[a-z A-ZÁ-ÿ\u00f1\u00d1/0-9]+$/),
         ]
       }),
       numero: new FormControl(this.empleado.numero, {

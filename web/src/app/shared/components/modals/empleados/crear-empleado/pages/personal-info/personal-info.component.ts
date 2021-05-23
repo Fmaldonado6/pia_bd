@@ -37,19 +37,19 @@ export class PersonalInfoComponent implements OnInit {
       nombre: new FormControl(this.empleado.nombre, {
         validators: [
           Validators.required,
-          Validators.pattern(/^[a-zA-Z/0-9]+$/),
+          Validators.pattern(/^[a-zA-ZÁ-ÿ\u00f1\u00d1/0-9]+$/),
         ]
       }),
       apellidoPaterno: new FormControl(this.empleado.apellidoPaterno, {
         validators: [
           Validators.required,
-          Validators.pattern(/^[a-zA-Z/0-9]+$/),
+          Validators.pattern(/^[a-z A-ZÁ-ÿ\u00f1\u00d1/0-9]+$/),
         ]
       }),
       apellidoMaterno: new FormControl(this.empleado.apellidoMaterno, {
         validators: [
           Validators.required,
-          Validators.pattern(/^[a-zA-Z/0-9]+$/),
+          Validators.pattern(/^[a-z A-ZÁ-ÿ\u00f1\u00d1/0-9]+$/),
         ]
       }),
       telefono: new FormControl(this.empleado.telefono, {
