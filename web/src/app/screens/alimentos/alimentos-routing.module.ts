@@ -1,11 +1,21 @@
+import { MarcasComponent } from './pages/marcas/marcas.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditarAlimentoComponent } from 'src/app/shared/components/modals/alimentos/editar-alimento/editar-alimento.component';
 import { MainComponent } from './pages/main/main.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent
+  },
+  {
+    path: 'list',
+    component: EditarAlimentoComponent
+  },
+  {
+    path: 'marcas',
+    component: MarcasComponent
   }
 ];
 

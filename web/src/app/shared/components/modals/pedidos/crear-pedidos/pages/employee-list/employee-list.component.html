@@ -1,25 +1,22 @@
-<!-- ME ESTOY BASANDO EN personal-info -->
+<modal-title
+  title="Crear pedido"
+  subtitle="Elija el empleado que se encargará del pedido"
+></modal-title>
 <form
   (ngSubmit)="onSubmit(formInformacion.value)"
   [formGroup]="formInformacion"
 >
   <mat-form-field appearance="outline">
-    <mat-label>Empleado</mat-label>
+    <mat-label>Seleccionar empleado</mat-label>
 
-    <mat-select formControlName="Empleado" [disabled]="empleados.length == 0" >
+    <mat-select formControlName="empleado" [disabled]="empleados.length == 0">
       <mat-option *ngFor="let emp of empleados" [value]="emp.idEmpleado">
-        {{ emp.nombre }} {{emp.apellidoPaterno}}
+        {{ emp.nombre }} {{ emp.apellidoPaterno }}
       </mat-option>
     </mat-select>
-
   </mat-form-field>
 
-  <br>
-
-  <div class="boton">
-    <button  [disabled]="!formInformacion.valid" mat-raised-button color="primary">
-      SIGUIENTE
-    </button>
-  </div>
+  <button [disabled]="!formInformacion.valid" mat-raised-button color="primary">
+    SIGUIENTE
+  </button>
 </form>
-

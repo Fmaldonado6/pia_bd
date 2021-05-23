@@ -22,19 +22,26 @@ export class MainComponent {
     },
     {
       title: "Editar alimentos o bebidas",
-      icon: "edit",
+      icon: "local_dining",
       description: "Edita las descripciones, precios o nombres de nuestros alimentos o bebidas.",
       action: "Editar",
-      onClick: () => { this.changePage("/alimentos") }
+      onClick: () => { this.changePage("/alimentos/list") }
       //Cambiar la ruta de onClick
     },
     {
-      title: "Eliminar alimentos o bebidas",
-      icon: "edit",
-      description: "Eliminar alguno de los alimentos y o bebidas.",
-      action: "Eliminar",
-      onClick: () => { this.changePage("/alimentos") }
+      title: "Editar tipos de alimento",
+      icon: "local_bar",
+      description: "Edita o elimina los diferentes tipos de alimentos que ofrecemos.",
+      action: "Editar",
+      onClick: () => { this.changePage("/alimentos/list") }
       //Cambiar la ruta de onClick
+    },
+    {
+      title: "Eliminar o editar marcas",
+      icon: "format_list_bulleted",
+      description: "Edita o elimina las marcas que manejamos en nuestros alimentos.",
+      action: "Editar",
+      onClick: () => { this.changePage("/alimentos/marcas") }
     },
   ]
 
@@ -45,7 +52,7 @@ export class MainComponent {
 
   }
 
-  changePage(route: string){
+  changePage(route: string) {
     this.router.navigate([route])
   }
 
