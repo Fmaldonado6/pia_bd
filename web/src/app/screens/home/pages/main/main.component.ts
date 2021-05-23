@@ -31,7 +31,7 @@ export class MainComponent {
       icon: "fastfood",
       description: "Agrega o edita las descripciones, precios y nombres de nuestros alimentos y bebidas.",
       action: "Gestionar Alimentos y Bebida",
-      onClick: () => { this.changePage("/pedidos") }
+      onClick: () => { this.changePage("/alimentos") }
 
     },
     {
@@ -39,7 +39,7 @@ export class MainComponent {
       icon: "sticky_note_2",
       description: "Crea, edita y elimina facturas de los pedidos realizados",
       action: "Gestionar Facturas",
-      onClick: () => { this.changePage("/pedidos") }
+      onClick: () => { this.changePage("/facturacion") }
 
     }
   ]
