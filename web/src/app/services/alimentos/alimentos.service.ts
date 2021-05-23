@@ -10,7 +10,7 @@ export class AlimentosService extends DataService {
 
 
   getAlimentos() {
-    return this.http.get(`${this.url}/alimentos`).pipe(catchError(this.handleError))
+    return this.http.get<Alimentos[]>(`${this.url}/alimentos`).pipe(catchError(this.handleError))
   }
 
   getAlimentosByTipoId(id: number) {
@@ -21,5 +21,10 @@ export class AlimentosService extends DataService {
   addAlimento(alimento: Alimentos) {
     return this.http.post(`${this.url}/alimentos`, alimento).pipe(catchError(this.handleError))
   }
+
+  updateAlimento(alimento: Alimentos) {
+    return this.http.put(`${this.url}/alimentos`, alimento).pipe(catchError(this.handleError))
+  }
+
 
 }

@@ -30,33 +30,33 @@ export class AlimentoInfoComponent implements OnInit {
     this.getTiposMarca();
 
     this.formInformacion = new FormGroup({
-      idTipoAlimento: new FormControl('', {
+      idTipoAlimento: new FormControl(this.alimento.idTipoAlimento, {
         validators: [
           Validators.required
         ]
       }),
-      nombre: new FormControl('', {
+      nombre: new FormControl(this.alimento.nombre, {
         validators: [
           Validators.required,
         ]
       }),
 
-      idMarca: new FormControl('', {
+      idMarca: new FormControl(this.alimento.idMarca, {
         validators: [
           Validators.required
         ]
       }),
-      precio: new FormControl('', {
+      precio: new FormControl(this.alimento.precio, {
         validators: [
           Validators.required,
         ]
       }),
-      cantidadDisponible: new FormControl('', {
+      cantidadDisponible: new FormControl(this.alimento.cantidadDisponible, {
         validators: [
           Validators.required,
         ]
       }),
-      descripcion: new FormControl('', {
+      descripcion: new FormControl(this.alimento.descripcion, {
         validators: [
           Validators.required,
         ]

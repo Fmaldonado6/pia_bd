@@ -9,6 +9,8 @@
           *ngSwitchCase="Pages.personalInfo"
         ></alimento-info> -->
       <alimento-info
+        [edit]="edit"
+        [alimento]="Alimento"
         (iconClicked)="close()"
         (submitForm)="addAlimentInfo($event)"
       ></alimento-info>

@@ -1,14 +1,18 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Input, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Alimentos, Status } from 'src/app/models/models';
 import { AlimentosService } from 'src/app/services/alimentos/alimentos.service';
+
+interface ModalData {
+  alimento: Alimentos
+}
 
 @Component({
   selector: 'app-crear-alimento',
   templateUrl: './crear-alimento.component.html',
   styleUrls: ['./crear-alimento.component.scss']
 })
-export class CrearAlimentoComponent {
+export class CrearAlimentoComponent implements OnInit {
 
   Pages = Pages
   Status = Status
@@ -16,15 +20,26 @@ export class CrearAlimentoComponent {
   currentPage = Pages.AlimentoInfo
   currentStatus = Status.loaded
 
-  @Input() Alimento = new Alimentos()
-  @Input() edit = false
+  Alimento = new Alimentos()
+  edit = false
   @Output() iconClicked = new EventEmitter()
-  @Output() userCreated = new EventEmitter()
+  @Output() alimentoCreado = new EventEmitter()
+
 
   constructor(
     private dialogRef: MatDialogRef<CrearAlimentoComponent>,
-    private alimentosService: AlimentosService
+    private alimentosService: AlimentosService,
+    @Inject(MAT_DIALOG_DATA) private modalData: ModalData
   ) { }
+
+  ngOnInit(): void {
+
+    if (this.modalData) {
+      this.edit = true
+      Object.assign(this.Alimento, this.modalData.alimento)
+    }
+
+  }
 
 
   addAlimentInfo(values: AlimentoInfoForm) {
@@ -34,7 +49,20 @@ export class CrearAlimentoComponent {
     this.Alimento.precio = values.precio
     this.Alimento.cantidadDisponible = values.cantidadDisponible
     this.Alimento.descripcion = values.descripcion
-    this.addAlimento()
+
+    if (this.edit)
+      this.updateAlimento()
+    else
+      this.addAlimento()
+  }
+
+  updateAlimento() {
+    this.currentStatus = Status.loading
+
+    this.alimentosService.updateAlimento(this.Alimento).subscribe(e => {
+      this.currentStatus = Status.success
+      this.success()
+    })
   }
 
   addAlimento() {
@@ -45,11 +73,11 @@ export class CrearAlimentoComponent {
       this.success()
     })
   }
-  
+
 
   success() {
     this.currentStatus = Status.success
-    this.userCreated.emit()
+    this.alimentoCreado.emit()
     setTimeout(() => {
       this.dialogRef.close()
     }, 1500);

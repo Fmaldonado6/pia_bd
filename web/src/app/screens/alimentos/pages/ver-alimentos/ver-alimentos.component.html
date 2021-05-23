@@ -1,0 +1,51 @@
+<div class="container" [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <div class="title-container">
+      <span>Alimentos Registrados</span>
+      <p>
+        Aquí podras gestionar los alimentos registrados.
+      </p>
+    </div>
+    <button
+      (click)="openAddAlimento()"
+      mat-raised-button
+      color="primary"
+      class="register-button"
+    >
+      <mat-icon>add</mat-icon>
+      Registrar
+    </button>
+    <div class="info-container">
+      <div class="empleado-item" *ngFor="let alimento of alimentos">
+        <mat-icon color="primary"> account_circle </mat-icon>
+        <span>{{ alimento.nombre }} </span>
+        <button
+          mat-icon-button
+          class="more-icon"
+          [matMenuTriggerData]="{ alimento: alimento }"
+          [matMenuTriggerFor]="optionsAlimento"
+        >
+          <mat-icon> more_vert </mat-icon>
+        </button>
+      </div>
+
+      <div class="empty-container" *ngIf="alimentos.length == 0">
+        <mat-icon>help_outline</mat-icon>
+        <span>No hay alimentos registrados</span>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+</div>
+
+<mat-menu #optionsAlimento="matMenu">
+  <ng-template matMenuContent let-alimento="alimento">
+    <button mat-menu-item (click)="openUpdateAlimento(alimento)">Editar</button>
+    <button mat-menu-item (click)="openDeleteAlimento(alimento)">
+      Eliminar
+    </button>
+  </ng-template>
+</mat-menu>

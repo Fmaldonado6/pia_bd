@@ -25,7 +25,7 @@ export class MainComponent {
       icon: "local_dining",
       description: "Edita las descripciones, precios o nombres de nuestros alimentos o bebidas.",
       action: "Editar",
-      onClick: () => { this.changePage("/alimentos/list") }
+      onClick: () => { this.changePage("/alimentos/lista") }
       //Cambiar la ruta de onClick
     },
     {

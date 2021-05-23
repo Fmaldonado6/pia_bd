@@ -1,6 +1,5 @@
 <div class="dialog">
   <modal-title
-    [type]="edit ? HeaderType.goBack : HeaderType.close"
     [title]="edit ? 'Editar Alimento' : 'Agregar Alimento'"
     subtitle="Ingrese la información del Alimento"
     (iconClicked)="onIconClick()"
@@ -54,7 +53,7 @@
       mat-raised-button
       color="primary"
     >
-      SIGUIENTE
+      {{ edit ? "ACTUALIZAR" : "REGISTRAR" }}
     </button>
   </form>
 </div>

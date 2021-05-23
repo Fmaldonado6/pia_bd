@@ -1,3 +1,4 @@
+import { VerAlimentosComponent } from './pages/ver-alimentos/ver-alimentos.component';
 import { MarcasComponent } from './pages/marcas/marcas.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,8 +12,8 @@ const routes: Routes = [
     component: MainComponent
   },
   {
-    path: 'list',
-    component: EditarAlimentoComponent
+    path: 'lista',
+    component: VerAlimentosComponent
   },
   {
     path: 'marcas',
