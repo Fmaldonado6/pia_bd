@@ -1,3 +1,4 @@
+import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
 import { Empleado, Pedido} from 'src/app/models/models';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -16,11 +17,13 @@ export class EmployeeListComponent implements OnInit {
   @Output() submitForm = new EventEmitter()
   @Input() pedido = new Pedido()
   @Input() edit = false
+
   empleados: Empleado[] = []
 
-  constructor() { }
+  constructor(private empleadosService: EmpleadosService) { }
 
   ngOnInit(): void {
+    this.getEmpleados()
   }
 
   onSubmit(values: any) {
@@ -31,6 +34,12 @@ export class EmployeeListComponent implements OnInit {
 
   onIconClick() {
     this.iconClicked.emit()
+  }
+
+  getEmpleados() {
+    this.empleadosService.getEmpleados().subscribe(e => {
+      this.empleados = e
+    })
   }
 
 }

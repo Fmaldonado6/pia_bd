@@ -8,22 +8,15 @@
         [edit]="edit"
         *ngSwitchCase="Pages.employeeList"
       ></app-employee-list>
-
-      <!-- <address
-        (iconClicked)="changePage(Pages.personalInfo)"
-        (submitForm)="addAddress($event)"
-        [empleado]="empleado"
-        [edit]="edit"
-        *ngSwitchCase="Pages.address"
-      ></address>
-      <employee-info
-        (submitForm)="addEmployeeInfo($event)"
-        [edit]="edit"
-        [empleado]="empleado"
-        (iconClicked)="changePage(Pages.address)"
-        *ngSwitchCase="Pages.employeeInfo"
-      >
-      </employee-info> -->
     </ng-container>
   </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+
+  <div class="status" *ngSwitchCase="Status.success">
+    <info-menu (clickEvent)="close()"></info-menu>
+  </div>
+
 </div>

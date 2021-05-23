@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Pedido, Empleado, Status } from 'src/app/models/models';
 
 
+
 interface miPedido{
   fecha?: Date
   descuentoPed: number
@@ -21,6 +22,7 @@ export class CrearPedidosComponent {
 
   @Input() edit = false
   @Output() iconClicked = new EventEmitter()
+  @Output() empPedido = new EventEmitter()
 
 
   Status = Status
@@ -42,6 +44,15 @@ export class CrearPedidosComponent {
     this.pedido.total = values.totalPed
     this.pedido.subtotal = values.subtotalPed
     this.pedido.descuento = values.descuentoPed
+    this.success()
+  }
+
+  success() {
+    this.currentStatus = Status.success
+    this.empPedido.emit()
+    setTimeout(() => {
+      this.dialogRef.close()
+    }, 1500);
   }
 
   clickIcon() {
@@ -51,8 +62,6 @@ export class CrearPedidosComponent {
   }
 
   close() {
-
-
     this.dialogRef.close()
   }
 
