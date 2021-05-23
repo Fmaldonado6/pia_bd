@@ -201,7 +201,7 @@ class MarcaRepository implements BaseRepository<Marca> {
         await database.executeQuery(`
         update Marca
         set 
-        nombre='${obj.nombreMarca}'
+        nombreMarca='${obj.nombreMarca}'
         where idMarca = ${obj.idMarca}
     `)
 

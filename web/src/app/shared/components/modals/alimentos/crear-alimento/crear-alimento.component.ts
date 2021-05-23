@@ -8,7 +8,7 @@ import { AlimentosService } from 'src/app/services/alimentos/alimentos.service';
   templateUrl: './crear-alimento.component.html',
   styleUrls: ['./crear-alimento.component.scss']
 })
-export class CrearAlimentoComponent implements OnInit {
+export class CrearAlimentoComponent {
 
   Pages = Pages
   Status = Status
@@ -26,8 +26,6 @@ export class CrearAlimentoComponent implements OnInit {
     private alimentosService: AlimentosService
   ) { }
 
-  ngOnInit(): void {
-  }
 
   addAlimentInfo(values: AlimentoInfoForm) {
     this.Alimento.nombre = values.nombre
@@ -47,6 +45,7 @@ export class CrearAlimentoComponent implements OnInit {
       this.success()
     })
   }
+  
 
   success() {
     this.currentStatus = Status.success

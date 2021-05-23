@@ -1,3 +1,4 @@
+import { EditarMarcaComponent } from './../../../../shared/components/modals/marcas/editar-marca/editar-marca.component';
 import { CrearMarcaComponent } from './../../../../shared/components/modals/marcas/crear-marca/crear-marca.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
@@ -34,6 +35,17 @@ export class MarcasComponent implements OnInit {
       this.currentStatus = Status.loaded
     })
 
+  }
+
+  updateMarca(marca: Marca) {
+    const dialog = this.dialog.open(EditarMarcaComponent, {
+      data: {
+        marca: marca
+      }
+    })
+    dialog.componentInstance.marcaCreada.subscribe(e => {
+      this.getMarcas()
+    })
   }
 
   openAddMarca() {
