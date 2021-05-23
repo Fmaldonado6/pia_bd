@@ -15,7 +15,7 @@ export class AlimentoInfoComponent implements OnInit {
   HeaderType = HeaderType
   formInformacion: FormGroup = new FormGroup({})
   tiposAlimentos: TipoAlimento[] = [];
-  idMarca: Marca [] = []
+  idMarca: Marca[] = []
 
   @Output() iconClicked = new EventEmitter()
   @Output() submitForm = new EventEmitter()
@@ -23,51 +23,42 @@ export class AlimentoInfoComponent implements OnInit {
   @Input() edit = false
 
   constructor(private tiposAlimentosService: TiposAlimentosService,
-              private tiposMarcaService: MarcasService) { }
+    private tiposMarcaService: MarcasService) { }
 
   ngOnInit(): void {
     this.getTiposAlimentos();
     this.getTiposMarca();
 
     this.formInformacion = new FormGroup({
-      tipoAlimento: new FormControl(this.alimento.idTipoAlimento, {
+      idTipoAlimento: new FormControl('', {
         validators: [
           Validators.required
         ]
       }),
-      nombre: new FormControl(this.alimento.nombre, {
+      nombre: new FormControl('', {
         validators: [
           Validators.required,
-          Validators.pattern(/^[a-zA-Z/0-9]+$/),
         ]
       }),
-      idAlimento: new FormControl(this.alimento.idAlimento, {
-        validators: [
-          Validators.required,
-          Validators.pattern(/^[0-9]+$/),
-        ]
-      }),
-      idMarca: new FormControl(this.alimento.idMarca, {
+
+      idMarca: new FormControl('', {
         validators: [
           Validators.required
         ]
       }),
-      precio: new FormControl(this.alimento.precio, {
+      precio: new FormControl('', {
         validators: [
           Validators.required,
-          Validators.pattern(/^[0-9]+$/),
         ]
       }),
-      cantidadDisponible: new FormControl(this.alimento.cantidadDisponible, {
+      cantidadDisponible: new FormControl('', {
         validators: [
           Validators.required,
-          Validators.pattern(/^[0-9]+$/),
         ]
       }),
-      descripcion: new FormControl(this.alimento.descripcion, {
+      descripcion: new FormControl('', {
         validators: [
           Validators.required,
-          Validators.pattern(/^[a-zA-Z/0-9]+$/),
         ]
       })
     })
@@ -86,7 +77,7 @@ export class AlimentoInfoComponent implements OnInit {
   }
 
   onSubmit(values: any) {
-    
+
     this.submitForm.emit(values)
 
   }
