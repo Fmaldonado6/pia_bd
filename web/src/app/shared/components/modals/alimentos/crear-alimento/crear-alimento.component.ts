@@ -30,7 +30,6 @@ export class CrearAlimentoComponent implements OnInit {
   }
 
   addAlimentInfo(values: AlimentoInfoForm) {
-    console.log(values)
     this.Alimento.nombre = values.nombre
     this.Alimento.idMarca = values.idMarca
     this.Alimento.idTipoAlimento = values.idTipoAlimento
