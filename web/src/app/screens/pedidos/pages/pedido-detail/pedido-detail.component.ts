@@ -20,6 +20,8 @@ export class PedidoDetailComponent implements OnInit {
   Status = Status
   currentStatus = Status.loading
 
+  total = 0
+
   pedido = new Pedido()
 
   constructor(
@@ -40,11 +42,23 @@ export class PedidoDetailComponent implements OnInit {
         pedido: this.pedido
       }
     })
+
+    dialog.componentInstance.pedidoEditado.subscribe(e => {
+      this.getPedido()
+    })
   }
 
   openEditIdemDialog(detalle: PedidoAlimento) {
-    console.log(detalle)
-    this.dialog.open(EditarDetalleComponent)
+    const dialog = this.dialog.open(EditarDetalleComponent, {
+      data: {
+        detalle: detalle,
+        pedido: this.pedido
+      }
+    })
+
+    dialog.componentInstance.detalleActualizado.subscribe(e => {
+      this.getPedido()
+    })
 
   }
 
@@ -55,6 +69,11 @@ export class PedidoDetailComponent implements OnInit {
     this.pedidosService.getPedido(this.id).subscribe(e => {
 
       this.pedido = e
+
+      for (let detalle of this.pedido.alimentos) {
+        this.total += detalle.precio * detalle.cantidad
+      }
+
       this.currentStatus = Status.loaded
 
     })

@@ -180,7 +180,9 @@ class PedidosController extends BaseController {
 
             for (let alimento of alimentos) {
 
-                if (!alimentos.find(x => x.idAlimento == alimento.idAlimento)) {
+                const found = pedido.alimentos.find(x => x.idAlimento == alimento.idAlimento)
+
+                if (!found) {
                     await alimentosRepository.addAlimentoQuantityById(alimento.idAlimento, alimento.cantidad)
 
                     await pedidoAlimentoRepository.delete(alimento.idPedido, alimento.idAlimento)

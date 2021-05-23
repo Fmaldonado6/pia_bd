@@ -45,7 +45,9 @@
         >
           <span class="nombre">{{ alimento.alimento.nombre }}</span>
           <span class="cantidad">(x{{ alimento.cantidad }})</span>
-          <span class="precio">{{ alimento.precio | currency: "MXN" }}</span>
+          <span class="precio">{{
+            alimento.precio * alimento.cantidad | currency: "MXN"
+          }}</span>
         </div>
       </div>
 
@@ -58,7 +60,7 @@
       <mat-divider></mat-divider>
       <div class="detail-item">
         <span>Total:</span>
-        <span>$100</span>
+        <span>{{ total | currency: "MXN" }}</span>
       </div>
     </div>
   </ng-container>
