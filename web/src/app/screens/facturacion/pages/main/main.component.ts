@@ -15,14 +15,14 @@ export class MainComponent {
       icon: "monetization_on",
       description: "Crea, edita y elimina las facturas",
       action: "Gestionar Facturas",
-      onClick: () => { this.changePage("/factura-crear") }
+      onClick: () => { this.openFacturaCrear() }
     },
     {
       title: "Ver Facturas",
       icon: "supervised_user_circle",
       description: "Visualizar las facturas",
       action: "Obserbar Facturas",
-      onClick: () => { this.changePage("/empleados") }
+      onClick: () => { this.changePage("/factura-ver") }
 
     }
   ]
@@ -33,10 +33,11 @@ export class MainComponent {
 
   }
 
-
-
   changePage(route: string) {
-    this.router.navigate([route])
+      this.router.navigate([route])
   }
 
+  openFacturaCrear() {
+    this.router.navigate(["/facturacion/create"])
+  }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SectionCard } from 'src/app/models/models';
 import { Router } from '@angular/router'
+import { CrearAlimentoComponent } from 'src/app/shared/components/modals/alimentos/crear-alimento/crear-alimento.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-main',
@@ -15,7 +17,7 @@ export class MainComponent {
       icon: "add_circle",
       description: "Agrega un nuevo alimento y o una bebida.",
       action: "Agregar",
-      onClick: () => { this.changePage("/alimentos") }
+      onClick: () => { this.openRegisterModal() }
       //Cambiar la ruta de onClick
     },
     {
@@ -37,7 +39,8 @@ export class MainComponent {
   ]
 
   constructor(
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
 
   }
@@ -48,6 +51,10 @@ export class MainComponent {
 
 
   ngOnInit(): void {
+  }
+
+  openRegisterModal() {
+    this.dialog.open(CrearAlimentoComponent)
   }
 
 }
