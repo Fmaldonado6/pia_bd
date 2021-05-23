@@ -23,7 +23,6 @@ export class MarcasComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMarcas()
-    this.openAddMarca()
   }
 
   getMarcas() {
