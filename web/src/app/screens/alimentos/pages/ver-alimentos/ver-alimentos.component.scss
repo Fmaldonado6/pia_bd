@@ -42,6 +42,22 @@
   justify-content: center;
 }
 
+.headers {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  padding: 10px 0px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.171);
+  margin-bottom: 10px;
+  .cantidad {
+    margin-right: 40px;
+  }
+
+  .nombre {
+    margin-left: 50px;
+  }
+}
+
 .empleado-item {
   display: flex;
   align-items: center;
@@ -56,18 +72,40 @@
     border-bottom: none;
   }
 
-  .more-icon {
+  .cantidad {
     margin-left: auto;
+    background-color: rgba(184, 184, 184, 0.281);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    border-radius: 100%;
+    span {
+      margin-left: 0px;
+      font-size: 14px;
+    }
+  }
+}
+
+.botones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  mat-form-field {
+    width: 45%;
   }
 }
 
 .register-button {
   margin-bottom: 20px;
   display: flex;
+  height: 35px;
   padding-right: 30px;
   border-radius: 20px;
   text-transform: uppercase;
-  margin-left: auto;
   mat-icon {
     transform: scale(0.75);
   }

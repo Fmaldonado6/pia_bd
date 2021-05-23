@@ -2,23 +2,41 @@
   <ng-container *ngSwitchCase="Status.loaded">
     <div class="title-container">
       <span>Alimentos Registrados</span>
-      <p>
-        Aquí podras gestionar los alimentos registrados.
-      </p>
+      <p>Aquí podras gestionar los alimentos registrados.</p>
     </div>
-    <button
-      (click)="openAddAlimento()"
-      mat-raised-button
-      color="primary"
-      class="register-button"
-    >
-      <mat-icon>add</mat-icon>
-      Registrar
-    </button>
+    <div class="botones">
+      <mat-form-field appearance="outline">
+        <mat-label>Buscar por nombre, marca o tipo de alimento</mat-label>
+        <input
+          #input
+          (input)="filter(input.value)"
+          matInput
+          autocomplete="off"
+          formControlName="descripcion"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <button
+        (click)="openAddAlimento()"
+        mat-raised-button
+        color="primary"
+        class="register-button"
+      >
+        <mat-icon>add</mat-icon>
+        Registrar
+      </button>
+    </div>
     <div class="info-container">
-      <div class="empleado-item" *ngFor="let alimento of alimentos">
-        <mat-icon color="primary"> account_circle </mat-icon>
+      <div class="headers">
+        <span class="nombre">Nombre</span>
+        <span class="cantidad">Cantidad</span>
+      </div>
+      <div class="empleado-item" *ngFor="let alimento of filterAlimentos">
+        <mat-icon color="primary"> sports_bar </mat-icon>
         <span>{{ alimento.nombre }} </span>
+        <div class="cantidad">
+          <span>{{ alimento.cantidadDisponible }}</span>
+        </div>
         <button
           mat-icon-button
           class="more-icon"
@@ -32,6 +50,14 @@
       <div class="empty-container" *ngIf="alimentos.length == 0">
         <mat-icon>help_outline</mat-icon>
         <span>No hay alimentos registrados</span>
+      </div>
+
+      <div
+        class="empty-container"
+        *ngIf="filterAlimentos.length == 0 && alimentos.length > 0"
+      >
+        <mat-icon>help_outline</mat-icon>
+        <span>No hay resultados para tu busqueda</span>
       </div>
     </div>
   </ng-container>

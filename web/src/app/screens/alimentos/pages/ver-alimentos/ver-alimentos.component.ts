@@ -1,7 +1,7 @@
 import { CrearAlimentoComponent } from './../../../../shared/components/modals/alimentos/crear-alimento/crear-alimento.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Alimentos, Status } from 'src/app/models/models';
+import { Alimentos, AlimentosFull, Status } from 'src/app/models/models';
 import { AlimentosService } from 'src/app/services/alimentos/alimentos.service';
 
 @Component({
@@ -14,7 +14,9 @@ export class VerAlimentosComponent implements OnInit {
   Status = Status
   currentStatus = Status.loading
 
-  alimentos: Alimentos[] = []
+  alimentos: AlimentosFull[] = []
+
+  filterAlimentos: AlimentosFull[] = []
 
   constructor(
     private dialog: MatDialog,
@@ -27,8 +29,9 @@ export class VerAlimentosComponent implements OnInit {
 
   getAlimentos() {
     this.currentStatus = Status.loading
-    this.alimentosService.getAlimentos().subscribe(e => {
+    this.alimentosService.getAlimentosFull().subscribe(e => {
       this.alimentos = e
+      this.filterAlimentos = this.alimentos
       this.currentStatus = Status.loaded
     })
   }
@@ -51,6 +54,22 @@ export class VerAlimentosComponent implements OnInit {
     dialog.componentInstance.alimentoCreado.subscribe(e => {
       this.getAlimentos()
     })
+  }
+
+  filter(input: string): any {
+
+    if (!input || input == "")
+      return this.filterAlimentos = this.alimentos
+
+    const inputLowerCase = input.toLowerCase()
+
+    this.filterAlimentos = this.alimentos.filter(x =>
+      x.nombre.toLowerCase().includes(inputLowerCase)
+      || x.marca.nombreMarca.toLowerCase().includes(inputLowerCase)
+      || x.tipoAlimento.nombre.toLowerCase().includes(inputLowerCase)
+
+    )
+
   }
 
 

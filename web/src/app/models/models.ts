@@ -56,6 +56,12 @@ export class Marca {
     nombreMarca: string = ""
 }
 
+export class AlimentosFull extends Alimentos {
+    marca: Marca = new Marca()
+    tipoAlimento = new TipoAlimento()
+
+}
+
 export class Pedido {
     idPedido: number = 0
     idEmpleado: number = 0

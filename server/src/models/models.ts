@@ -39,7 +39,7 @@ export class Privilegios {
 export class Alimentos {
     idAlimento: number = 0
     idTipoAlimento: number = 0
-    idMarca: string = ""
+    idMarca: number = 0
     nombre: string = ""
     precio: number = 0
     descripcion: string = ""
@@ -49,6 +49,12 @@ export class Alimentos {
 export class TipoAlimento {
     idTipoAlimento: number = 0
     nombre: string = ""
+}
+
+export class AlimentosFull extends Alimentos {
+    marca: Marca = new Marca()
+    tipoAlimento = new TipoAlimento()
+
 }
 
 export class Marca {
