@@ -7,7 +7,12 @@
         alimentos que ofrecemos.
       </p>
     </div>
-    <button mat-raised-button color="primary" class="register-button">
+    <button
+      (click)="openAddMarca()"
+      mat-raised-button
+      color="primary"
+      class="register-button"
+    >
       <mat-icon>add</mat-icon>
       Registrar
     </button>
@@ -23,6 +28,11 @@
         >
           <mat-icon> more_vert </mat-icon>
         </button>
+      </div>
+
+      <div class="empty-container" *ngIf="marcas.length == 0">
+        <mat-icon>help_outline</mat-icon>
+        <span>No hay marcas registradas</span>
       </div>
     </div>
   </ng-container>

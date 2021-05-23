@@ -72,3 +72,16 @@
     transform: scale(0.75);
   }
 }
+
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  color: grey;
+  mat-icon {
+    transform: scale(2);
+    margin-bottom: 15px;
+  }
+}
