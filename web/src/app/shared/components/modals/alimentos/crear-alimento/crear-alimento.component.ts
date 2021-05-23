@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Alimentos, Status } from 'src/app/models/models';
+import { AlimentosService } from 'src/app/services/alimentos/alimentos.service';
 
 @Component({
   selector: 'app-crear-alimento',
@@ -8,31 +9,44 @@ import { Alimentos, Status } from 'src/app/models/models';
   styleUrls: ['./crear-alimento.component.scss']
 })
 export class CrearAlimentoComponent implements OnInit {
-  
+
   Pages = Pages
   Status = Status
 
   currentPage = Pages.AlimentoInfo
   currentStatus = Status.loaded
 
-  @Input() Alimento = new Alimentos ()
+  @Input() Alimento = new Alimentos()
   @Input() edit = false
   @Output() iconClicked = new EventEmitter()
   @Output() userCreated = new EventEmitter()
 
-  constructor(private dialogRef: MatDialogRef<CrearAlimentoComponent> ) { }
+  constructor(
+    private dialogRef: MatDialogRef<CrearAlimentoComponent>,
+    private alimentosService: AlimentosService
+  ) { }
 
   ngOnInit(): void {
   }
 
   addAlimentInfo(values: AlimentoInfoForm) {
+    console.log(values)
     this.Alimento.nombre = values.nombre
-    this.Alimento.idAlimento = values.idAlimento
     this.Alimento.idMarca = values.idMarca
     this.Alimento.idTipoAlimento = values.idTipoAlimento
     this.Alimento.precio = values.precio
     this.Alimento.cantidadDisponible = values.cantidadDisponible
     this.Alimento.descripcion = values.descripcion
+    this.addAlimento()
+  }
+
+  addAlimento() {
+    this.currentStatus = Status.loading
+
+    this.alimentosService.addAlimento(this.Alimento).subscribe(e => {
+      this.currentStatus = Status.success
+      this.success()
+    })
   }
 
   success() {
@@ -63,7 +77,6 @@ export class CrearAlimentoComponent implements OnInit {
 
 interface AlimentoInfoForm {
   nombre: string
-  idAlimento: number
   idMarca: string
   idTipoAlimento: number
   precio: number

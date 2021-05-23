@@ -18,4 +18,8 @@ export class AlimentosService extends DataService {
 
   }
 
+  addAlimento(alimento: Alimentos) {
+    return this.http.post(`${this.url}/alimentos`, alimento).pipe(catchError(this.handleError))
+  }
+
 }

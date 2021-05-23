@@ -110,6 +110,8 @@ class AlimentosController extends BaseController {
 
             const alimento = req.body as Alimentos
 
+            console.log(alimento)
+
             await alimentosRepository.add(alimento)
 
             res.status(200).json(alimento)
