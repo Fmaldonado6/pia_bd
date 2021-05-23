@@ -23,4 +23,9 @@ export class MarcasService extends DataService {
     return this.http.get<Marca[]>(`${this.url}/alimentos/marcas`).pipe(catchError(this.handleError))
   }
 
+  deleteMarca(id: number) {
+    return this.http.delete(`${this.url}/alimentos/marcas/${id}`).pipe(catchError(this.handleError))
+
+  }
+
 }

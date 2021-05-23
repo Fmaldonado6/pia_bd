@@ -44,7 +44,7 @@
 
 <mat-menu #optionsMarca="matMenu">
   <ng-template matMenuContent let-marca="marca">
-    <button mat-menu-item (click)="updateMarca(marca)">Editar</button>
-    <button mat-menu-item>Eliminar</button>
+    <button mat-menu-item (click)="openUpdateMarca(marca)">Editar</button>
+    <button mat-menu-item (click)="openDeleteMarca(marca)">Eliminar</button>
   </ng-template>
 </mat-menu>

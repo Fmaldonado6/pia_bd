@@ -32,6 +32,7 @@ import { EditarAlimentoComponent } from './components/modals/alimentos/editar-al
 import { AlimentoInfoComponent } from './components/modals/alimentos/crear-alimento/pages/alimento-info/alimento-info.component';
 import { CrearMarcaComponent } from './components/modals/marcas/crear-marca/crear-marca.component';
 import { EditarMarcaComponent } from './components/modals/marcas/editar-marca/editar-marca.component';
+import { EliminarMarcaComponent } from './components/modals/marcas/eliminar-marca/eliminar-marca.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { EditarMarcaComponent } from './components/modals/marcas/editar-marca/ed
     AlimentoInfoComponent,
     CrearMarcaComponent,
     EditarMarcaComponent,
+    EliminarMarcaComponent,
   ],
   imports: [
     CommonModule,
