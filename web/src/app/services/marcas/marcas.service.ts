@@ -13,7 +13,7 @@ export class MarcasService extends DataService {
     return this.http.post(`${this.url}/alimentos/marcas`, marca).pipe(catchError(this.handleError))
   }
 
-  getMarcas(marca: Marca) {
+  getMarcas() {
     return this.http.get<Marca[]>(`${this.url}/alimentos/marcas`).pipe(catchError(this.handleError))
   }
 
