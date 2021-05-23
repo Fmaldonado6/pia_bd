@@ -22,7 +22,7 @@ export class MainComponent {
       icon: "supervised_user_circle",
       description: "Visualizar las facturas",
       action: "Obserbar Facturas",
-      onClick: () => { this.changePage("/factura-ver") }
+      onClick: () => { this.openFacturaVer() }
 
     }
   ]
@@ -39,5 +39,9 @@ export class MainComponent {
 
   openFacturaCrear() {
     this.router.navigate(["/facturacion/create"])
+  }
+
+  openFacturaVer(){
+    this.router.navigate(["/facturacion/ver"])
   }
 }
