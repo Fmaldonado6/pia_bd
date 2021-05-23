@@ -57,8 +57,6 @@ export class MainComponent {
   }
 
 
-  ngOnInit(): void {
-  }
 
   openRegisterModal() {
     this.dialog.open(CrearAlimentoComponent)

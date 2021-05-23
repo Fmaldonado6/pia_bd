@@ -1,1 +1,40 @@
-<p>marcas works!</p>
+<div class="container" [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <div class="title-container">
+      <span>Marcas Registradas</span>
+      <p>
+        Aquí podras gestionar todo lo relacionado con las marcas de los
+        alimentos que ofrecemos.
+      </p>
+    </div>
+    <button mat-raised-button color="primary" class="register-button">
+      <mat-icon>add</mat-icon>
+      Registrar
+    </button>
+    <div class="info-container">
+      <div class="empleado-item" *ngFor="let marca of marcas">
+        <mat-icon color="primary"> account_circle </mat-icon>
+        <span>{{ marca.nombreMarca }} </span>
+        <button
+          mat-icon-button
+          class="more-icon"
+          [matMenuTriggerData]="{ marca: marca }"
+          [matMenuTriggerFor]="optionsMarca"
+        >
+          <mat-icon> more_vert </mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+</div>
+
+<mat-menu #optionsMarca="matMenu">
+  <ng-template matMenuContent let-marca="marca">
+    <button mat-menu-item>Editar</button>
+    <button mat-menu-item>Eliminar</button>
+  </ng-template>
+</mat-menu>

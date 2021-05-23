@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Marca, Status } from 'src/app/models/models';
 
 @Component({
   selector: 'app-marcas',
@@ -6,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./marcas.component.scss']
 })
 export class MarcasComponent implements OnInit {
+
+  Status = Status
+  currentStatus = Status.loaded
+
+  marcas: Marca[] = []
 
   constructor() { }
 
