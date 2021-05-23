@@ -1,0 +1,71 @@
+<modal-title
+  [type]="edit ? HeaderType.goBack : HeaderType.close"
+  [title]="edit ? 'Editar Alimento' : 'Agregar Alimento'"
+  subtitle="Ingrese la información del Alimento"
+  (iconClicked)="onIconClick()"
+></modal-title>
+<form
+  (ngSubmit)="onSubmit(formInformacion.value)"
+  [formGroup]="formInformacion"
+>
+    <mat-form-field appearance="outline">
+        <mat-label>Tipo de alimento</mat-label>
+        <mat-select
+        [disabled]="tiposAlimentos.length == 0"
+        formControlName="tipoAlimento"
+        >
+            <mat-option
+                *ngFor="let tipo of tiposAlimentos"
+                [value]="tipo.idTipoAlimento"
+                >{{ tipo.nombre }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>idAlimento</mat-label>
+        <input matInput formControlName="idAlimento" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Marca</mat-label>
+        <mat-select
+        [disabled]="idMarca.length == 0"
+        formControlName="idMarca"
+        >
+            <mat-option
+                *ngFor="let marca of idMarca"
+                [value]="marca.idMarca"
+                >{{ marca.idMarca }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+
+
+
+    <mat-form-field appearance="outline">
+        <mat-label>Precio</mat-label>
+        <input matInput formControlName="precio" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Cantidad Disponible</mat-label>
+        <input matInput formControlName="cantidadDisponible" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="descripcion" />
+    </mat-form-field>
+
+
+
+
+  <button [disabled]="!formInformacion.valid" mat-raised-button color="primary">
+    SIGUIENTE
+  </button>
+</form>
