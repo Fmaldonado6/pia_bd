@@ -1,6 +1,8 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { SectionCard } from '../../../../models/models';
 import { Router } from '@angular/router';
+import { CrearFacturaComponent } from 'src/app/shared/components/modals/facturas/crear-factura/crear-factura.component';
 
 @Component({
   selector: 'app-main',
@@ -28,20 +30,21 @@ export class MainComponent {
   ]
 
   constructor(
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
-
+    this.openFacturaCrear()
   }
 
   changePage(route: string) {
-      this.router.navigate([route])
+    this.router.navigate([route])
   }
 
   openFacturaCrear() {
-    this.router.navigate(["/facturacion/create"])
+    this.dialog.open(CrearFacturaComponent)
   }
 
-  openFacturaVer(){
+  openFacturaVer() {
     this.router.navigate(["/facturacion/ver"])
   }
 }

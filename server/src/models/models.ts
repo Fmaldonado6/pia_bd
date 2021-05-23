@@ -128,7 +128,6 @@ export class Factura {
     RFC: string = ""
     idPedido: number = 0
     concepto: string = ""
-    razonSocial: string = ""
     idPais: number = 0
     idEstado: number = 0
     idMunicipio: number = 0

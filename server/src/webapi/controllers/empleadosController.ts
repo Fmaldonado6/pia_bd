@@ -138,7 +138,7 @@ class EmpleadosController extends BaseController {
                 colonia = await coloniasRepository.add(colonia)
             }
 
-            let calle = await callesRepository.getCallesByNameAndColoniaId(empleado.nombreColonia,empleado.idColonia)
+            let calle = await callesRepository.getCallesByNameAndColoniaId(empleado.nombreCalle,empleado.idColonia)
 
 
             if (!calle) {
