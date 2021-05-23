@@ -33,7 +33,7 @@ export class MainComponent {
       icon: "local_bar",
       description: "Edita o elimina los diferentes tipos de alimentos que ofrecemos.",
       action: "Editar",
-      onClick: () => { this.changePage("/alimentos/list") }
+      onClick: () => { this.changePage("/alimentos/tipos") }
       //Cambiar la ruta de onClick
     },
     {

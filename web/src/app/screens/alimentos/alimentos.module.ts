@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AgregarAlimentosComponent } from './pages/agregar-alimentos/agregar-alimentos.component';
 import { EditarAlimentosComponent } from './pages/editar-alimentos/editar-alimentos.component';
 import { MarcasComponent } from './pages/marcas/marcas.component';
+import { TiposComponent } from './pages/tipos/tipos.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { MarcasComponent } from './pages/marcas/marcas.component';
     AgregarAlimentosComponent,
     EditarAlimentosComponent,
     MarcasComponent,
+    TiposComponent,
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditarAlimentoComponent } from 'src/app/shared/components/modals/alimentos/editar-alimento/editar-alimento.component';
 import { MainComponent } from './pages/main/main.component';
+import { TiposComponent } from './pages/tipos/tipos.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'marcas',
     component: MarcasComponent
+  },
+  {
+    path: 'tipos',
+    component: TiposComponent
   }
 ];
 
