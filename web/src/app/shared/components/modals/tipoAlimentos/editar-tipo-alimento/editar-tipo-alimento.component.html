@@ -1,1 +1,26 @@
-<p>editar-tipo-alimento works!</p>
+<div class="dialog" [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <modal-title
+      title="Registrar Tipo de Alimento"
+      subtitle="Ingrese la información del tipo de alimento"
+      (iconClicked)="close()"
+    ></modal-title>
+    <form (ngSubmit)="submit(form.value)" [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre del tipo de alimento</mat-label>
+        <input autocomplete="off" matInput formControlName="nombre" />
+      </mat-form-field>
+      <button [disabled]="!form.valid" mat-raised-button color="primary">
+        REGISTRAR
+      </button>
+    </form>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+
+  <div class="status" *ngSwitchCase="Status.success">
+    <info-menu (clickEvent)="close()"></info-menu>
+  </div>
+</div>

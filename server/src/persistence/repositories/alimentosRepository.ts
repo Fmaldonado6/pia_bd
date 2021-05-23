@@ -102,7 +102,7 @@ class TipoAlimentoRepository implements BaseRepository<TipoAlimento> {
         ) 
         output Inserted.idTipoAlimento
         values (
-            '${obj.nombreTipo}'
+            '${obj.nombre}'
         )`)
 
         return res!![0]
@@ -143,7 +143,7 @@ class TipoAlimentoRepository implements BaseRepository<TipoAlimento> {
         await database.executeQuery(`
         update TipoAlimento
         set 
-        nombre='${obj.nombreTipo}'
+        nombre='${obj.nombre}'
         where idTipoAlimento = ${obj.idTipoAlimento}
     `)
 

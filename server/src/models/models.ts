@@ -48,7 +48,7 @@ export class Alimentos {
 
 export class TipoAlimento {
     idTipoAlimento: number = 0
-    nombreTipo: string = ""
+    nombre: string = ""
 }
 
 export class Marca {
