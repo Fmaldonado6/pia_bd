@@ -1,5 +1,5 @@
 import { EmpleadosService } from 'src/app/services/empleados/empleados.service';
-import { Empleado, Pedido} from 'src/app/models/models';
+import { Empleado, Pedido } from 'src/app/models/models';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HeaderType } from '../../../../modal-title/modal-title.component';
@@ -23,6 +23,13 @@ export class EmployeeListComponent implements OnInit {
   constructor(private empleadosService: EmpleadosService) { }
 
   ngOnInit(): void {
+
+    this.formInformacion = new FormGroup({
+      empleado: new FormControl('', [
+        Validators.required
+      ])
+    })
+
     this.getEmpleados()
   }
 

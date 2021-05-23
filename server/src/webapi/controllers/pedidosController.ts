@@ -103,7 +103,7 @@ class PedidosController extends BaseController {
                 await pedidoAlimentoRepository.add(alimento)
             }
 
-            res.status(200).json(pedido)
+            res.status(200).json(nuevoPedido)
 
         } catch (error) {
             console.error(error)
