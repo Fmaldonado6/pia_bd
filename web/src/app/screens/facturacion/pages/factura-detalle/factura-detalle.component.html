@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="header">
+    <div class="title-container">
+      <span>Factura</span>
+      <h1>Bar delow</h1>
+    </div>
+    <img class="logo" src="assets/logo.png" />
+  </div>
+  <div class="factura-info">
+    <div class="direccion">
+      <span
+        >Direccion: {{ factura.nombreColoniaNegocio }},
+        {{ factura.nombreCalleNegocio }}, {{ factura.numeroNegocio }}</span
+      >
+      <span
+        >Ciudad: {{ factura.nombrePaisNegocio }},
+        {{ factura.nombreEstadoNegocio }}, {{ factura.nombreMunicipioNegocio }},
+      </span>
+      <span>Teléfono: {{ factura.telefonoNegocio }}</span>
+    </div>
+    <div class="info-general">
+      <span>Fecha: {{ factura.fechaFactura | date: "fullDate" }}</span>
+      <span># de factura: {{ factura.idFactura }} </span>
+    </div>
+  </div>
+  <div class="factura-personal-info">
+    <span>Facturar a:</span>
+    <span>Nombre: {{ factura.nombre }} </span>
+    <span>Teléfono: {{ factura.telefono }}</span>
+    <span
+      >Direccion: {{ factura.nombreColonia }}, {{ factura.nombreCalle }},
+      {{ factura.numero }}</span
+    >
+    <span
+      >Ciudad: {{ factura.nombrePais }}, {{ factura.nombreEstado }},
+      {{ factura.nombreMunicipio }},
+    </span>
+    <span>RFC: {{ factura.RFC }}</span>
+    <span>Concepto: {{ factura.concepto }}</span>
+    <span>Razón social: {{ factura.razonSocial }}</span>
+  </div>
+  <div class="detalle">
+    <table>
+      <th class="nombre">Nombre</th>
+      <th>Cantidad</th>
+      <th>Precio Unitario</th>
+      <th>Precio</th>
+      <tr *ngFor="let detalle of factura.detalles">
+        <td>{{ detalle.nombreAlimento }}</td>
+        <td>{{ detalle.cantidad }}</td>
+        <td>{{ detalle.precio }}</td>
+        <td>{{ detalle.precio * detalle.cantidad }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>Subtotal</td>
+        <td>$100</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>Total</td>
+        <td>$100</td>
+      </tr>
+    </table>
+  </div>
+</div>

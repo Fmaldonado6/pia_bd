@@ -140,6 +140,30 @@ export class Factura {
     telefono: string = ""
 }
 
+export class FacturaResource extends Factura {
+    nombrePais: string = ""
+    nombreEstado: string = ""
+    nombreMunicipio: string = ""
+    nombreColonia: string = ""
+    nombreCalle: string = ""
+    nombrePaisNegocio: string = ""
+    nombreEstadoNegocio: string = ""
+    nombreMunicipioNegocio: string = ""
+    nombreColoniaNegocio: string = ""
+    nombreCalleNegocio: string = ""
+    numeroNegocio = 0
+    telefonoNegocio = 0
+    detalles: FacturaDetalle[] = []
+}
+
+export class FacturaDetalle {
+    idFactura: number = 0
+    idAlimento: number = 0
+    cantidad: number = 0
+    nombreAlimento: string = ""
+    precio: number = 0
+}
+
 export enum PrivilegiosId {
     gestionarUsuarios = 1,
     gestionarPedidos,
