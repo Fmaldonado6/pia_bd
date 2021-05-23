@@ -26,6 +26,9 @@ import { AlimentosListComponent } from './components/modals/pedidos/agregar-deta
 import { AlimentosCantidadComponent } from './components/modals/pedidos/agregar-detalle/pages/alimentos-cantidad/alimentos-cantidad.component';
 import { EmployeeListComponent } from './components/modals/pedidos/crear-pedidos/pages/employee-list/employee-list.component';
 import { EditarDetalleComponent } from './components/modals/pedidos/editar-detalle/editar-detalle.component';
+import { CrearAlimentoComponent } from './components/modals/alimentos/crear-alimento/crear-alimento.component';
+import { EliminarAlimentoComponent } from './components/modals/alimentos/eliminar-alimento/eliminar-alimento.component';
+import { EditarAlimentoComponent } from './components/modals/alimentos/editar-alimento/editar-alimento.component';
 
 
 @NgModule({
@@ -54,6 +57,9 @@ import { EditarDetalleComponent } from './components/modals/pedidos/editar-detal
     AlimentosCantidadComponent,
     EmployeeListComponent,
     EditarDetalleComponent,
+    CrearAlimentoComponent,
+    EliminarAlimentoComponent,
+    EditarAlimentoComponent,
   ],
   imports: [
     CommonModule,
