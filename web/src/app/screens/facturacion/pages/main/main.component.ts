@@ -12,18 +12,12 @@ import { MatDialog } from '@angular/material/dialog';
 export class MainComponent {
 
   sections: SectionCard[] = [
+ 
     {
-      title: "Crear Facturas",
-      icon: "monetization_on",
-      description: "Crea, edita y elimina las facturas",
-      action: "Gestionar Facturas",
-      onClick: () => { this.openRegisterModal() }
-    },
-    {
-      title: "Ver Facturas",
-      icon: "supervised_user_circle",
-      description: "Visualizar las facturas",
-      action: "Observar Facturas",
+      title: "Gestionar Facturas",
+      icon: "sticky_note_2",
+      description: "Aquí podrás gestionar todas las facturas creadas.",
+      action: "Ver Facturas",
       onClick: () => { this.openFacturaVer() }
     }
   ]
