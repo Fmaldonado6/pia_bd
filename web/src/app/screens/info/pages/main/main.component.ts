@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InfoSucursal, InfoSucursalResource } from 'src/app/models/models';
+import { InfoSucursal, InfoSucursalResource, Status } from 'src/app/models/models';
 import { LocalService } from 'src/app/services/local/local.service';
 
 @Component({
@@ -8,6 +8,9 @@ import { LocalService } from 'src/app/services/local/local.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+
+  Status = Status
+  currentStatus = Status.loading
 
   sucursal = new InfoSucursalResource()
 
@@ -21,6 +24,7 @@ export class MainComponent implements OnInit {
 
   getInfo() {
     this.localService.getLocalInfo().subscribe(e => {
+      this.currentStatus = Status.loaded
       this.sucursal = e
     })
   }
