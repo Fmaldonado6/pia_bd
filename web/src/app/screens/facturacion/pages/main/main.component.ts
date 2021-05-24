@@ -3,7 +3,6 @@ import { SectionCard } from '../../../../models/models';
 import { Router } from '@angular/router';
 import { CrearFacturasCrearComponent } from 'src/app/shared/components/modals/facturas/crear-facturas-crear/crear-facturas-crear.component';
 import { MatDialog } from '@angular/material/dialog';
-import { CrearFacturaComponent } from 'src/app/shared/components/modals/facturas/crear-factura/crear-factura.component';
 
 @Component({
   selector: 'app-main',
@@ -47,7 +46,6 @@ export class MainComponent {
   }
 
   openFacturaCrear() {
-    this.dialog.open(CrearFacturaComponent)
   }
 
   openFacturaVer() {
