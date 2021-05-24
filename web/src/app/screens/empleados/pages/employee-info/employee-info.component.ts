@@ -29,9 +29,7 @@ export class EmployeeInfoComponent implements OnInit {
   getEmpleadoInfo() {
 
     const id = this.route.snapshot.params.id
-    console.log(id)
     this.empleadosService.getEmpleadosInfo(id).subscribe(e => {
-      console.log(e)
       this.empleado = e
       this.currentStatus = Status.loaded
     })

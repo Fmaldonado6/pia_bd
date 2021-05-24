@@ -7,13 +7,15 @@
     </p>
   </div>
   <div class="card-container">
-    <section-card
-      *ngFor="let section of sections"
-      [title]="section.title"
-      [description]="section.description"
-      [icon]="section.icon"
-      [action]="section.action"
-      (buttonClicked)="section.onClick()"
-    ></section-card>
+    <ng-container *ngFor="let section of sections">
+      <section-card
+        *ngIf="section.canActivate"
+        [title]="section.title"
+        [description]="section.description"
+        [icon]="section.icon"
+        [action]="section.action"
+        (buttonClicked)="section.onClick()"
+      ></section-card>
+    </ng-container>
   </div>
 </div>

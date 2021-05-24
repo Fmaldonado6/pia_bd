@@ -43,6 +43,9 @@ class EmpleadosController extends BaseController {
             if (!empleado)
                 return res.sendStatus(404)
 
+            const privilegios = await privilegiosRepository.getPrivilefiosByTipoEmpleadoId(empleado.idTipoEmpleado)
+
+            empleado.privilegios = privilegios
             if (empleado) empleado.contrasena = ""
 
             res.status(200).json(empleado)
@@ -129,7 +132,7 @@ class EmpleadosController extends BaseController {
 
             const empleado = req.body as Empleado
 
-            let colonia = await coloniasRepository.getColoniaByNameAndMunicipioId(empleado.nombreColonia,empleado.idMunicipio)
+            let colonia = await coloniasRepository.getColoniaByNameAndMunicipioId(empleado.nombreColonia, empleado.idMunicipio)
 
             if (!colonia) {
                 colonia = new Colonia()
@@ -138,7 +141,7 @@ class EmpleadosController extends BaseController {
                 colonia = await coloniasRepository.add(colonia)
             }
 
-            let calle = await callesRepository.getCallesByNameAndColoniaId(empleado.nombreCalle,empleado.idColonia)
+            let calle = await callesRepository.getCallesByNameAndColoniaId(empleado.nombreCalle, empleado.idColonia)
 
 
             if (!calle) {
