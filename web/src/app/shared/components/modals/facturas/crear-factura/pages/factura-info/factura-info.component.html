@@ -1,0 +1,35 @@
+<modal-title
+  title="Crear factura"
+  subtitle="Ingrese la información de la factura"
+  (iconClicked)="onIconClicked()"
+>
+</modal-title>
+<form (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Apellido Paterno</mat-label>
+    <input matInput formControlName="apPaterno" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Apellido Materno</mat-label>
+    <input matInput formControlName="apMaterno" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Telefono</mat-label>
+    <input matInput type="number" formControlName="telefono" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>RFC</mat-label>
+    <input matInput formControlName="RFC" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Concepto</mat-label>
+    <input matInput formControlName="concepto" />
+  </mat-form-field>
+  <button [disabled]="!form.valid" mat-raised-button color="primary">
+    SIGUIENTE
+  </button>
+</form>

@@ -17,9 +17,13 @@ export class FacturasService extends DataService {
     return this.http.get<FacturaResource>(`${this.url}/facturas/${id}`).pipe(catchError(this.handleError))
   }
 
-  deleteFactura(id:number){
+  deleteFactura(id: number) {
     return this.http.delete(`${this.url}/facturas/${id}`).pipe(catchError(this.handleError))
 
+  }
+
+  addFactura(factura: FacturaResource) {
+    return this.http.post<FacturaResource>(`${this.url}/facturas`, factura).pipe(catchError(this.handleError))
   }
 
 }

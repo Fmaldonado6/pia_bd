@@ -2,7 +2,7 @@ import { infoSucursalRepository } from './../../persistence/repositories/infoSuc
 import { callesRepository } from './../../persistence/repositories/direcionRepository';
 import { alimentosRepository } from './../../persistence/repositories/alimentosRepository';
 import { facturaDetalleRepository, facturasRepository } from './../../persistence/repositories/facturasRepository';
-import { Factura, FacturaDetalle, FacturaResource, PrivilegiosId } from './../../models/models';
+import { Calle, Colonia, Factura, FacturaDetalle, FacturaResource, PrivilegiosId } from './../../models/models';
 import { Request, Response } from 'express';
 import { BaseController, CustomRequest } from './baseController';
 import { pedidoAlimentoRepository } from '../../persistence/repositories/pedidosRepository';
@@ -136,12 +136,32 @@ class FacturasController extends BaseController {
             if (!hasPermission)
                 return res.sendStatus(403)
 
-            const factura = req.body as Factura
+            const factura = req.body as FacturaResource
 
             factura.fechaFactura = new Date()
 
             const pedidoDetalles = await pedidoAlimentoRepository.getPedidosAlimentosByPedidoId(factura.idPedido)
 
+            let colonia = await coloniasRepository.getColoniaByNameAndMunicipioId(factura.nombreColonia, factura.idMunicipio)
+
+            if (!colonia) {
+                colonia = new Colonia()
+                colonia.idMunicipio = factura.idMunicipio
+                colonia.nombre = factura.nombreColonia
+                colonia = await coloniasRepository.add(colonia)
+            }
+
+            let calle = await callesRepository.getCallesByNameAndColoniaId(factura.nombreCalle, factura.idColonia)
+
+            if (!calle) {
+                calle = new Calle()
+                calle.idColonia = colonia.idColonia
+                calle.nombre = factura.nombreCalle
+                calle = await callesRepository.add(calle)
+            }
+
+            factura.idColonia = colonia.idColonia
+            factura.idCalle = calle.idCalle
 
             const nuevaFactura = await facturasRepository.add(factura)
 
@@ -163,7 +183,6 @@ class FacturasController extends BaseController {
 
                 await facturaDetalleRepository.add(facturaDetalle)
             }
-
             res.status(200).json(factura)
 
         } catch (error) {

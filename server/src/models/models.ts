@@ -144,6 +144,9 @@ export class Factura {
     apPaterno: string = ""
     apMaterno: string = ""
     telefono: string = ""
+    total = 0
+    subtotal = 0
+    descuento = 0
 }
 
 export class FacturaResource extends Factura {

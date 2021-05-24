@@ -1,3 +1,4 @@
+import { CrearFacturaComponent } from './../../../../shared/components/modals/facturas/crear-factura/crear-factura.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PedidoAlimento } from './../../../../models/models';
 import { EditarDetalleComponent } from './../../../../shared/components/modals/pedidos/editar-detalle/editar-detalle.component';
@@ -83,6 +84,14 @@ export class PedidoDetailComponent implements OnInit {
 
     })
 
+  }
+
+  crearFactura() {
+    this.dialog.open(CrearFacturaComponent, {
+      data: {
+        pedido: this.pedido
+      }
+    })
   }
 
   crearTicket() {

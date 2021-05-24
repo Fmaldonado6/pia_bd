@@ -71,8 +71,13 @@ p {
   }
 }
 
-.ticket-button{
-  margin-left: auto;
+.botones {
+  display: flex;
+  justify-content: flex-end;
+
+  button:last-child {
+    margin-left: 10px;
+  }
 }
 
 .info-title-container {

@@ -1,0 +1,56 @@
+<modal-title
+  title="Crear Factura"
+  [type]="HeaderType.goBack"
+  subtitle="Ingrese la información de la factura"
+  (iconClicked)="onIconClick()"
+></modal-title>
+<form [formGroup]="formDireccion" (ngSubmit)="onSubmit(formDireccion.value)">
+  <mat-form-field appearance="outline">
+    <mat-label>País</mat-label>
+    <mat-select (ngModelChange)="getEstados($event)" formControlName="idPais">
+      <mat-option *ngFor="let pais of paises" [value]="pais.idPais">{{
+        pais.nombre
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Estado</mat-label>
+    <mat-select
+      [disabled]="estados.length == 0"
+      (ngModelChange)="getMunicipios($event)"
+      formControlName="idEstado"
+    >
+      <mat-option *ngFor="let estado of estados" [value]="estado.idEstado">{{
+        estado.nombre
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Municipio</mat-label>
+    <mat-select
+      [disabled]="municipios.length == 0"
+      formControlName="idMunicipio"
+    >
+      <mat-option
+        *ngFor="let municipio of municipios"
+        [value]="municipio.idMunicipio"
+        >{{ municipio.nombre }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Colonia</mat-label>
+    <input matInput formControlName="nombreColonia" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Calle</mat-label>
+    <input matInput formControlName="nombreCalle" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Numero</mat-label>
+    <input type="number" matInput formControlName="numero" />
+  </mat-form-field>
+  <button [disabled]="!formDireccion.valid" mat-raised-button color="primary">
+    CREAR
+  </button>
+</form>

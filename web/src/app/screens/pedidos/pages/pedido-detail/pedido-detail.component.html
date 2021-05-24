@@ -4,15 +4,26 @@
       <span>Pedido ({{ pedido.idPedido }})</span>
       <p>Aquí podrás gestionar los detalles del pedido seleccionado</p>
     </div>
-    <button
-      (click)="crearTicket()"
-      mat-raised-button
-      color="primary"
-      class="ticket-button"
-    >
-      <mat-icon>sticky_note_2</mat-icon>
-      Generar ticket
-    </button>
+    <div class="botones">
+      <button
+        (click)="crearFactura()"
+        mat-raised-button
+        color="primary"
+        class="ticket-button"
+      >
+        <mat-icon>sticky_note_2</mat-icon>
+        Generar Factura
+      </button>
+      <button
+        (click)="crearTicket()"
+        mat-raised-button
+        color="primary"
+        class="ticket-button"
+      >
+        <mat-icon>sticky_note_2</mat-icon>
+        Generar ticket
+      </button>
+    </div>
     <div class="info-container">
       <span class="section-title">Información del pedido</span>
       <mat-list>

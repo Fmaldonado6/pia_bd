@@ -9,14 +9,15 @@ class FacturasRepository implements BaseRepository<Factura> {
         insert into Facturas(
             idPedido, concepto, nombre, apPaterno,
             apMaterno, telefono, RFC, fechaFactura, idPais, idEstado,
-            idMunicipio, idColonia, idCalle, numero
+            idMunicipio, idColonia, idCalle, numero, total, subtotal, descuento
         ) 
         output Inserted.idFactura
         values (
             ${obj.idPedido}, '${obj.concepto}' , 
             '${obj.nombre}', '${obj.apPaterno}', '${obj.apMaterno}' , ${obj.telefono} ,
             '${obj.RFC}', ${date.getTime()}, '${obj.idPais}', '${obj.idEstado}',
-            '${obj.idMunicipio}', '${obj.idColonia}', '${obj.idCalle}', ${obj.numero}
+            '${obj.idMunicipio}', '${obj.idColonia}', '${obj.idCalle}', ${obj.numero}, ${obj.total},
+            ${obj.subtotal}, ${obj.descuento}
         )`)
 
         return res!![0]
@@ -56,7 +57,8 @@ class FacturasRepository implements BaseRepository<Factura> {
             nombre = '${obj.nombre}', apPaterno = '${obj.apPaterno}', apMaterno = '${obj.apMaterno}', 
             telefono = ${obj.telefono}, RFC = '${obj.RFC}', fechaFactura = ${date.getTime()}, 
             idPais = '${obj.idPais}', idEstado = '${obj.idEstado}', idMunicipio = '${obj.idMunicipio}',
-            idColonia = '${obj.idColonia}', idCalle = '${obj.idCalle}', numero = ${obj.numero}
+            idColonia = '${obj.idColonia}', idCalle = '${obj.idCalle}', numero = ${obj.numero}, total = ${obj.total},
+            subtotal = ${obj.subtotal}, descuento = ${obj.descuento}
         where idFactura = ${obj.idFactura}
         
         `)
@@ -69,7 +71,7 @@ class FacturaDetalleRepository {
 
     async add(obj: FacturaDetalle): Promise<FacturaDetalle> {
         await database.executeQuery(`
-        insert into FacturaDetalle(
+        insert into FacturasDetalle(
             idFactura, idAlimento, cantidad,nombreAlimento ,precio
         ) 
         values (
@@ -83,7 +85,7 @@ class FacturaDetalleRepository {
 
     async get(id: number): Promise<FacturaDetalle | null> {
         const res = await database.executeQuery(`
-            select * from FacturaDetalle where idFactura = ${id}
+            select * from FacturasDetalle where idFactura = ${id}
         `)
         if (!res)
             return null
@@ -94,7 +96,7 @@ class FacturaDetalleRepository {
 
     async getFacturaDetalleByFacturaId(id: number): Promise<FacturaDetalle[]> {
         const res = await database.executeQuery(`
-        select * from FacturaDetalle
+        select * from FacturasDetalle
         where idFactura = ${id}
         `)
 
@@ -106,7 +108,7 @@ class FacturaDetalleRepository {
 
     async getFacturaDetalleByAlimentoId(id: number): Promise<FacturaDetalle[]> {
         const res = await database.executeQuery(`
-        select * from FacturaDetalle
+        select * from FacturasDetalle
         where idAlimento = ${id}
         `)
 
@@ -120,14 +122,14 @@ class FacturaDetalleRepository {
 
     async delete(idPedido: number, idAlimento: number): Promise<void> {
         await database.executeQuery(`
-            delete from FacturaDetalle 
+            delete from FacturasDetalle 
             where idFactura = ${idPedido} and idAlimento = ${idAlimento}
         `)
     }
 
     async update(obj: FacturaDetalle): Promise<FacturaDetalle> {
         await database.executeQuery(`
-        update FacturaDetalle
+        update FacturasDetalle
         set cantidad = ${obj.cantidad}, precio = ${obj.precio}, nombreAlimento = '${obj.nombreAlimento}'
         where idFactura = ${obj.idFactura} and idAlimento = ${obj.idAlimento}
     `)

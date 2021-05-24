@@ -40,6 +40,8 @@ import { EliminarPedidoComponent } from './components/modals/pedidos/eliminar-pe
 import { EliminarTicketComponent } from './components/modals/tickets/eliminar-ticket/eliminar-ticket.component';
 import { EliminarFacturaComponent } from './components/modals/facturas/eliminar-factura/eliminar-factura.component';
 import { CrearFacturaComponent } from './components/modals/facturas/crear-factura/crear-factura.component';
+import { FacturaInfoComponent } from './components/modals/facturas/crear-factura/pages/factura-info/factura-info.component';
+import { FacturaAddressComponent } from './components/modals/facturas/crear-factura/pages/factura-address/factura-address.component';
 
 
 @NgModule({
@@ -82,6 +84,8 @@ import { CrearFacturaComponent } from './components/modals/facturas/crear-factur
     EliminarTicketComponent,
     EliminarFacturaComponent,
     CrearFacturaComponent,
+    FacturaInfoComponent,
+    FacturaAddressComponent
   ],
   imports: [
     CommonModule,

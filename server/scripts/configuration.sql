@@ -161,6 +161,9 @@ IF OBJECT_ID ('Facturas','U') is null create table Facturas
     telefono Bigint not null,
     RFC varchar (20) not null,
     fechaFactura Bigint not null,
+    subtotal int not null,
+    total int not null,
+    descuento int not null,
     --Foreign
     idPais int ,
     constraint fk_idPais foreign key (idPais) references Pais(idPais),

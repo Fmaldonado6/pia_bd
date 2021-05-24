@@ -2,9 +2,7 @@
   <ng-container *ngSwitchCase="Status.loaded">
     <div class="title-container">
       <span>Facturas Registradas</span>
-      <p>
-        Aquí podras gestionar todo lo relacionado con las facturas creadas.
-      </p>
+      <p>Aquí podras gestionar todo lo relacionado con las facturas creadas.</p>
     </div>
 
     <div class="info-container">
@@ -38,7 +36,9 @@
 
 <mat-menu #optionsFatura="matMenu">
   <ng-template matMenuContent let-factura="factura">
-    <button mat-menu-item>Ver más</button>
+    <button mat-menu-item routerLink="/facturacion/{{ factura.idFactura }}">
+      Ver más
+    </button>
     <button mat-menu-item (click)="openDeleteModal(factura)">Eliminar</button>
   </ng-template>
 </mat-menu>

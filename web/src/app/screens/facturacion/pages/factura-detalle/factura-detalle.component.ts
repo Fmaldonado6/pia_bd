@@ -25,13 +25,15 @@ export class FacturaDetalleComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id
+    this.getFactura()
   }
 
   getFactura() {
-
+    this.currentStatus = Status.loading
 
     this.facturasService.getFactura(this.id).subscribe(e => {
-
+      this.factura = e
+      this.currentStatus = Status.loaded
     })
   }
 }
