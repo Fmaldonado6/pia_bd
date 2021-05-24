@@ -188,6 +188,44 @@ export interface SectionCard {
     onClick: Function
 }
 
+export class Ticket {
+    idTicket: number = 0
+    nombreEmpleado: string = ""
+    apellidoPaternoEmpleado: string = ""
+    apellidoMaternoEmpleado: string = ""
+    fechaTicket = new Date()
+    subtotal: number = 0
+    descuento: number = 0
+    telefono = 0
+    total: number = 0
+    idPais: number = 0
+    idEstado: number = 0
+    idMunicipio: number = 0
+    idColonia: number = 0
+    idCalle: number = 0
+    numero: number = 0
+}
+
+export class TicketDetalle {
+
+    idTicket = 0
+    idAlimento = 0
+    cantidad = 0
+    nombreAlimento = ""
+    precio = 0
+
+}
+
+export class TicketResource extends Ticket {
+
+    nombrePais = ""
+    nombreEstado = ""
+    nombreMunicipio = ""
+    nombreColonia = ""
+    nombreCalle = ""
+    detalles: TicketDetalle[] = []
+
+}
 
 export enum Status {
     loading,

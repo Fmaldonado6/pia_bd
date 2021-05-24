@@ -193,7 +193,7 @@ export class TicketDetalle {
     idTicket = 0
     idAlimento = 0
     cantidad = 0
-    nombreAlimento = 0
+    nombreAlimento = ""
     precio = 0
 
 }
