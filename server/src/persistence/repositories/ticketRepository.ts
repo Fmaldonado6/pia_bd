@@ -8,7 +8,7 @@ class TicketRepository implements BaseRepository<Ticket>{
 
         const res = await database.executeQuery(`
             insert into Ticket(
-                nombreEmpleado, apellidoPaternoEmpleado, apellidoMaternoEmpleado
+                nombreEmpleado, apellidoPaternoEmpleado, apellidoMaternoEmpleado,
                 fechaTicket, subtotal, descuento, total, telefono, idPais,
                 idEstado, idMunicipio, idColonia, idCalle, numero
             ) 
@@ -21,7 +21,6 @@ class TicketRepository implements BaseRepository<Ticket>{
         `)
 
         return res!![0]
-
     }
     async get(id: number): Promise<Ticket | null> {
         const res = await database.executeQuery(`select * from Ticket where idTicket = ${id}`)
@@ -58,7 +57,7 @@ class TicketDetalleRepository {
             idTicket, idAlimento, cantidad,nombreAlimento ,precio
         ) 
         values (
-            ${obj.idTicket}, ${obj.idAlimento}, ${obj.cantidad},${obj.nombreAlimento}, ${obj.precio}
+            ${obj.idTicket}, ${obj.idAlimento}, ${obj.cantidad},'${obj.nombreAlimento}', ${obj.precio}
         )`)
 
         return obj
@@ -113,7 +112,7 @@ class TicketDetalleRepository {
     async update(obj: TicketDetalle): Promise<TicketDetalle> {
         await database.executeQuery(`
         update TicketDetalle
-        set cantidad = ${obj.cantidad}, precio = ${obj.precio}, nombreAlimento = ${obj.nombreAlimento}
+        set cantidad = ${obj.cantidad}, precio = ${obj.precio}, nombreAlimento = '${obj.nombreAlimento}'
         where idTIcket = ${obj.idTicket} and idAlimento = ${obj.idAlimento}
     `)
 

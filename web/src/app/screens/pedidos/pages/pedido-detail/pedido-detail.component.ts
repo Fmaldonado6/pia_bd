@@ -1,11 +1,13 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PedidoAlimento } from './../../../../models/models';
 import { EditarDetalleComponent } from './../../../../shared/components/modals/pedidos/editar-detalle/editar-detalle.component';
 import { AgregarDetalleComponent } from './../../../../shared/components/modals/pedidos/agregar-detalle/agregar-detalle.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Pedido, SectionCard, Status } from 'src/app/models/models';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
 
 @Component({
   selector: 'app-pedido-detail',
@@ -27,7 +29,10 @@ export class PedidoDetailComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private pedidosService: PedidosService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private ticketService: TicketsService,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -78,6 +83,15 @@ export class PedidoDetailComponent implements OnInit {
 
     })
 
+  }
+
+  crearTicket() {
+    this.ticketService.addTicket(this.pedido).subscribe(e => {
+      const snackbar = this.snackBar.open("Ticket creado", "VER TICKET")
+      snackbar.onAction().subscribe(() => {
+        this.router.navigate([`/pedidos/ticket/${e.idTicket}`])
+      })
+    })
   }
 
 }

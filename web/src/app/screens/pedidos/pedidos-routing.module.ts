@@ -1,3 +1,4 @@
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import { PedidoDetailComponent } from './pages/pedido-detail/pedido-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: ":id",
     component: PedidoDetailComponent
+  },
+  {
+    path: "ticket/:id",
+    component: TicketDetailComponent
   }
 ];
 

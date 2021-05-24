@@ -116,7 +116,7 @@ class TicketController extends BaseController {
             const calle = await callesRepository.get(ticket.idCalle)
 
             if (pais) ticket.nombrePais = pais.nombre
-            if (estado) ticket.nombreEmpleado = estado.nombre
+            if (estado) ticket.nombreEstado = estado.nombre
             if (municipio) ticket.nombreMunicipio = municipio.nombre
             if (colonia) ticket.nombreColonia = colonia.nombre
             if (calle) ticket.nombreCalle = calle.nombre

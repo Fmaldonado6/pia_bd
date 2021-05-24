@@ -214,7 +214,7 @@ IF OBJECT_ID ('FacturasDetalle','U') is null create table FacturasDetalle
     idAlimento int not null,
     constraint pk_idFacturaDetalle primary key (idFactura,idAlimento),
     cantidad int not null,
-    nombreAlimento int not null,
+    nombreAlimento varchar(150) not null,
     precio int not null
         constraint fk_facturaDetalle foreign key (idFactura) references Facturas(idFactura)
 )
@@ -252,7 +252,7 @@ IF OBJECT_ID ('TicketDetalle','U') is null create table TicketDetalle
     idAlimento int not null,
     constraint pkIdTicketDetalle primary key (idTicket,idAlimento),
     cantidad int not null,
-    nombreAlimento int not null,
+    nombreAlimento varchar(150) not null,
     precio int not null
         constraint fk_ticketDetalle foreign key (idTicket) references Ticket(idTicket)
 )

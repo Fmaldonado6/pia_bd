@@ -1,0 +1,28 @@
+.container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  border: 1px solid black;
+  padding: 20px;
+
+  align-items: center;
+  h1 {
+    text-align: center;
+  }
+}
+
+.divider {
+  margin: 20px 0px;
+  height: 10px;
+  width: 100%;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.336);
+}
+
+.detalle-item {
+  width: 100%;
+  display: flex;
+  margin: 5px 0px;
+  font-size: 16px;
+  justify-content: space-between;
+}

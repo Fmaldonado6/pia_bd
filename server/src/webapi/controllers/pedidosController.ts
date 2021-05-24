@@ -157,8 +157,10 @@ class PedidosController extends BaseController {
 
             const alimentos = await pedidoAlimentoRepository.getPedidosAlimentosByPedidoId(pedido.idPedido)
 
-
+            let total = 0
             for (let alimento of pedido.alimentos) {
+
+                total += alimento.cantidad * alimento.precio
 
                 const found = alimentos.find(x => x.idAlimento == alimento.idAlimento)
 
@@ -190,6 +192,11 @@ class PedidosController extends BaseController {
 
             }
 
+            pedido.subtotal = total
+            pedido.total = total
+
+            if (pedido.descuento > 0)
+                pedido.total *= pedido.descuento
 
             await pedidosRepository.update(pedido);
 

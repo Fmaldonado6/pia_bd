@@ -1,0 +1,44 @@
+<div class="container">
+  <h1>Bar Delow</h1>
+
+  <span
+    >Dirección: {{ ticket.nombreCalle }}, #{{ ticket.numero }}
+    {{ ticket.nombreColonia }}</span
+  >
+  <span>Teléfono: {{ ticket.telefono }}</span>
+  <span
+    >Atendido por: {{ ticket.nombreEmpleado }}
+    {{
+      ticket.apellidoPaternoEmpleado != "null"
+        ? ticket.apellidoPaternoEmpleado
+        : ""
+    }}
+    {{
+      ticket.apellidoMaternoEmpleado != "null"
+        ? ticket.apellidoMaternoEmpleado
+        : ""
+    }}
+  </span>
+  <span>{{ ticket.fechaTicket | date: "fullDate" }}</span>
+  <span>No. Ticket: {{ ticket.idTicket }}</span>
+  <div class="divider"></div>
+  <div class="detalle-item" *ngFor="let detalle of ticket.detalles">
+    <span>{{ detalle.nombreAlimento }}</span>
+    <span>{{ detalle.cantidad * detalle.precio | currency: "MXN" }}</span>
+  </div>
+  <div class="divider"></div>
+  <div class="detalle-item">
+    <span>Subtotal: </span>
+    <span>{{ ticket.subtotal | currency: "MXN" }}</span>
+  </div>
+  <div class="detalle-item">
+    <span>Descuento: </span>
+    <span>{{ ticket.descuento * 100 }}%</span>
+  </div>
+  <div class="detalle-item">
+    <span>Total: </span>
+    <span>{{ ticket.total | currency: "MXN" }}</span>
+  </div>
+  <div class="divider"></div>
+  <h2>Gracias por su visita</h2>
+</div>

@@ -73,7 +73,7 @@ class FacturaDetalleRepository {
             idFactura, idAlimento, cantidad,nombreAlimento ,precio
         ) 
         values (
-            ${obj.idFactura}, ${obj.idAlimento}, ${obj.cantidad},${obj.nombreAlimento}, ${obj.precio}
+            ${obj.idFactura}, ${obj.idAlimento}, ${obj.cantidad},'${obj.nombreAlimento}', ${obj.precio}
         )`)
 
         return obj
@@ -128,7 +128,7 @@ class FacturaDetalleRepository {
     async update(obj: FacturaDetalle): Promise<FacturaDetalle> {
         await database.executeQuery(`
         update FacturaDetalle
-        set cantidad = ${obj.cantidad}, precio = ${obj.precio}, nombreAlimento = ${obj.nombreAlimento}
+        set cantidad = ${obj.cantidad}, precio = ${obj.precio}, nombreAlimento = '${obj.nombreAlimento}'
         where idFactura = ${obj.idFactura} and idAlimento = ${obj.idAlimento}
     `)
 
