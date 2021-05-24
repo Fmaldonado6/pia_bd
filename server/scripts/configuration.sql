@@ -220,3 +220,39 @@ IF OBJECT_ID ('FacturasDetalle','U') is null create table FacturasDetalle
 )
 
 
+IF OBJECT_ID ('Ticket','U') is null create table Ticket
+(
+    idTicket int not null identity(1,1),
+    constraint pkIdTicket primary key (idTicket),
+    nombreEmpleado varchar(150) not null,
+    apellidoPaternoEmpleado varchar(150) not null,
+    apellidoMaternoEmpleado varchar(150) not null,
+    fechaTicket Bigint not null,
+    subtotal float not null,
+    descuento float not null,
+    total float not null,
+    telefono Bigint,
+    idPais int ,
+    constraint fk_TicketidPaisNegocioInfo foreign key (idPais) references Pais(idPais),
+    idEstado int ,
+    constraint fk_TicketidEstadoNegocioInfo foreign key (idEstado) references Estado(idEstado),
+    idMunicipio int ,
+    constraint fk_TicketidMunicipioNegocioInfo foreign key (idMunicipio) references Municipio(idMunicipio),
+    idColonia int ,
+    constraint fk_TicketidColoniaNegocioInfo foreign key (idColonia) references Colonia(idColonia),
+    idCalle int ,
+    constraint fk_TicketidCalleNegocioInfo foreign key (idCalle) references Calle(idCalle),
+    numero int
+)
+
+
+IF OBJECT_ID ('TicketDetalle','U') is null create table TicketDetalle
+(
+    idTicket int not null,
+    idAlimento int not null,
+    constraint pkIdTicketDetalle primary key (idTicket,idAlimento),
+    cantidad int not null,
+    nombreAlimento int not null,
+    precio int not null
+        constraint fk_ticketDetalle foreign key (idTicket) references Ticket(idTicket)
+)
