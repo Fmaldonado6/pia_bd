@@ -23,9 +23,8 @@ export class MainComponent {
       title: "Ver Facturas",
       icon: "supervised_user_circle",
       description: "Visualizar las facturas",
-      action: "Obserbar Facturas",
+      action: "Observar Facturas",
       onClick: () => { this.openFacturaVer() }
-
     }
   ]
   
