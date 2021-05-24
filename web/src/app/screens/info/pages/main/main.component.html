@@ -1,0 +1,29 @@
+<div class="container">
+  <img class="logo" src="assets/logo.png" />
+
+  <div class="info-container">
+    <span class="section-title">Información general</span>
+    <div class="item">
+      <span class="info-title">Dirección: </span>{{ sucursal.nombreCalle }}, #{{
+        sucursal.numero
+      }},
+      {{ sucursal.nombreColonia }}
+    </div>
+    <div class="item">
+      <span class="info-title">Ciudad: </span>{{ sucursal.nombreMunicipio }},
+      {{ sucursal.nombreEstado }},
+      {{ sucursal.nombrePais }}
+    </div>
+    <div class="item">
+      <span class="info-title">Hora de Apertura: </span
+      >{{ sucursal.horarioApertura }}
+    </div>
+    <div class="item">
+      <span class="info-title">Hora de Cierre: </span
+      >{{ sucursal.horarioCierre }}
+    </div>
+    <div class="item">
+      <span class="info-title">Teléfono: </span>{{ sucursal.telefono }}
+    </div>
+  </div>
+</div>

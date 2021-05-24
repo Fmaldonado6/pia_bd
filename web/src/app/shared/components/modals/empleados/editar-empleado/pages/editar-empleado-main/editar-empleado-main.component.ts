@@ -1,5 +1,6 @@
+import { Empleado } from 'src/app/models/models';
 import { Pages } from './../../editar-empleado.component';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'editar-empleado-main',
@@ -10,7 +11,7 @@ export class EditarEmpleadoMainComponent {
   Pages = Pages
   @Output() iconClicked = new EventEmitter()
   @Output() tileClicked = new EventEmitter<Pages>()
-
+  @Input() empleado = new Empleado()
   onTileClicked(page: Pages) {
     this.tileClicked.emit(page)
   }

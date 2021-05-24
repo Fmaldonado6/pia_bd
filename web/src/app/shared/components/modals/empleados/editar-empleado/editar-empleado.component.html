@@ -2,6 +2,7 @@
   <ng-container *ngSwitchCase="Status.loaded" [ngSwitch]="currentPage">
     <editar-empleado-main
       (iconClicked)="close()"
+      [empleado]="empleado"
       (tileClicked)="changePage($event)"
       *ngSwitchCase="Pages.main"
     ></editar-empleado-main>

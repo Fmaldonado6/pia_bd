@@ -5,11 +5,15 @@
 >
 </modal-title>
 <mat-list>
-  <mat-list-item mat-ripple (click)="onTileClicked(Pages.editInfo)">
+  <mat-list-item
+    *ngIf="empleado.idEmpleado != 1000"
+    mat-ripple
+    (click)="onTileClicked(Pages.editInfo)"
+  >
     <mat-icon mat-list-icon>account_circle</mat-icon>
     <div mat-line>Editar información</div>
   </mat-list-item>
-  <mat-divider></mat-divider>
+  <mat-divider *ngIf="empleado.idEmpleado != 1000"></mat-divider>
   <mat-list-item mat-ripple (click)="onTileClicked(Pages.changePassword)">
     <mat-icon mat-list-icon>vpn_key</mat-icon>
     <div mat-line>Cambiar contraseña</div>

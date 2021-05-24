@@ -10,6 +10,7 @@ import cors from 'cors';
 import morgan from "morgan";
 import { authController } from './controllers/authController';
 import { facturasController } from './controllers/facturasController';
+import { sucursalController } from './controllers/sucursalController';
 
 const PORT = 'port'
 
@@ -41,6 +42,7 @@ class Server {
         this.app.use("/pedidos", pedidosController.router)
         this.app.use("/tickets", ticketController.router)
         this.app.use("/facturas", facturasController.router)
+        this.app.use("/sucursal", sucursalController.router)
 
     }
 

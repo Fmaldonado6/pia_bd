@@ -67,6 +67,12 @@ export class AppComponent implements OnInit {
         canActivate: true
       },
       {
+        icon: "local_bar",
+        title: "Información",
+        route: "/info",
+        canActivate: true
+      },
+      {
         icon: "monetization_on",
         title: "Pedidos",
         route: "/pedidos",

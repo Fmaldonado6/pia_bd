@@ -93,6 +93,14 @@ export class InfoSucursal {
     telefono = 0
 }
 
+export class InfoSucursalResource extends InfoSucursal {
+    nombrePais = ""
+    nombreEstado = ""
+    nombreMunicipio = ""
+    nombreColonia = ""
+    nombreCalle = ""
+}
+
 export class Pais {
     idPais: number = 0
     nombre: string = ""

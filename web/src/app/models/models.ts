@@ -83,13 +83,23 @@ export class PedidoAlimento {
 
 export class InfoSucursal {
     nombre: string = ""
-    horario: string = ""
+    horarioApertura: string = ""
+    horarioCierre: string = ""
     idPais: number = 0
     idEstado: number = 0
     idMunicipio: number = 0
     idColonia: number = 0
     idCalle: number = 0
     numero: number = 0
+    telefono = 0
+}
+
+export class InfoSucursalResource extends InfoSucursal {
+    nombrePais = ""
+    nombreEstado = ""
+    nombreMunicipio = ""
+    nombreColonia = ""
+    nombreCalle = ""
 }
 
 export class Pais {

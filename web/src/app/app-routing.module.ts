@@ -13,6 +13,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: "info",
+    loadChildren: () => import('./screens/info/info.module').then(m => m.InfoModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: "pedidos",
     loadChildren: () => import('./screens/pedidos/pedidos.module').then(m => m.PedidosModule),
     canLoad: [AuthGuard]
