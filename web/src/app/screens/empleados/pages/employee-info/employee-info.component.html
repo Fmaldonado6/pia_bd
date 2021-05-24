@@ -9,8 +9,8 @@
 
       <div *ngIf="empleado.nombre" class="item">
         <span class="info-title">Nombre: </span>{{ empleado.nombre }}
-        {{ empleado.apellidoPaterno }}
-        {{ empleado.apellidoMaterno }}
+        {{ empleado.apellidoPaterno != "null" ? empleado.apellidoPaterno : "" }}
+        {{ empleado.apellidoMaterno != "null" ? empleado.apellidoMaterno : "" }}
       </div>
       <div *ngIf="empleado.telefono" class="item">
         <span class="info-title">Teléfono: </span>{{ empleado.telefono }}

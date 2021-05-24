@@ -192,6 +192,16 @@ class PrivilegiosRepository implements BaseRepository<Privilegios>{
 
     }
 
+
+    async deleteEmpPrivilegios(idPrivilegio: number, idTipoEmpleado: number): Promise<void> {
+
+        await database.executeQuery(`
+            delete from EmpPrivilegios where idTipoEmpleado = ${idTipoEmpleado} and idPrivilegio = ${idPrivilegio}
+        `)
+
+
+    }
+
     async getPrivilefiosByTipoEmpleadoId(id: number): Promise<Privilegios[]> {
         const res = await database.executeQuery(`
             select EmpPrivilegios.idPrivilegio,Privilegios.nombre from EmpPrivilegios join Privilegios on idTipoEmpleado = ${id} 

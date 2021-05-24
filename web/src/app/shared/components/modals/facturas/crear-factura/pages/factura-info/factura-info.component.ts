@@ -26,7 +26,6 @@ export class FacturaInfoComponent implements OnInit {
       apMaterno: new FormControl(this.factura.apMaterno, [Validators.required]),
       telefono: new FormControl(this.factura.telefono, [Validators.required]),
       RFC: new FormControl(this.factura.RFC, [Validators.required]),
-      concepto: new FormControl(this.factura.concepto, [Validators.required]),
 
     })
   }

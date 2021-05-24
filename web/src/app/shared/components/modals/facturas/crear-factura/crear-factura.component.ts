@@ -33,8 +33,10 @@ export class CrearFacturaComponent implements OnInit {
   ngOnInit(): void {
     this.factura.idPedido = this.modalData.pedido.idPedido
     this.factura.subtotal = this.modalData.pedido.subtotal
-    this.factura.total = this.modalData.pedido.total
+    this.factura.subtotal = this.modalData.pedido.subtotal
     this.factura.descuento = this.modalData.pedido.descuento
+    this.factura.total = this.modalData.pedido.total
+    console.log(this.factura)
   }
 
   addFacturaInfo(values: Factura) {
@@ -43,7 +45,6 @@ export class CrearFacturaComponent implements OnInit {
     this.factura.apPaterno = values.apPaterno
     this.factura.RFC = values.RFC
     this.factura.telefono = values.telefono
-    this.factura.concepto = values.concepto
     this.changePage(Pages.address)
   }
 
@@ -63,6 +64,9 @@ export class CrearFacturaComponent implements OnInit {
     this.facturasService.addFactura(this.factura).subscribe(e => {
       this.factura = e
       this.currentStatus = Status.success
+      setTimeout(() => {
+        this.close()
+      }, 2500);
     })
   }
 

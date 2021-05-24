@@ -41,7 +41,6 @@ class DirectionController extends BaseController {
 
 
         } catch (error) {
-
         }
     }
 

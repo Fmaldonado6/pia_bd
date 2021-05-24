@@ -297,6 +297,24 @@ class EmpleadosController extends BaseController {
 
             const tipoEmpleado = req.body as TipoEmpleado
 
+            const privilegios = await privilegiosRepository.getPrivilefiosByTipoEmpleadoId(tipoEmpleado.idTipoEmpleado)
+
+            for (let privilegio of tipoEmpleado.privilegios) {
+
+                const found = privilegios.find(x => x.idPrivilegio == privilegio.idPrivilegio)
+
+                if (!found)
+                    await privilegiosRepository.addEmpPrivilegios(privilegio.idPrivilegio, tipoEmpleado.idTipoEmpleado)
+            }
+
+            for (let privilegio of privilegios) {
+
+                const found = tipoEmpleado.privilegios.find(x => x.idPrivilegio == privilegio.idPrivilegio)
+
+                if (!found)
+                    await privilegiosRepository.deleteEmpPrivilegios(privilegio.idPrivilegio, tipoEmpleado.idTipoEmpleado)
+            }
+
             await tipoEmpleadoRepository.update(tipoEmpleado)
 
             res.status(200).json(tipoEmpleado)

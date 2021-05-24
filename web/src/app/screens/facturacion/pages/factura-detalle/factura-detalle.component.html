@@ -63,6 +63,12 @@
         <tr>
           <td></td>
           <td></td>
+          <td>Descuento</td>
+          <td>-{{ factura.subtotal * factura.descuento | currency: "MXN" }}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
           <td>Total</td>
           <td>{{ factura.total | currency: "MXN" }}</td>
         </tr>

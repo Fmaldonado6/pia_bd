@@ -42,15 +42,26 @@
     <div class="info-container">
       <div class="info-title-container">
         <span class="section-title">Detalle del pedido</span>
-        <button
-          (click)="openAddAddDialog()"
-          mat-raised-button
-          color="primary"
-          class="register-button"
-        >
-          <mat-icon>add</mat-icon>
-          Añadir
-        </button>
+        <div class="botones">
+          <button
+            (click)="openAddDescuento()"
+            mat-raised-button
+            color="primary"
+            class="register-button"
+          >
+            <mat-icon>attach_money</mat-icon>
+            Agregar Descuento
+          </button>
+          <button
+            (click)="openAddAddDialog()"
+            mat-raised-button
+            color="primary"
+            class="register-button"
+          >
+            <mat-icon>fastfood</mat-icon>
+            Añadir alimento
+          </button>
+        </div>
       </div>
 
       <div
@@ -79,8 +90,18 @@
       </ng-template>
       <mat-divider></mat-divider>
       <div class="detail-item">
+        <span>Subtotal:</span>
+        <span>{{ pedido.subtotal | currency: "MXN" }}%</span>
+      </div>
+      <div class="detail-item">
+        <span>Descuento:</span>
+        <span
+          >-{{ pedido.descuento * pedido.subtotal | currency: "MXN" }}</span
+        >
+      </div>
+      <div class="detail-item">
         <span>Total:</span>
-        <span>{{ total | currency: "MXN" }}</span>
+        <span>{{ pedido.total | currency: "MXN" }}</span>
       </div>
     </div>
   </ng-container>

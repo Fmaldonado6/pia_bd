@@ -7,13 +7,13 @@ class FacturasRepository implements BaseRepository<Factura> {
         const date = new Date(obj.fechaFactura)
         const res = await database.executeQuery(`
         insert into Facturas(
-            idPedido, concepto, nombre, apPaterno,
+            idPedido, nombre, apPaterno,
             apMaterno, telefono, RFC, fechaFactura, idPais, idEstado,
             idMunicipio, idColonia, idCalle, numero, total, subtotal, descuento
         ) 
         output Inserted.idFactura
         values (
-            ${obj.idPedido}, '${obj.concepto}' , 
+            ${obj.idPedido}, 
             '${obj.nombre}', '${obj.apPaterno}', '${obj.apMaterno}' , ${obj.telefono} ,
             '${obj.RFC}', ${date.getTime()}, '${obj.idPais}', '${obj.idEstado}',
             '${obj.idMunicipio}', '${obj.idColonia}', '${obj.idCalle}', ${obj.numero}, ${obj.total},
@@ -48,12 +48,11 @@ class FacturasRepository implements BaseRepository<Factura> {
             delete from Facturas where idFactura = ${id}
         `)
     }
-
     async update(obj: Factura): Promise<Factura> {
         const date = new Date(obj.fechaFactura)
         await database.executeQuery(`
         update Facturas
-            set idPedido = ${obj.idPedido} , concepto = '${obj.concepto}', 
+            set idPedido = ${obj.idPedido},
             nombre = '${obj.nombre}', apPaterno = '${obj.apPaterno}', apMaterno = '${obj.apMaterno}', 
             telefono = ${obj.telefono}, RFC = '${obj.RFC}', fechaFactura = ${date.getTime()}, 
             idPais = '${obj.idPais}', idEstado = '${obj.idEstado}', idMunicipio = '${obj.idMunicipio}',

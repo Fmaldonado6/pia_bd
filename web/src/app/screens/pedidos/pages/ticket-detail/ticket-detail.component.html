@@ -33,7 +33,7 @@
   </div>
   <div class="detalle-item">
     <span>Descuento: </span>
-    <span>{{ ticket.descuento * 100 }}%</span>
+    <span>-{{ ticket.subtotal * ticket.descuento | currency: "MXN" }}</span>
   </div>
   <div class="detalle-item">
     <span>Total: </span>

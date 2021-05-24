@@ -1,3 +1,4 @@
+import { AgregarDescuentoComponent } from './../../../../shared/components/modals/pedidos/agregar-descuento/agregar-descuento.component';
 import { CrearFacturaComponent } from './../../../../shared/components/modals/facturas/crear-factura/crear-factura.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PedidoAlimento } from './../../../../models/models';
@@ -68,6 +69,14 @@ export class PedidoDetailComponent implements OnInit {
 
   }
 
+  openAddDescuento() {
+    const dialog = this.dialog.open(AgregarDescuentoComponent, {
+      data: {
+        pedido: this.pedido
+      }
+    })
+  }
+
   getPedido() {
 
     this.currentStatus = Status.loading
@@ -96,7 +105,7 @@ export class PedidoDetailComponent implements OnInit {
 
   crearTicket() {
     this.ticketService.addTicket(this.pedido).subscribe(e => {
-      const snackbar = this.snackBar.open("Ticket creado", "VER TICKET")
+      const snackbar = this.snackBar.open("Ticket creado", "VER TICKET", { duration: 2000 })
       snackbar.onAction().subscribe(() => {
         this.router.navigate([`/pedidos/ticket/${e.idTicket}`])
       })

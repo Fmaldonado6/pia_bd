@@ -164,7 +164,6 @@ class FacturasController extends BaseController {
             factura.idCalle = calle.idCalle
 
             const nuevaFactura = await facturasRepository.add(factura)
-
             factura.idFactura = nuevaFactura.idFactura
 
             for (let pedidoDetalle of pedidoDetalles) {

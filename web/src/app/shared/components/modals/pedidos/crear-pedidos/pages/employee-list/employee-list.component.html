@@ -12,7 +12,8 @@
 
     <mat-select formControlName="empleado" [disabled]="empleados.length == 0">
       <mat-option *ngFor="let emp of empleados" [value]="emp.idEmpleado">
-        {{ emp.nombre }} {{ emp.apellidoPaterno }}
+        {{ emp.nombre }}
+        {{ emp.apellidoPaterno != "null" ? emp.apellidoPaterno : "" }}
       </mat-option>
     </mat-select>
   </mat-form-field>

@@ -42,6 +42,7 @@ import { EliminarFacturaComponent } from './components/modals/facturas/eliminar-
 import { CrearFacturaComponent } from './components/modals/facturas/crear-factura/crear-factura.component';
 import { FacturaInfoComponent } from './components/modals/facturas/crear-factura/pages/factura-info/factura-info.component';
 import { FacturaAddressComponent } from './components/modals/facturas/crear-factura/pages/factura-address/factura-address.component';
+import { AgregarDescuentoComponent } from './components/modals/pedidos/agregar-descuento/agregar-descuento.component';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { FacturaAddressComponent } from './components/modals/facturas/crear-fact
     EliminarFacturaComponent,
     CrearFacturaComponent,
     FacturaInfoComponent,
-    FacturaAddressComponent
+    FacturaAddressComponent,
+    AgregarDescuentoComponent
   ],
   imports: [
     CommonModule,

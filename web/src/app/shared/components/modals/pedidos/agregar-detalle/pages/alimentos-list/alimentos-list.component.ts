@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Alimentos, Status, TipoAlimento } from 'src/app/models/models';
 import { AlimentosService } from 'src/app/services/alimentos/alimentos.service';
@@ -24,7 +25,8 @@ export class AlimentosListComponent implements OnInit {
   Status = Status
 
   constructor(
-    private alimentosService: AlimentosService
+    private alimentosService: AlimentosService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +48,11 @@ export class AlimentosListComponent implements OnInit {
   }
 
   onAddAlimento(alimento: Alimentos) {
-    this.addAlimento.emit(alimento)
+
+    if (alimento.cantidadDisponible == 0)
+      this.snackBar.open("No quedan más unidades de éste alimento", "CERRAR", { duration: 2000 })
+    else
+      this.addAlimento.emit(alimento)
   }
 
   onIconClick() {
