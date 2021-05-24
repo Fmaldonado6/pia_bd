@@ -36,11 +36,10 @@ import { EliminarMarcaComponent } from './components/modals/marcas/eliminar-marc
 import { CrearTipoAlimentoComponent } from './components/modals/tipoAlimentos/crear-tipo-alimento/crear-tipo-alimento.component';
 import { EditarTipoAlimentoComponent } from './components/modals/tipoAlimentos/editar-tipo-alimento/editar-tipo-alimento.component';
 import { EliminarTipoAlimentoComponent } from './components/modals/tipoAlimentos/eliminar-tipo-alimento/eliminar-tipo-alimento.component';
-import { CrearFacturasCrearComponent } from './components/modals/facturas/crear-facturas-crear/crear-facturas-crear.component';
-import { OrdersListComponent } from './components/modals/facturas/crear-facturas-crear/pages/orders-list/orders-list.component';
 import { EliminarPedidoComponent } from './components/modals/pedidos/eliminar-pedido/eliminar-pedido.component';
 import { EliminarTicketComponent } from './components/modals/tickets/eliminar-ticket/eliminar-ticket.component';
 import { EliminarFacturaComponent } from './components/modals/facturas/eliminar-factura/eliminar-factura.component';
+import { CrearFacturaComponent } from './components/modals/facturas/crear-factura/crear-factura.component';
 
 
 @NgModule({
@@ -79,11 +78,10 @@ import { EliminarFacturaComponent } from './components/modals/facturas/eliminar-
     CrearTipoAlimentoComponent,
     EditarTipoAlimentoComponent,
     EliminarTipoAlimentoComponent,
-    CrearFacturasCrearComponent,
-    OrdersListComponent,
     EliminarPedidoComponent,
     EliminarTicketComponent,
     EliminarFacturaComponent,
+    CrearFacturaComponent,
   ],
   imports: [
     CommonModule,
