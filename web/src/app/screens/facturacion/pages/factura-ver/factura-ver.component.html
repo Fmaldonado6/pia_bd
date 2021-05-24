@@ -1,1 +1,44 @@
-<p>factura-ver works!</p>
+<div class="container" [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <div class="title-container">
+      <span>Facturas Registradas</span>
+      <p>
+        Aquí podras gestionar todo lo relacionado con las facturas creadas.
+      </p>
+    </div>
+
+    <div class="info-container">
+      <div class="empleado-item" *ngFor="let factura of facturas">
+        <mat-icon color="primary"> account_circle </mat-icon>
+        <div class="item-content">
+          <span>No. Factura: {{ factura.idFactura }} </span>
+          <span class="empleado">No .Pedido: {{ factura.idPedido }}</span>
+        </div>
+        <button
+          mat-icon-button
+          class="more-icon"
+          [matMenuTriggerData]="{ factura: factura }"
+          [matMenuTriggerFor]="optionsFatura"
+        >
+          <mat-icon> more_vert </mat-icon>
+        </button>
+      </div>
+
+      <div class="empty-container" *ngIf="facturas.length == 0">
+        <mat-icon>help_outline</mat-icon>
+        <span>No hay facturas registradas</span>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+</div>
+
+<mat-menu #optionsFatura="matMenu">
+  <ng-template matMenuContent let-factura="factura">
+    <button mat-menu-item>Ver más</button>
+    <button mat-menu-item (click)="openDeleteModal(factura)">Eliminar</button>
+  </ng-template>
+</mat-menu>

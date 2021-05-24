@@ -219,3 +219,5 @@ class FacturasController extends BaseController {
         }
     }
 }
+
+export const facturasController = new FacturasController()

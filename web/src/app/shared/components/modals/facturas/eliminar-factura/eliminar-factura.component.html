@@ -1,10 +1,10 @@
 <div class="dialog" [ngSwitch]="currentStatus">
   <confirm-menu
     *ngSwitchCase="Status.loaded"
-    title="Eliminar Pedido"
-    body="¿Estás seguro de que quieres eliminar éste pedido? Ésto también eliminará toda
-          la información relacionada.
-      "
+    title="Eliminar Factura"
+    body="¿Estás seguro de que quieres eliminar ésta factura? Ésto también eliminará toda
+            la información relacionada.
+        "
     (cancelPressed)="close()"
     (confirmPressed)="deletemMarca()"
   ></confirm-menu>
@@ -13,7 +13,7 @@
   </div>
   <div class="status info" *ngSwitchCase="Status.success">
     <info-menu
-      title="Pedido eliminado correctamente"
+      title="Factura eliminada correctamente"
       (clickEvent)="close()"
     ></info-menu>
   </div>
