@@ -7,13 +7,13 @@ class FacturasRepository implements BaseRepository<Factura> {
         const date = new Date(obj.fechaFactura)
         const res = await database.executeQuery(`
         insert into Facturas(
-            idPedido, razonSocial, concepto, nombre, apPaterno,
+            idPedido, concepto, nombre, apPaterno,
             apMaterno, telefono, RFC, fechaFactura, idPais, idEstado,
             idMunicipio, idColonia, idCalle, numero
         ) 
         output Inserted.idFactura
         values (
-            ${obj.idPedido}, '${obj.razonSocial}', '${obj.concepto}' , 
+            ${obj.idPedido}, '${obj.concepto}' , 
             '${obj.nombre}', '${obj.apPaterno}', '${obj.apMaterno}' , ${obj.telefono} ,
             '${obj.RFC}', ${date.getTime()}, '${obj.idPais}', '${obj.idEstado}',
             '${obj.idMunicipio}', '${obj.idColonia}', '${obj.idCalle}', ${obj.numero}
@@ -52,7 +52,7 @@ class FacturasRepository implements BaseRepository<Factura> {
         const date = new Date(obj.fechaFactura)
         await database.executeQuery(`
         update Facturas
-            set idPedido = ${obj.idPedido} , razonSocial = '${obj.razonSocial}', concepto = '${obj.concepto}', 
+            set idPedido = ${obj.idPedido} , concepto = '${obj.concepto}', 
             nombre = '${obj.nombre}', apPaterno = '${obj.apPaterno}', apMaterno = '${obj.apMaterno}', 
             telefono = ${obj.telefono}, RFC = '${obj.RFC}', fechaFactura = ${date.getTime()}, 
             idPais = '${obj.idPais}', idEstado = '${obj.idEstado}', idMunicipio = '${obj.idMunicipio}',

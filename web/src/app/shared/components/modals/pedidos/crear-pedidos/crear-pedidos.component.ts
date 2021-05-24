@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 interface FormValues {
   empleado: number
 }
+
 @Component({
   selector: 'app-crear-pedidos',
   templateUrl: './crear-pedidos.component.html',
   styleUrls: ['./crear-pedidos.component.scss']
 })
-
 
 export class CrearPedidosComponent {
 
@@ -26,9 +26,7 @@ export class CrearPedidosComponent {
   Status = Status
   Pages = Pages
 
-
   currentPage = Pages.employeeList
-
   currentStatus = Status.loaded
 
   pedido = new Pedido()
@@ -47,8 +45,6 @@ export class CrearPedidosComponent {
       this.success()
     })
   }
-
-
 
   success() {
     this.currentStatus = Status.success

@@ -154,7 +154,6 @@ IF OBJECT_ID ('Facturas','U') is null create table Facturas
     idFactura int not null identity(1,1),
     constraint pk_idFactura primary key (idFactura),
     idPedido int not null,
-    razonSocial varchar (75) not null,
     concepto varchar (75) not null,
     nombre varchar (50) not null,
     apPaterno varchar (25) not null,
@@ -173,7 +172,39 @@ IF OBJECT_ID ('Facturas','U') is null create table Facturas
     constraint fk_idColonia foreign key (idColonia) references Colonia(idColonia),
     idCalle int ,
     constraint fk_idCalle foreign key (idCalle) references Calle(idCalle),
-    numero tinyInt
+    numero int,
+    idPaisNegocio int ,
+    constraint fk_idPaisNegocio foreign key (idPais) references Pais(idPais),
+    idEstadoNegocio int ,
+    constraint fk_idEstadoNegocio foreign key (idEstado) references Estado(idEstado),
+    idMunicipioNegocio int ,
+    constraint fk_idMunicipioNegocio foreign key (idMunicipio) references Municipio(idMunicipio),
+    idColoniaNegocio int ,
+    constraint fk_idColoniaNegocio foreign key (idColonia) references Colonia(idColonia),
+    idCalleNegocio int ,
+    constraint fk_idCalleNegocio foreign key (idCalle) references Calle(idCalle),
+    numeroNegocio int
+)
+
+IF OBJECT_ID ('InfoNegocio','U') is null create table InfoNegocio
+(
+    idNegocio int not null identity(1,1),
+    constraint pkIdNegocio primary key (idNegocio),
+    nombre varchar(150) not null,
+    horarioApertura varchar(150) not null,
+    horarioCierre varchar(150) not null,
+    telefono Bigint,
+    idPais int ,
+    constraint fk_idPaisNegocioInfo foreign key (idPais) references Pais(idPais),
+    idEstado int ,
+    constraint fk_idEstadoNegocioInfo foreign key (idEstado) references Estado(idEstado),
+    idMunicipio int ,
+    constraint fk_idMunicipioNegocioInfo foreign key (idMunicipio) references Municipio(idMunicipio),
+    idColonia int ,
+    constraint fk_idColoniaNegocioInfo foreign key (idColonia) references Colonia(idColonia),
+    idCalle int ,
+    constraint fk_idCalleNegocioInfo foreign key (idCalle) references Calle(idCalle),
+    numero int
 )
 
 
@@ -185,7 +216,43 @@ IF OBJECT_ID ('FacturasDetalle','U') is null create table FacturasDetalle
     cantidad int not null,
     nombreAlimento int not null,
     precio int not null
-    constraint fk_facturaDetalle foreign key (idFactura) references Facturas(idFactura)
+        constraint fk_facturaDetalle foreign key (idFactura) references Facturas(idFactura)
 )
 
 
+IF OBJECT_ID ('Ticket','U') is null create table Ticket
+(
+    idTicket int not null identity(1,1),
+    constraint pkIdTicket primary key (idTicket),
+    nombreEmpleado varchar(150) not null,
+    apellidoPaternoEmpleado varchar(150) not null,
+    apellidoMaternoEmpleado varchar(150) not null,
+    fechaTicket Bigint not null,
+    subtotal float not null,
+    descuento float not null,
+    total float not null,
+    telefono Bigint,
+    idPais int ,
+    constraint fk_TicketidPaisNegocioInfo foreign key (idPais) references Pais(idPais),
+    idEstado int ,
+    constraint fk_TicketidEstadoNegocioInfo foreign key (idEstado) references Estado(idEstado),
+    idMunicipio int ,
+    constraint fk_TicketidMunicipioNegocioInfo foreign key (idMunicipio) references Municipio(idMunicipio),
+    idColonia int ,
+    constraint fk_TicketidColoniaNegocioInfo foreign key (idColonia) references Colonia(idColonia),
+    idCalle int ,
+    constraint fk_TicketidCalleNegocioInfo foreign key (idCalle) references Calle(idCalle),
+    numero int
+)
+
+
+IF OBJECT_ID ('TicketDetalle','U') is null create table TicketDetalle
+(
+    idTicket int not null,
+    idAlimento int not null,
+    constraint pkIdTicketDetalle primary key (idTicket,idAlimento),
+    cantidad int not null,
+    nombreAlimento int not null,
+    precio int not null
+        constraint fk_ticketDetalle foreign key (idTicket) references Ticket(idTicket)
+)

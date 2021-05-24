@@ -1,0 +1,21 @@
+<modal-title
+  title="Crear Factura"
+  subtitle="Elija el pedido que se llevó a cabo"
+></modal-title>
+<form
+  (ngSubmit)="onSubmit(formInformacion.value)"
+  [formGroup]="formInformacion"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Seleccionar Pedido</mat-label>
+    <mat-select formControlName="pedido" [disabled]="pedidos.length == 0">
+      <mat-option *ngFor="let ped of pedidos" [value]="ped.idEmpleado">
+        {{ ped.idPedido }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button [disabled]="!formInformacion.valid" mat-raised-button color="primary">
+    SIGUIENTE
+  </button>
+</form>

@@ -59,7 +59,8 @@ p {
   }
 }
 
-.register-button {
+.register-button,
+.ticket-button {
   margin-bottom: 20px;
   display: flex;
   padding-right: 30px;
@@ -68,6 +69,10 @@ p {
   mat-icon {
     transform: scale(0.75);
   }
+}
+
+.ticket-button{
+  margin-left: auto;
 }
 
 .info-title-container {
