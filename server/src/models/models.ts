@@ -170,6 +170,21 @@ export class FacturaDetalle {
     precio: number = 0
 }
 
+export class Ticket {
+    idTicket: number = 0
+    nombreEmpleado: string = ""
+    apellidoPaternoEmpleado: string = ""
+    fechaTicket = new Date()
+    subtotal: number = 0
+    descuento: number = 0
+    total:number = 0
+    idPais:number = 0
+    idEstado:number = 0
+    idMunicipio:number = 0
+    idColonia:number = 0
+    idCalle:number = 0
+}
+
 export enum PrivilegiosId {
     gestionarUsuarios = 1,
     gestionarPedidos,
