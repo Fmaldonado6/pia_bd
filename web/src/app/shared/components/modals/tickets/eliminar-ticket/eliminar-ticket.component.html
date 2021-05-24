@@ -1,0 +1,20 @@
+<div class="dialog" [ngSwitch]="currentStatus">
+  <confirm-menu
+    *ngSwitchCase="Status.loaded"
+    title="Eliminar Ticket"
+    body="¿Estás seguro de que quieres eliminar éste ticket? Ésto también eliminará todos
+            la información relacionada.
+        "
+    (cancelPressed)="close()"
+    (confirmPressed)="deletemMarca()"
+  ></confirm-menu>
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+  <div class="status info" *ngSwitchCase="Status.success">
+    <info-menu
+      title="Ticket eliminado correctamente"
+      (clickEvent)="close()"
+    ></info-menu>
+  </div>
+</div>

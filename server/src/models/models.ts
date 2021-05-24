@@ -186,6 +186,7 @@ export class Ticket {
     idColonia: number = 0
     idCalle: number = 0
     numero: number = 0
+    idPedido = 0
 }
 
 export class TicketDetalle {

@@ -6,7 +6,8 @@ import { PedidosRoutingModule } from './pedidos-routing.module';
 import { MainComponent } from './pages/main/main.component';
 import { ListaPedidosComponent } from './pages/lista-pedidos/lista-pedidos.component';
 import { PedidoDetailComponent } from './pages/pedido-detail/pedido-detail.component';
-import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
+import { TicketDetailComponent } from './pages/ticket-detail/ticket-detail.component';
+import { TicketListComponent } from './pages/ticket-list/ticket-list.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
     MainComponent,
     ListaPedidosComponent,
     PedidoDetailComponent,
-    TicketDetailComponent
+    TicketDetailComponent,
+    TicketListComponent
   ],
   imports: [
     CommonModule,

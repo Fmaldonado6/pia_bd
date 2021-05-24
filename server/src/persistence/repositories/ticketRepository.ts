@@ -10,13 +10,13 @@ class TicketRepository implements BaseRepository<Ticket>{
             insert into Ticket(
                 nombreEmpleado, apellidoPaternoEmpleado, apellidoMaternoEmpleado,
                 fechaTicket, subtotal, descuento, total, telefono, idPais,
-                idEstado, idMunicipio, idColonia, idCalle, numero
+                idEstado, idMunicipio, idColonia, idCalle, numero,idPedido
             ) 
             output Inserted.idTicket
             values(
                 '${obj.nombreEmpleado}','${obj.apellidoPaternoEmpleado}','${obj.apellidoMaternoEmpleado}',
                 ${date.getTime()},${obj.subtotal},${obj.descuento},${obj.total},${obj.telefono},${obj.idPais},
-                ${obj.idEstado},${obj.idMunicipio},${obj.idColonia},${obj.idCalle},${obj.numero}
+                ${obj.idEstado},${obj.idMunicipio},${obj.idColonia},${obj.idCalle},${obj.numero},${obj.idPedido}
             )
         `)
 

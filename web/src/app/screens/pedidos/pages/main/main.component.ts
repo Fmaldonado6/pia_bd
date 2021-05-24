@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
   sections: SectionCard[] = [
     {
       title: "Crear",
-      icon: "monetization_on",
+      icon: "add",
       description: "Registra un nuevo pedido",
       action: "Crear",
       onClick: () => { this.openRegisterModal() }
@@ -26,6 +26,14 @@ export class MainComponent implements OnInit {
       description: "Ver todos los pedidos registrados",
       action: "Ver",
       onClick: () => { this.changePage("/pedidos/lista") }
+
+    },
+    {
+      title: "Ver Tickets",
+      icon: "sticky_note_2",
+      description: "Ver todos los tickets registrados",
+      action: "Ver",
+      onClick: () => { this.changePage("/pedidos/tickets") }
 
     },
 

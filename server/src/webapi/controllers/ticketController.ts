@@ -63,6 +63,8 @@ class TicketController extends BaseController {
             ticket.idMunicipio = sucursal.idMunicipio
             ticket.numero = sucursal.numero
 
+            ticket.idPedido = pedido.idPedido
+
             const newTicket = await ticketRepository.add(ticket)
 
             for (let detalle of pedido.alimentos) {

@@ -224,6 +224,8 @@ IF OBJECT_ID ('Ticket','U') is null create table Ticket
 (
     idTicket int not null identity(1,1),
     constraint pkIdTicket primary key (idTicket),
+    idPedido int not null,
+    constraint fkTicketPedido foreign key (idPedido) references Pedidos(idPedido),
     nombreEmpleado varchar(150) not null,
     apellidoPaternoEmpleado varchar(150) not null,
     apellidoMaternoEmpleado varchar(150) not null,

@@ -1,0 +1,39 @@
+<div class="container" [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <div class="title-container">
+      <span>Tickets registrados</span>
+      <p>Aquí podras gestionar los tickets registrados.</p>
+    </div>
+
+    <div class="info-container">
+      <div class="empleado-item" *ngFor="let ticket of tickets">
+        <mat-icon color="primary"> sticky_note_2 </mat-icon>
+        <div class="item-content">
+          <span>No. Ticket: {{ ticket.idTicket }} </span>
+          <span class="empleado">No .Pedido: {{ ticket.idPedido }}</span>
+        </div>
+        <button
+          mat-icon-button
+          class="more-icon"
+          [matMenuTriggerData]="{ ticket: ticket }"
+          [matMenuTriggerFor]="optionsTicket"
+        >
+          <mat-icon> more_vert </mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+</div>
+
+<mat-menu #optionsTicket="matMenu">
+  <ng-template matMenuContent let-ticket="ticket">
+    <button mat-menu-item routerLink="/pedidos/ticket/{{ ticket.idTicket }}">
+      Ver más
+    </button>
+    <button mat-menu-item (click)="openDeleteModal(ticket)">Eliminar</button>
+  </ng-template>
+</mat-menu>
