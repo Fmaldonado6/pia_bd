@@ -129,7 +129,7 @@ class EmpleadosController extends BaseController {
 
             const empleado = req.body as Empleado
 
-            let colonia = await coloniasRepository.getColoniaByName(empleado.nombreColonia)
+            let colonia = await coloniasRepository.getColoniaByNameAndMunicipioId(empleado.nombreColonia,empleado.idMunicipio)
 
             if (!colonia) {
                 colonia = new Colonia()
@@ -138,7 +138,7 @@ class EmpleadosController extends BaseController {
                 colonia = await coloniasRepository.add(colonia)
             }
 
-            let calle = await callesRepository.getCallesByName(empleado.nombreColonia)
+            let calle = await callesRepository.getCallesByNameAndColoniaId(empleado.nombreCalle,empleado.idColonia)
 
 
             if (!calle) {
@@ -326,6 +326,8 @@ class EmpleadosController extends BaseController {
                 await empleadosRepository.update(empleado)
             }
 
+
+
             const deleteId = Number.parseInt(req.params.id)
 
             await tipoEmpleadoRepository.delete(deleteId)
@@ -351,11 +353,12 @@ class EmpleadosController extends BaseController {
 
             const deleteId = Number.parseInt(req.params.id)
 
-            const pedidos = await pedidosRepository.getPedidosByEmpleadoId(id)
+            const pedidos = await pedidosRepository.getPedidosByEmpleadoId(deleteId)
+
 
             for (let pedido of pedidos) {
 
-                pedido.idEmpleado = 0
+                pedido.idEmpleado = 1000
 
                 await pedidosRepository.update(pedido)
 

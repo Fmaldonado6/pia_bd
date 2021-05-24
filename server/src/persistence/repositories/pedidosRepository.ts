@@ -161,6 +161,8 @@ class PedidoAlimentoRepository {
 
         return obj
     }
+
+    
 }
 
 export const pedidosRepository = new PedidosRepository()

@@ -191,9 +191,9 @@ class ColoniaRepository implements BaseRepository<Colonia>{
         return res
     }
 
-    async getColoniaByName(name: string): Promise<Colonia | null> {
+    async getColoniaByNameAndMunicipioId(name: string, idMunicipio: number): Promise<Colonia | null> {
         const res = await database.executeQuery(`
-        select * from Colonia where nombre = '${name}'
+        select * from Colonia where nombre = '${name} and idMunicipio = ${idMunicipio}'
     `)
 
         if (!res)
@@ -259,9 +259,9 @@ class CallesRepository implements BaseRepository<Calle>{
     }
 
 
-    async getCallesByName(name: string): Promise<Calle | null> {
+    async getCallesByNameAndColoniaId(name: string, coloniaId: number): Promise<Calle | null> {
         const res = await database.executeQuery(`
-        select * from Calle where nombre = '${name}'
+        select * from Calle where nombre = '${name} and idColonia = ${coloniaId}'
     `)
 
         if (!res)
