@@ -1,6 +1,7 @@
 <modal-title
   title="Crear pedido"
   subtitle="Elija el empleado que se encargará del pedido"
+  (iconClicked)="onIconClick()"
 ></modal-title>
 <form
   (ngSubmit)="onSubmit(formInformacion.value)"
