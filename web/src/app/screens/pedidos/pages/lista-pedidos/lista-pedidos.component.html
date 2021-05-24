@@ -1,1 +1,49 @@
-<p>lista-pedidos works!</p>
+<div class="container" [ngSwitch]="currentStatus">
+  <ng-container *ngSwitchCase="Status.loaded">
+    <div class="title-container">
+      <span>Pedidos registrados</span>
+      <p>Aquí podras gestionar los pedidos registrados.</p>
+    </div>
+    <button
+      (click)="openRegisterModal()"
+      mat-raised-button
+      color="primary"
+      class="register-button"
+    >
+      <mat-icon>add</mat-icon>
+      Registrar
+    </button>
+    <div class="info-container">
+      <div class="empleado-item" *ngFor="let pedido of pedidos">
+        <mat-icon color="primary"> sticky_note_2 </mat-icon>
+        <div class="item-content">
+          <span>No. Pedido: {{ pedido.idPedido }} </span>
+          <span class="empleado"
+            >Empleado asignado: {{ pedido.idEmpleado }}</span
+          >
+        </div>
+        <button
+          mat-icon-button
+          class="more-icon"
+          [matMenuTriggerData]="{ pedido: pedido }"
+          [matMenuTriggerFor]="optionsPedido"
+        >
+          <mat-icon> more_vert </mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="status" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+  </div>
+</div>
+
+<mat-menu #optionsPedido="matMenu">
+  <ng-template matMenuContent let-pedido="pedido">
+    <button mat-menu-item routerLink="/pedidos/{{ pedido.idPedido }}">
+      Ver más
+    </button>
+    <button mat-menu-item (click)="openDeleteModal(pedido)">Eliminar</button>
+  </ng-template>
+</mat-menu>

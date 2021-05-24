@@ -30,5 +30,8 @@ export class AlimentosService extends DataService {
     return this.http.put(`${this.url}/alimentos`, alimento).pipe(catchError(this.handleError))
   }
 
+  deleteAlimento(id: number) {
+    return this.http.delete(`${this.url}/alimentos/${id}`).pipe(catchError(this.handleError))
+  }
 
 }

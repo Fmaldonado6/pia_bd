@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 
-import localeMX from '@angular/common/locales/es-MX'
+import localeMX from '@angular/common/locales/es-MX';
 
 registerLocaleData(localeMX)
 

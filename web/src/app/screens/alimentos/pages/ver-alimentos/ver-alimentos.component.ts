@@ -1,3 +1,4 @@
+import { EliminarAlimentoComponent } from './../../../../shared/components/modals/alimentos/eliminar-alimento/eliminar-alimento.component';
 import { CrearAlimentoComponent } from './../../../../shared/components/modals/alimentos/crear-alimento/crear-alimento.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -74,6 +75,16 @@ export class VerAlimentosComponent implements OnInit {
 
 
   openDeleteAlimento(alimento: Alimentos) {
+
+    const dialog = this.dialog.open(EliminarAlimentoComponent, {
+      data: {
+        alimento: alimento
+      }
+    })
+
+    dialog.componentInstance.alimentoEliminado.subscribe(e => {
+      this.getAlimentos()
+    })
 
   }
 

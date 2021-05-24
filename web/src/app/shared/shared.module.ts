@@ -38,6 +38,7 @@ import { EditarTipoAlimentoComponent } from './components/modals/tipoAlimentos/e
 import { EliminarTipoAlimentoComponent } from './components/modals/tipoAlimentos/eliminar-tipo-alimento/eliminar-tipo-alimento.component';
 import { CrearFacturasCrearComponent } from './components/modals/facturas/crear-facturas-crear/crear-facturas-crear.component';
 import { OrdersListComponent } from './components/modals/facturas/crear-facturas-crear/pages/orders-list/orders-list.component';
+import { EliminarPedidoComponent } from './components/modals/pedidos/eliminar-pedido/eliminar-pedido.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { OrdersListComponent } from './components/modals/facturas/crear-facturas
     EliminarTipoAlimentoComponent,
     CrearFacturasCrearComponent,
     OrdersListComponent,
+    EliminarPedidoComponent,
   ],
   imports: [
     CommonModule,

@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class PedidosService extends DataService {
   getPedidos() {
-    return this.http.get<Pedido[]>(`${this.url}/pedidos}`).pipe(catchError(this.handleError))
+    return this.http.get<Pedido[]>(`${this.url}/pedidos`).pipe(catchError(this.handleError))
   }
 
   addPedido(pedido: Pedido) {

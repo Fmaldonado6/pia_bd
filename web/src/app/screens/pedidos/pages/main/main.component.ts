@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
       icon: "monetization_on",
       description: "Ver todos los pedidos registrados",
       action: "Ver",
-      onClick: () => { this.changePage("/pedidos") }
+      onClick: () => { this.changePage("/pedidos/lista") }
 
     },
 

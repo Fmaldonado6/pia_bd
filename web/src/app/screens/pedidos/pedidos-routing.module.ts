@@ -1,3 +1,4 @@
+import { ListaPedidosComponent } from './pages/lista-pedidos/lista-pedidos.component';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import { PedidoDetailComponent } from './pages/pedido-detail/pedido-detail.component';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,10 @@ const routes: Routes = [
   {
     path: "",
     component: MainComponent
+  },
+  {
+    path: "lista",
+    component: ListaPedidosComponent
   },
   {
     path: ":id",
