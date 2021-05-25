@@ -7,17 +7,30 @@
         ofrecemos
       </p>
     </div>
-    <button
-      (click)="openAddTipo()"
-      mat-raised-button
-      color="primary"
-      class="register-button"
-    >
-      <mat-icon>add</mat-icon>
-      Registrar
-    </button>
+    <div class="botones">
+      <mat-form-field appearance="outline">
+        <mat-label>Buscar por nombre de tipo de alimento</mat-label>
+        <input
+          #input
+          (input)="filter(input.value)"
+          matInput
+          autocomplete="off"
+          formControlName="descripcion"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <button
+        (click)="openAddTipo()"
+        mat-raised-button
+        color="primary"
+        class="register-button"
+      >
+        <mat-icon>add</mat-icon>
+        Registrar
+      </button>
+    </div>
     <div class="info-container">
-      <div class="empleado-item" *ngFor="let tipo of tiposAlimentos">
+      <div class="empleado-item" *ngFor="let tipo of filterTiposAlimentos">
         <mat-icon color="primary"> local_bar </mat-icon>
         <span>{{ tipo.nombre }} </span>
         <button
@@ -33,6 +46,11 @@
       <div class="empty-container" *ngIf="tiposAlimentos.length == 0">
         <mat-icon>help_outline</mat-icon>
         <span>No hay tipos de alimentos registradas</span>
+      </div>
+
+      <div class="empty-container" *ngIf="filterTiposAlimentos.length == 0 && tiposAlimentos.length > 0">
+        <mat-icon>help_outline</mat-icon>
+        <span>No hay resultados para tu búsqueda</span>
       </div>
     </div>
   </ng-container>

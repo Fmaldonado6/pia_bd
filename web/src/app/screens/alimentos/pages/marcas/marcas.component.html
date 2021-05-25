@@ -7,18 +7,31 @@
         alimentos que ofrecemos.
       </p>
     </div>
-    <button
-      (click)="openAddMarca()"
-      mat-raised-button
-      color="primary"
-      class="register-button"
-    >
-      <mat-icon>add</mat-icon>
-      Registrar
-    </button>
+    <div class="botones">
+      <mat-form-field appearance="outline">
+        <mat-label>Buscar por nombre de marca</mat-label>
+        <input
+          #input
+          (input)="filter(input.value)"
+          matInput
+          autocomplete="off"
+          formControlName="descripcion"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <button
+        (click)="openAddMarca()"
+        mat-raised-button
+        color="primary"
+        class="register-button"
+      >
+        <mat-icon>add</mat-icon>
+        Registrar
+      </button>
+    </div>
     <div class="info-container">
-      <div class="empleado-item" *ngFor="let marca of marcas">
-        <mat-icon color="primary"> account_circle </mat-icon>
+      <div class="empleado-item" *ngFor="let marca of filterMarcas">
+        <mat-icon color="primary"> featured_play_list </mat-icon>
         <span>{{ marca.nombreMarca }} </span>
         <button
           mat-icon-button
@@ -33,6 +46,14 @@
       <div class="empty-container" *ngIf="marcas.length == 0">
         <mat-icon>help_outline</mat-icon>
         <span>No hay marcas registradas</span>
+      </div>
+
+      <div
+        class="empty-container"
+        *ngIf="filterMarcas.length == 0 && marcas.length > 0"
+      >
+        <mat-icon>help_outline</mat-icon>
+        <span>No hay resultados para tu búsqueda</span>
       </div>
     </div>
   </ng-container>

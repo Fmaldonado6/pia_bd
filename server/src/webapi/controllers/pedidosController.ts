@@ -196,7 +196,7 @@ class PedidosController extends BaseController {
             pedido.total = total
 
             if (pedido.descuento > 0)
-                pedido.total *= pedido.descuento
+                pedido.total = pedido.subtotal - (pedido.descuento * pedido.subtotal)
 
             await pedidosRepository.update(pedido);
 

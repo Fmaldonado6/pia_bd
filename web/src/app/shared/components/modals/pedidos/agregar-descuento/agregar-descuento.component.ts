@@ -34,7 +34,7 @@ export class AgregarDescuentoComponent implements OnInit {
     Object.assign(this.pedido, this.modalData.pedido)
 
     this.form = new FormGroup({
-      descuento: new FormControl(this.pedido.descuento, [
+      descuento: new FormControl(this.pedido.descuento*100, [
         Validators.required,
         Validators.pattern(/^0*(?:[0-9][0-9]?|100)$/)
       ])

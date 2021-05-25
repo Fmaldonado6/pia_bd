@@ -50,7 +50,7 @@ class PedidosRepository implements BaseRepository<Pedido> {
     }
 
     async findAll(): Promise<Pedido[]> {
-        const res = await database.executeQuery(`select * from Pedidos`)
+        const res = await database.executeQuery(`select * from Pedidos order by fechaPedido DESC`)
 
         if (!res)
             return []

@@ -75,6 +75,10 @@ export class PedidoDetailComponent implements OnInit {
         pedido: this.pedido
       }
     })
+
+    dialog.componentInstance.descuentoAplicado.subscribe(e=>{
+      this.getPedido()
+    })
   }
 
   getPedido() {

@@ -31,7 +31,7 @@ class TicketRepository implements BaseRepository<Ticket>{
         return res[0]
     }
     async findAll(): Promise<Ticket[]> {
-        const res = await database.executeQuery(`select * from Ticket`)
+        const res = await database.executeQuery(`select * from Ticket order by fechaTicket DESC`)
 
         if (!res)
             return []

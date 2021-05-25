@@ -10,7 +10,13 @@
         <mat-icon color="primary"> account_circle </mat-icon>
         <div class="item-content">
           <span>No. Factura: {{ factura.idFactura }} </span>
-          <span class="empleado">No .Pedido: {{ factura.idPedido }}</span>
+          <div class="detalles">
+            <span class="empleado"
+              >Fecha de creación:
+              {{ factura.fechaFactura | date: "fullDate" }}</span
+            >
+            <span class="empleado">No .Pedido: {{ factura.idPedido }}</span>
+          </div>
         </div>
         <button
           mat-icon-button

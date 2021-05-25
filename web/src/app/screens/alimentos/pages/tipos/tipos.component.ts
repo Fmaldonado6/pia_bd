@@ -17,6 +17,7 @@ export class TiposComponent implements OnInit {
   currentStatus = Status.loaded
 
   tiposAlimentos: TipoAlimento[] = []
+  filterTiposAlimentos: TipoAlimento[] = []
 
   constructor(
     private tiposAlimentosService: TiposAlimentosService,
@@ -32,7 +33,8 @@ export class TiposComponent implements OnInit {
     this.currentStatus = Status.loading
 
     this.tiposAlimentosService.getTipoAlimentos().subscribe(e => {
-      this.tiposAlimentos= e
+      this.tiposAlimentos = e
+      this.filterTiposAlimentos = this.tiposAlimentos
       this.currentStatus = Status.loaded
     })
 
@@ -59,6 +61,20 @@ export class TiposComponent implements OnInit {
     dialog.componentInstance.tipoEliminado.subscribe(e => {
       this.getTipos()
     })
+  }
+
+  filter(input: string): any {
+
+    if (!input || input == "")
+      return this.filterTiposAlimentos = this.tiposAlimentos
+
+    const inputLowerCase = input.toLowerCase()
+
+    this.filterTiposAlimentos = this.tiposAlimentos.filter(x =>
+      x.nombre.toLowerCase().includes(inputLowerCase)
+
+    )
+
   }
 
   openAddTipo() {

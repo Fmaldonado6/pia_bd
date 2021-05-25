@@ -18,9 +18,15 @@
         <mat-icon color="primary"> sticky_note_2 </mat-icon>
         <div class="item-content">
           <span>No. Pedido: {{ pedido.idPedido }} </span>
-          <span class="empleado"
-            >Empleado asignado: {{ pedido.idEmpleado }}</span
-          >
+          <div class="detalles">
+            <span class="empleado"
+              >Fecha de creación:
+              {{ pedido.fechaPedido | date: "fullDate" }}</span
+            >
+            <span class="empleado"
+              >Empleado asignado: {{ pedido.idEmpleado }}</span
+            >
+          </div>
         </div>
         <button
           mat-icon-button

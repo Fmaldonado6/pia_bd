@@ -10,7 +10,13 @@
         <mat-icon color="primary"> sticky_note_2 </mat-icon>
         <div class="item-content">
           <span>No. Ticket: {{ ticket.idTicket }} </span>
-          <span class="empleado">No .Pedido: {{ ticket.idPedido }}</span>
+          <div class="detalles">
+            <span class="empleado"
+              >Fecha de creación:
+              {{ ticket.fechaTicket | date: "fullDate" }}</span
+            >
+            <span class="empleado">No .Pedido: {{ ticket.idPedido }}</span>
+          </div>
         </div>
         <button
           mat-icon-button

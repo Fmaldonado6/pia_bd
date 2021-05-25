@@ -38,7 +38,7 @@ export class MainComponent {
     },
     {
       title: "Eliminar o editar marcas",
-      icon: "format_list_bulleted",
+      icon: "featured_play_list",
       description: "Edita o elimina las marcas que manejamos en nuestros alimentos.",
       action: "Editar",
       onClick: () => { this.changePage("/alimentos/marcas") }

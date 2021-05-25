@@ -36,7 +36,7 @@ class FacturasRepository implements BaseRepository<Factura> {
 
     }
     async findAll(): Promise<Factura[]> {
-        const res = await database.executeQuery(`select * from Facturas`)
+        const res = await database.executeQuery(`select * from Facturas order by fechaFactura DESC`)
 
         if (!res)
             return []

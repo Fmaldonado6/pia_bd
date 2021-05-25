@@ -61,18 +61,27 @@
   }
 }
 
+.botones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  mat-form-field {
+    width: 45%;
+  }
+}
+
 .register-button {
   margin-bottom: 20px;
   display: flex;
+  height: 35px;
   padding-right: 30px;
   border-radius: 20px;
   text-transform: uppercase;
-  margin-left: auto;
   mat-icon {
     transform: scale(0.75);
   }
 }
-
 .empty-container {
   display: flex;
   flex-direction: column;

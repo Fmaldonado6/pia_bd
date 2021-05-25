@@ -41,7 +41,7 @@ export class EditarTipoAlimentoComponent implements OnInit {
     Object.assign(this.tipo, this.modalData.tipo)
 
     this.form = new FormGroup({
-      nombre: new FormControl('', [
+      nombre: new FormControl(this.tipo.nombre, [
         Validators.required
       ])
     })

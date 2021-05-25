@@ -66,7 +66,7 @@ class AlimentosRepository implements BaseRepository<Alimentos>
     }
 
     async findAll(): Promise<Alimentos[]> {
-        const res = await database.executeQuery(`select * from Alimentos`)
+        const res = await database.executeQuery(`select * from Alimentos order by nombre ASC`)
 
         if (!res)
             return []
@@ -125,7 +125,7 @@ class TipoAlimentoRepository implements BaseRepository<TipoAlimento> {
 
 
     async findAll(): Promise<TipoAlimento[]> {
-        const res = await database.executeQuery(`select * from TipoAlimento`)
+        const res = await database.executeQuery(`select * from TipoAlimento order by nombre ASC`)
 
         if (!res)
             return []
@@ -183,7 +183,7 @@ class MarcaRepository implements BaseRepository<Marca> {
 
 
     async findAll(): Promise<Marca[]> {
-        const res = await database.executeQuery(`select * from Marca`)
+        const res = await database.executeQuery(`select * from Marca order by nombreMarca ASC`)
 
         if (!res)
             return []

@@ -23,7 +23,7 @@ class PaisRepository implements BaseRepository<Pais>{
         return res[0] as Pais
     }
     async findAll(): Promise<Pais[]> {
-        const res = await database.executeQuery(`select * from Pais`)
+        const res = await database.executeQuery(`select * from Pais order by nombre ASC`)
         if (!res)
             return []
 
@@ -69,7 +69,7 @@ class EstadoRepository implements BaseRepository<Estado>{
 
     async getEstadosByPaisId(id: number): Promise<Estado[]> {
         const res = await database.executeQuery(`
-            select * from Estado where idPais = ${id}
+            select * from Estado where idPais = ${id} order by nombre ASC
         `)
 
         if (!res)
@@ -79,7 +79,7 @@ class EstadoRepository implements BaseRepository<Estado>{
     }
 
     async findAll(): Promise<Estado[]> {
-        const res = await database.executeQuery(`select * from Estado`)
+        const res = await database.executeQuery(`select * from Estado order by nombre ASC`)
         if (!res)
             return []
 
@@ -125,7 +125,7 @@ class MunicipioRepository implements BaseRepository<Municipio>{
 
     async getMunicipiosByEstadoId(id: number): Promise<Municipio[]> {
         const res = await database.executeQuery(`
-            select * from Municipio where idEstado = ${id}
+            select * from Municipio where idEstado = ${id} order by nombre ASC
         `)
 
 
@@ -136,7 +136,7 @@ class MunicipioRepository implements BaseRepository<Municipio>{
     }
 
     async findAll(): Promise<Municipio[]> {
-        const res = await database.executeQuery(`select * from Municipio`)
+        const res = await database.executeQuery(`select * from Municipio order by nombre ASC`)
         if (!res)
             return []
 
